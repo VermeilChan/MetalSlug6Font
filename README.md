@@ -41,8 +41,8 @@ Make sure you have Python installed. You can download Python from the official P
 1. Clone this repository to your local machine:
 
    ```bash
-   git clone https://github.com/VermeilChan/custom-font-web-app.git
-   cd custom-font-web-app
+   git clone https://github.com/VermeilChan/MetalSlug6Font.git
+   cd MetalSlug6Font
    ```
 
 2. Install the required Python packages:
