@@ -14,6 +14,7 @@ CHARACTER_DIMENSIONS = {
     '1': (32, 50),
     'exclamation': (26, 50),
     'question': (50, 50),
+    'default': (50, 50),  # Default character set
     ' ': (20, 50)  # Space character
 }
 
@@ -21,41 +22,40 @@ CHARACTER_DIMENSIONS = {
 # Function to generate an image with the custom font
 def generate_image(text):
     # Calculate image dimensions
-    total_width = sum(
-        max(CHARACTER_DIMENSIONS.get(char_set, (50, 50))[0] for char_set in CHARACTER_DIMENSIONS if char in char_set)
-        for char in text)
-    img_height = 50
+    img_height = 50  # Fixed height for characters
+    img_widths = []
+    for char in text:
+        if char == ' ':
+            img_widths.append(20)  # Fixed width for spaces
+        else:
+            char_img_path = os.path.join('static', f"{char}.png")
+            try:
+                char_img = Image.open(char_img_path).convert('RGBA')
+                char_aspect_ratio = char_img.width / char_img.height
+                char_width = int(img_height * char_aspect_ratio)
+                img_widths.append(char_width)
+            except Exception as e:
+                raise ValueError(f"Error processing character '{char}': {str(e)}")
+
+    total_width = sum(img_widths)
 
     # Create a transparent image with RGBA mode
     img = Image.new('RGBA', (total_width, img_height), (0, 0, 0, 0))
     x = 0
 
-    for char in text:
+    for char, char_width in zip(text, img_widths):
         if char == ' ':
-            char_width, _ = CHARACTER_DIMENSIONS[char]
-        else:
-            char_img_path = os.path.join('static', f"{char}.png")
-            try:
-                char_img = Image.open(char_img_path).convert('RGBA')
-                char_width, _ = char_img.size
+            x += char_width
+            continue
 
-                # Find the character set to get the appropriate width
-                char_set = next((char_set for char_set in CHARACTER_DIMENSIONS if char in char_set), None)
-                if char_set:
-                    char_set_width, _ = CHARACTER_DIMENSIONS[char_set]
-                    char_scale_factor = char_set_width / char_width
-                    char_width *= char_scale_factor
-                else:
-                    # Use a default width if the character is not in any defined character set
-                    char_width, _ = CHARACTER_DIMENSIONS.get(char, (50, 50))
-
-                # Resize the character image to the appropriate width and paste it
-                char_img = char_img.resize((int(char_width), img_height), Image.BILINEAR)
-                img.paste(char_img, (x, 0), char_img)
-            except Exception as e:
-                raise ValueError(f"Error processing character '{char}': {str(e)}")
-
-        x += int(char_width)
+        char_img_path = os.path.join('static', f"{char}.png")
+        try:
+            char_img = Image.open(char_img_path).convert('RGBA')
+            char_img = char_img.resize((char_width, img_height), Image.BILINEAR)
+            img.paste(char_img, (x, 0), char_img)
+            x += char_width
+        except Exception as e:
+            raise ValueError(f"Error processing character '{char}': {str(e)}")
 
     return img
 
