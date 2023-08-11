@@ -1,91 +1,77 @@
 import os
 
-from PIL import Image
-from flask import Flask, render_template, request, send_from_directory
+from PIL import Image, ImageOps
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-# Define character dimensions
-CHARACTER_DIMENSIONS = {
-    'ABCDEFGJKMOQRSU': (50, 50),
-    'HNPT': (48, 50),
-    'L': (46, 50),
-    '23456789': (50, 50),
-    '1': (32, 50),
-    'exclamation': (26, 50),
-    'question': (50, 50),
-    'default': (50, 50),  # Default character set
-    ' ': (20, 50)  # Space character
+# Mapping special characters to filenames
+CHARACTER_FILES = {
+    ' ': 'space',
+    '?': '_',
+    '!': 'exclamation'
 }
+
+
+# Function to get the dimensions of a character image
+def get_character_dimensions(char):
+    char_img_path = os.path.join('static', f"{char}.png")
+    char_img = Image.open(char_img_path).convert('RGBA')
+    return char_img.size
 
 
 # Function to generate an image with the custom font
 def generate_image(text):
-    # Calculate image dimensions
-    img_height = 50  # Fixed height for characters
-    img_widths = []
-    for char in text:
-        if char == ' ':
-            img_widths.append(20)  # Fixed width for spaces
-        else:
-            char_img_path = os.path.join('static', f"{char}.png")
-            try:
-                char_img = Image.open(char_img_path).convert('RGBA')
-                char_aspect_ratio = char_img.width / char_img.height
-                char_width = int(img_height * char_aspect_ratio)
-                img_widths.append(char_width)
-            except Exception as e:
-                raise ValueError(f"Error processing character '{char}': {str(e)}")
+    try:
+        img_height = None
+        img_widths = []
+        for char in text:
+            char_size = get_character_dimensions(CHARACTER_FILES.get(char, char))
+            img_widths.append(char_size[0])
+            if img_height is None:
+                img_height = char_size[1]
 
-    total_width = sum(img_widths)
+        total_width = sum(img_widths)
+        img = Image.new('RGBA', (total_width, img_height), (0, 0, 0, 0))
+        x = 0
 
-    # Create a transparent image with RGBA mode
-    img = Image.new('RGBA', (total_width, img_height), (0, 0, 0, 0))
-    x = 0
-
-    for char, char_width in zip(text, img_widths):
-        if char == ' ':
-            x += char_width
-            continue
-
-        char_img_path = os.path.join('static', f"{char}.png")
-        try:
+        for char, char_width in zip(text, img_widths):
+            char_img_path = os.path.join('static', f"{CHARACTER_FILES.get(char, char)}.png")
             char_img = Image.open(char_img_path).convert('RGBA')
-            char_img = char_img.resize((char_width, img_height), Image.BILINEAR)
+            char_img = ImageOps.fit(char_img, (char_width, img_height), method=Image.BILINEAR)
             img.paste(char_img, (x, 0), char_img)
             x += char_width
-        except Exception as e:
-            raise ValueError(f"Error processing character '{char}': {str(e)}")
 
-    return img
+        return img, None
+
+    except Exception as e:
+        return None, str(e)
 
 
-# Route to display the form
+# Routes
 @app.route('/')
 def index():
     return render_template('index.html')
 
 
-# Route to handle form submission
 @app.route('/generate', methods=['POST'])
 def generate():
-    text = request.form.get('text', '').upper()  # Convert to uppercase
+    text = request.form.get('text', '').upper()
+
     if not text:
         return render_template('index.html', error_message="Please enter text.")
-    try:
-        img = generate_image(text)
-        img_path = 'static/result.png'
-        img.save(img_path)
-        return render_template('result.html', img_path=img_path)
-    except ValueError as ve:
-        return render_template('index.html', error_message=str(ve))
+
+    img, error_message = generate_image(text)
+
+    if img is None:
+        return render_template('index.html', error_message=error_message)
+
+    img_path = os.path.join('static', 'result.png')
+    img.save(img_path)
+
+    return render_template('result.html', img_path=img_path)
 
 
-# Route to serve the generated image
-@app.route('/image/<filename>')
-def image(filename):
-    return send_from_directory('.', filename)
-
-
-if __name__ == '__main__':
+# Run the app
+if __name__ == "__main__":
     app.run(debug=True)
