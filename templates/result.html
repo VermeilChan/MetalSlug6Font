@@ -9,7 +9,7 @@
 <body>
     <div class="container">
         <h1>Generated Image</h1>
-        <img src="{{ img_path }}" alt="Generated Image">
+        <img src="{{ url_for('static', filename='result.png') }}" alt="Generated Image">
         <div class="button-container">
             <a href="{{ url_for('index') }}" class="button">Back</a>
         </div>

@@ -5,29 +5,30 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-# Mapping special characters to filenames
 CHARACTER_FILES = {
     ' ': 'space',
-    '?': '_',
+    '?': 'question',
     '!': 'exclamation'
 }
 
 
-# Function to get the dimensions of a character image
-def get_character_dimensions(char):
-    char_img_path = os.path.join('static', f"{char}.png")
+def get_character_image(char):
+    char_img_path = os.path.join('static', f"{CHARACTER_FILES.get(char, char)}.png")
     char_img = Image.open(char_img_path).convert('RGBA')
-    return char_img.size
+    return char_img
 
 
-# Function to generate an image with the custom font
 def generate_image(text):
     try:
-        img_height = None
         img_widths = []
+        img_height = None
+        chars = []
         for char in text:
-            char_size = get_character_dimensions(CHARACTER_FILES.get(char, char))
+            char_img = get_character_image(char)
+            char_size = char_img.size
             img_widths.append(char_size[0])
+            chars.append((char_img, char_size[0]))
+
             if img_height is None:
                 img_height = char_size[1]
 
@@ -35,11 +36,9 @@ def generate_image(text):
         img = Image.new('RGBA', (total_width, img_height), (0, 0, 0, 0))
         x = 0
 
-        for char, char_width in zip(text, img_widths):
-            char_img_path = os.path.join('static', f"{CHARACTER_FILES.get(char, char)}.png")
-            char_img = Image.open(char_img_path).convert('RGBA')
-            char_img = ImageOps.fit(char_img, (char_width, img_height), method=Image.BILINEAR)
-            img.paste(char_img, (x, 0), char_img)
+        for char_img, char_width in chars:
+            char_img_resized = ImageOps.fit(char_img, (char_width, img_height), method=Image.BILINEAR)
+            img.paste(char_img_resized, (x, 0), char_img_resized)
             x += char_width
 
         return img, None
@@ -48,7 +47,6 @@ def generate_image(text):
         return None, str(e)
 
 
-# Routes
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -72,6 +70,5 @@ def generate():
     return render_template('result.html', img_path=img_path)
 
 
-# Run the app
 if __name__ == "__main__":
     app.run(debug=True)

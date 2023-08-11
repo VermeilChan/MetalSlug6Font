@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Metal Slug 6 Font Generator</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
 </head>
 <body>
     <div class="container">
         <h1>Metal Slug 6 Font Generator</h1>
         <form action="/generate" method="post">
-            <input type="text" name="text" id="text" placeholder="Enter text">
+            <input type="text" name="text" id="text" placeholder="Enter text" required>
             <input type="submit" value="Generate">
         </form>
         {% if error_message %}
