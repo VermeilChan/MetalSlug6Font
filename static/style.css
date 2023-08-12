@@ -27,28 +27,21 @@ body {
     }
 }
 
-h1,
-h2 {
-    margin-bottom: 1rem;
-    transition: color 0.3s ease-in-out;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add this line for the shadow effect */
-}
-
-h1:hover,
-h2:hover {
-    animation: Rainbow 5s infinite;
-}
-
 @keyframes Rainbow {
-    0% { color: #007bff; }
-    14% { color: #3498db; }
-    28% { color: #2ecc71; }
-    42% { color: #f39c12; }
-    57% { color: #e74c3c; }
-    71% { color: #e91e63; }
-    85% { color: #9b59b6; }
-    100% { color: #007bff; }
+    0% { color: #ff3399; }
+    14% { color: #ff66cc; }
+    28% { color: #ff9900; }
+    42% { color: #ffcc00; }
+    57% { color: #33cc33; }
+    71% { color: #3399ff; }
+    85% { color: #9966ff; }
+    100% { color: #ff3399; }
 }
+
+h1:hover, h2:hover {
+    animation: Rainbow 5s infinite linear;
+}
+
 
 form {
     display: flex;
