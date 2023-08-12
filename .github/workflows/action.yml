@@ -24,6 +24,10 @@ jobs:
             exit 1
           fi
 
+      - name: Install json module
+        run: |
+          npm install json
+
       - name: Fetch the latest commit details
         id: latest_commit
         run: |
