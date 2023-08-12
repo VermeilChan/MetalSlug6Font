@@ -11,9 +11,7 @@ jobs:
 
     steps:
       - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '16'
+        uses: actions/setup-node@v3
 
       - name: Checkout the code
         uses: actions/checkout@v2
@@ -23,26 +21,19 @@ jobs:
         run: |
           if [[ -z "${{ secrets.GH_TOKEN }}" || -z "${{ secrets.DISCORD_WEBHOOK_URL }}" ]]; then
             echo "Secrets GH_TOKEN or DISCORD_WEBHOOK_URL not provided. Skipping tasks."
-            echo "result=failure" >> $GITHUB_ENV
-          else
-            echo "result=success" >> $GITHUB_ENV
+            exit 1
           fi
 
       - name: Fetch the latest commit details
         id: latest_commit
-        if: steps.check_secrets.outputs.result == 'success'
         run: |
           COMMIT_API_RESPONSE=$(curl -s -H "Authorization: token ${{ secrets.GH_TOKEN }}" "https://api.github.com/repos/VermeilChan/MetalSlug6Font/commits?per_page=1")
           COMMIT_MESSAGE=$(echo "$COMMIT_API_RESPONSE" | jq -r '.[0].commit.message')
           COMMIT_SHA=$(echo "$COMMIT_API_RESPONSE" | jq -r '.[0].sha')
           COMMIT_URL=$(echo "$COMMIT_API_RESPONSE" | jq -r '.[0].html_url')
           SHORT_COMMIT_SHA=$(echo "$COMMIT_SHA" | cut -c 1-7)
-          echo "commit_message=$COMMIT_MESSAGE" >> $GITHUB_ENV
-          echo "commit_url=$COMMIT_URL" >> $GITHUB_ENV
-          echo "short_commit_sha=$SHORT_COMMIT_SHA" >> $GITHUB_ENV
 
       - name: Send an embed message to Discord
-        if: steps.check_secrets.outputs.result == 'success'
         run: |
           TIMESTAMP=$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)
           LONG_DATE=$(date -u +"%A, %B %-d, %Y at %T")
@@ -61,16 +52,22 @@ jobs:
                 "fields": [
                   {
                     "name": "Latest Commit",
-                    "value": "**'"$COMMIT_MESSAGE"'**"
+                    "value": "$COMMIT_MESSAGE"
                   },
                   {
                     "name": "Commit ID",
-                    "value": "[View Commit ('"$SHORT_COMMIT_SHA"')]('"$COMMIT_URL"')\n_Click the hyperlink to learn more about the changes._"
+                    "value": "[View Commit]($COMMIT_URL)\n_Click the hyperlink to learn more about the changes._"
                   }
                 ],
                 "footer": {
-                  "text": "Updated: '"$LONG_DATE"'"
+                  "text": "Updated: $LONG_DATE"
                 }
               }
             ]
           }' "${{ secrets.DISCORD_WEBHOOK_URL }}"
+
+    finally:
+      - name: Cleanup
+        run: |
+          echo "Cleaning up..."
+          echo "::set-output name=cleanup_success::true"
