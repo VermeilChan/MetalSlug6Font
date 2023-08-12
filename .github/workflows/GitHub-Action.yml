@@ -37,9 +37,9 @@ jobs:
         run: |
           TIMESTAMP=$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)
           LONG_DATE=$(date -u +"%A, %B %-d, %Y at %T")
-          COMMIT_MESSAGE="${{ steps.latest_commit.outputs.commit_message }}"
-          COMMIT_URL="${{ steps.latest_commit.outputs.commit_url }}"
-          SHORT_COMMIT_SHA="${{ steps.latest_commit.outputs.short_commit_sha }}"
+          COMMIT_MESSAGE="\\\"$COMMIT_MESSAGE\\\""
+          COMMIT_URL="\\\"$COMMIT_URL\\\""
+          SHORT_COMMIT_SHA="\\\"$SHORT_COMMIT_SHA\\\""
           curl -X POST -H "Content-Type: application/json" -d '{
             "embeds": [
               {
