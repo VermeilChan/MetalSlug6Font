@@ -42,6 +42,13 @@ h1:hover, h2:hover {
     animation: Rainbow 5s infinite linear;
 }
 
+h1,
+h2 {
+    margin-bottom: 1rem;
+    transition: color 0.3s ease-in-out;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add this line for the shadow effect */
+}
+
 form {
     display: flex;
     flex-direction: column;
