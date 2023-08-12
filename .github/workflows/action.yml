@@ -33,32 +33,38 @@ jobs:
           COMMIT_URL=$(echo "$COMMIT_API_RESPONSE" | jq -r '.[0].html_url')
           SHORT_COMMIT_SHA=$(echo "$COMMIT_SHA" | cut -c 1-7)
 
+      - name: Set environment variables
+        run: |
+          echo "COMMIT_MESSAGE=${COMMIT_MESSAGE}" >> $GITHUB_ENV
+          echo "COMMIT_URL=${COMMIT_URL}" >> $GITHUB_ENV
+          echo "SHORT_COMMIT_SHA=${SHORT_COMMIT_SHA}" >> $GITHUB_ENV
+
       - name: Send an embed message to Discord
         run: |
           TIMESTAMP=$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)
           LONG_DATE=$(date -u +"%A, %B %-d, %Y at %T")
-          curl -X POST -H "Content-Type: application/json" -d '{
-            "embeds": [
+          curl -X POST -H "Content-Type: application/json" -d "{
+            \"embeds\": [
               {
-                "title": "MetalSlug6Font Update",
-                "description": "MetalSlug6Font has been updated with the following changes:",
-                "color": 3447003,
-                "thumbnail": {
-                  "url": "https://cdn.discordapp.com/attachments/905835784215592960/1136337834689712138/sv-001.png"
+                \"title\": \"MetalSlug6Font Update\",
+                \"description\": \"MetalSlug6Font has been updated with the following changes:\",
+                \"color\": 3447003,
+                \"thumbnail\": {
+                  \"url\": \"https://cdn.discordapp.com/attachments/905835784215592960/1136337834689712138/sv-001.png\"
                 },
-                "fields": [
+                \"fields\": [
                   {
-                    "name": "Latest Commit",
-                    "value": "'"$COMMIT_MESSAGE"'"
+                    \"name\": \"Latest Commit\",
+                    \"value\": \"\$COMMIT_MESSAGE\"
                   },
                   {
-                    "name": "Commit ID",
-                    "value": "[View Commit]('"$COMMIT_URL"')\n_Click the hyperlink to learn more about the changes._"
+                    \"name\": \"Commit ID\",
+                    \"value\": \"[View Commit](\$COMMIT_URL)\\n_Click the hyperlink to learn more about the changes._\"
                   }
                 ],
-                "footer": {
-                  "text": "Updated: '"$LONG_DATE"'"
+                \"footer\": {
+                  \"text\": \"Updated: \$LONG_DATE\"
                 }
               }
             ]
-          }' "${{ secrets.DISCORD_WEBHOOK_URL }}"
+          }" "${{ secrets.DISCORD_WEBHOOK_URL }}"
