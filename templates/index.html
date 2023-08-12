@@ -19,26 +19,14 @@
             <h2>Generated Image:</h2>
             <img src="{{ img_path }}" alt="Generated Image">
             <div class="button-container">
+                <button id="download_button">
+                    <a href="{{ img_path }}" download="{{ img_path }}">Download</a>
+                </button>
             </div>
             {% endif %}
             {% if error_message %}
             <p class="error">{{ error_message }}</p>
             {% endif %}
         </div>
-        <script>
-            // To Be Discused
-
-            // document.getElementById('myform').onsubmit = () => {
-            //     let img = document.querySelectorAll("img[alt='Generated Image']")[0]
-            //         .getAttribute('src');
-            //     let link = document.createElement('a');
-                    
-            //     link.setAttribute('href' , img);
-            //     link.setAttribute('download' , img);
-
-            //     link.click()
-            //     link.remove()
-            // }
-        </script>
     </body>
 </html>

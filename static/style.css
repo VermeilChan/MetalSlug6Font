@@ -80,6 +80,8 @@ input[type="submit"]:hover {
     background-color: #0056b3;
 }
 
+
+
 .error {
     color: #ff5555;
     margin-top: 1rem;
@@ -101,4 +103,40 @@ input[type="submit"]:hover {
     height: auto;
     display: block;
     margin: 0 auto;
+}
+
+#download_button {
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: none;
+    border-radius: 5px;
+    width:100%;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+#download_button{
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+#download_button a {
+    color:#fff;
+    text-decoration:none;
+}
+
+#download_button a:active {
+    color:#fff;
+    text-decoration:none;
+}
+
+
+#download_button:hover {
+    background-color: #0056b3;
+}
+
+.button-container {
+    margin-top:30px;
+    display:flex;
+    flex-direction:column;
 }

@@ -14,12 +14,13 @@ CHARACTER_FILES = {
 def get_character_image(char):
 
     try:
+        
         char_img_path = os.path.join('static', f"{CHARACTER_FILES.get(char, char)}.png")
         char_img = Image.open(char_img_path).convert('RGBA')
         return char_img
+    
     except FileNotFoundError:
         return None
-
 
 def resize_character(char_img, char_width, img_height):
     return ImageOps.fit(char_img, (char_width, img_height), method=Image.BILINEAR)
