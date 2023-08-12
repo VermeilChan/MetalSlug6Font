@@ -51,32 +51,27 @@ def generate_image(text):
             img.paste(char_img_resized, (x, 0), char_img_resized)
             x += char_width
 
-        return img, None
+        img_path = os.path.join('static', 'result.png')
+        img.save(img_path)
+        return img_path, None
     except Exception as e:
         return None, str(e)
 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template('index.html')
+    img_path = None
+    error_message = None
 
+    if request.method == 'POST':
+        text = request.form.get('text', '').upper()
 
-@app.route('/generate', methods=['POST'])
-def generate():
-    text = request.form.get('text', '').upper()
+        if not text:
+            error_message = "Please enter text."
+        else:
+            img_path, error_message = generate_image(text)
 
-    if not text:
-        return render_template('index.html', error_message="Please enter text.")
-
-    img, error_message = generate_image(text)
-
-    if img is None:
-        return render_template('index.html', error_message=error_message)
-
-    img_path = os.path.join('static', 'result.png')
-    img.save(img_path)
-
-    return render_template('result.html', img_path=img_path)
+    return render_template('index.html', img_path=img_path, error_message=error_message)
 
 
 if __name__ == "__main__":
