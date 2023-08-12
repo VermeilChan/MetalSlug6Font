@@ -31,8 +31,19 @@ h1 {
     transition: color 0.3s ease-in-out;
 }
 
-h1:hover {
-    color: #7a02eb;
+h1:hover, h2:hover {
+    animation: Rainbow 5s infinite;
+}
+
+@keyframes Rainbow {
+    0% { color: #007bff; }
+    14% { color: #3498db; }
+    28% { color: #2ecc71; }
+    42% { color: #f39c12; }
+    57% { color: #e74c3c; }
+    71% { color: #e91e63; }
+    85% { color: #9b59b6; }
+    100% { color: #007bff; }
 }
 
 form {
