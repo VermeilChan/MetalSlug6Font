@@ -28,22 +28,13 @@ jobs:
         run: |
           npm install json
 
-      - name: Fetch the latest commit details
-        id: latest_commit
-        run: |
-          COMMIT_API_RESPONSE=$(curl -s -H "Authorization: token ${{ secrets.GH_TOKEN }}" "https://api.github.com/repos/VermeilChan/MetalSlug6Font/commits?per_page=1")
-          COMMIT_MESSAGE=$(echo "$COMMIT_API_RESPONSE" | jq -r '.[0].commit.message')
-          COMMIT_SHA=$(echo "$COMMIT_API_RESPONSE" | jq -r '.[0].sha')
-          COMMIT_URL=$(echo "$COMMIT_API_RESPONSE" | jq -r '.[0].html_url')
-          SHORT_COMMIT_SHA=$(echo "$COMMIT_SHA" | cut -c 1-7)
-
       - name: Send an embed message to Discord
         run: |
           TIMESTAMP=$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)
           LONG_DATE=$(date -u +"%A, %B %-d, %Y at %T")
-          COMMIT_MESSAGE=$(echo "$COMMIT_MESSAGE" | json.stringify)
-          COMMIT_URL=$(echo "$COMMIT_URL" | json.stringify)
-          SHORT_COMMIT_SHA=$(echo "$SHORT_COMMIT_SHA" | json.stringify)
+          COMMIT_MESSAGE=$(echo "$COMMIT_MESSAGE" | node -e "const json = require('json'); console.log(json.stringify(`$COMMIT_MESSAGE`))")
+          COMMIT_URL=$(echo "$COMMIT_URL" | node -e "const json = require('json'); console.log(json.stringify(`$COMMIT_URL`))")
+          SHORT_COMMIT_SHA=$(echo "$SHORT_COMMIT_SHA" | node -e "const json = require('json'); console.log(json.stringify(`$SHORT_COMMIT_SHA`))")
           curl -X POST -H "Content-Type: application/json" -d '{
             "embeds": [
               {
