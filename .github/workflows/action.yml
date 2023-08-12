@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  Update:
+  notify_update:
     runs-on: ubuntu-latest
 
     steps:
@@ -14,57 +14,61 @@ jobs:
         uses: actions/setup-node@v3
 
       - name: Checkout the code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Check for GH_TOKEN and DISCORD_WEBHOOK_URL
         id: check_secrets
         run: |
           if [[ -z "${{ secrets.GH_TOKEN }}" || -z "${{ secrets.DISCORD_WEBHOOK_URL }}" ]]; then
             echo "Secrets GH_TOKEN or DISCORD_WEBHOOK_URL not provided. Skipping tasks."
-            exit 1
+            echo "::set-output name=result::failure"
+          else
+            echo "::set-output name=result::success"
           fi
 
       - name: Fetch the latest commit details
         id: latest_commit
+        if: steps.check_secrets.outputs.result == 'success'
         run: |
           COMMIT_API_RESPONSE=$(curl -s -H "Authorization: token ${{ secrets.GH_TOKEN }}" "https://api.github.com/repos/VermeilChan/MetalSlug6Font/commits?per_page=1")
           COMMIT_MESSAGE=$(echo "$COMMIT_API_RESPONSE" | jq -r '.[0].commit.message')
           COMMIT_SHA=$(echo "$COMMIT_API_RESPONSE" | jq -r '.[0].sha')
           COMMIT_URL=$(echo "$COMMIT_API_RESPONSE" | jq -r '.[0].html_url')
           SHORT_COMMIT_SHA=$(echo "$COMMIT_SHA" | cut -c 1-7)
-
-      - name: Set environment variables
-        run: |
-          echo "COMMIT_MESSAGE=${COMMIT_MESSAGE}" >> $GITHUB_ENV
-          echo "COMMIT_URL=${COMMIT_URL}" >> $GITHUB_ENV
-          echo "SHORT_COMMIT_SHA=${SHORT_COMMIT_SHA}" >> $GITHUB_ENV
+          echo "::set-output name=commit_message::$COMMIT_MESSAGE"
+          echo "::set-output name=commit_url::$COMMIT_URL"
+          echo "::set-output name=short_commit_sha::$SHORT_COMMIT_SHA"
 
       - name: Send an embed message to Discord
+        if: steps.check_secrets.outputs.result == 'success'
         run: |
           TIMESTAMP=$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)
           LONG_DATE=$(date -u +"%A, %B %-d, %Y at %T")
-          curl -X POST -H "Content-Type: application/json" -d "{
-            \"embeds\": [
+          COMMIT_MESSAGE="${{ steps.latest_commit.outputs.commit_message }}"
+          COMMIT_URL="${{ steps.latest_commit.outputs.commit_url }}"
+          SHORT_COMMIT_SHA="${{ steps.latest_commit.outputs.short_commit_sha }}"
+          curl -X POST -H "Content-Type: application/json" -d '{
+            "embeds": [
               {
-                \"title\": \"MetalSlug6Font Update\",
-                \"description\": \"MetalSlug6Font has been updated with the following changes:\",
-                \"color\": 3447003,
-                \"thumbnail\": {
-                  \"url\": \"https://cdn.discordapp.com/attachments/905835784215592960/1136337834689712138/sv-001.png\"
+                "title": "MetalSlug6Font Update",
+                "description": "MetalSlug6Font has been updated with the following changes:",
+                "color": 3447003,
+                "thumbnail": {
+                  "url": "https://cdn.discordapp.com/attachments/905835784215592960/1136337834689712138/sv-001.png"
                 },
-                \"fields\": [
+                "fields": [
                   {
-                    \"name\": \"Latest Commit\",
-                    \"value\": \"\$COMMIT_MESSAGE\"
+                    "name": "Latest Commit",
+                    "value": "**'"$COMMIT_MESSAGE"'**"
                   },
                   {
-                    \"name\": \"Commit ID\",
-                    \"value\": \"[View Commit](\$COMMIT_URL)\\n_Click the hyperlink to learn more about the changes._\"
+                    "name": "Commit ID",
+                    "value": "[View Commit ('"$SHORT_COMMIT_SHA"')]('"$COMMIT_URL"')\n_Click the hyperlink to learn more about the changes._"
                   }
                 ],
-                \"footer\": {
-                  \"text\": \"Updated: \$LONG_DATE\"
+                "footer": {
+                  "text": "Updated: '"$LONG_DATE"'"
                 }
               }
             ]
-          }" "${{ secrets.DISCORD_WEBHOOK_URL }}"
+          }' "${{ secrets.DISCORD_WEBHOOK_URL }}"
