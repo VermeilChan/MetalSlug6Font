@@ -43,6 +43,9 @@ jobs:
           COMMIT_MESSAGE=$(echo "$COMMIT_MESSAGE" | node -e "const json = require('json'); console.log(json.stringify(`$COMMIT_MESSAGE`))")
           COMMIT_URL=$(echo "$COMMIT_URL" | node -e "const json = require('json'); console.log(json.stringify(`$COMMIT_URL`))")
           SHORT_COMMIT_SHA=$(echo "$SHORT_COMMIT_SHA" | node -e "const json = require('json'); console.log(json.stringify(`$SHORT_COMMIT_SHA`))")
+          echo "Loading json module..."
+          node -e "const json = require('json');"
+          echo "json.stringify() function is available."
           curl -X POST -H "Content-Type: application/json" -d '{
             "embeds": [
               {
