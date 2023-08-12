@@ -65,9 +65,3 @@ jobs:
               }
             ]
           }' "${{ secrets.DISCORD_WEBHOOK_URL }}"
-
-    finally:
-      - name: Cleanup
-        run: |
-          echo "Cleaning up..."
-          echo "::set-output name=cleanup_success::true"
