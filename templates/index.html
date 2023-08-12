@@ -3,19 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Metal Slug 6 Font Generator</title>
+    <title>Metal Slug 6 Font</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
 </head>
 <body>
     <div class="container">
-        <h1>Metal Slug 6 Font Generator</h1>
-        <form action="/generate" method="post">
-            <input type="text" name="text" id="text" placeholder="Enter text" required>
+        <h1>Metal Slug 6 Font</h1>
+        <form action="/" method="post">
+            <input type="text" name="text" placeholder="Enter text" required>
             <input type="submit" value="Generate">
         </form>
+
+        {% if img_path %}
+        <h2>Generated Image:</h2>
+        <img src="{{ img_path }}" alt="Generated Image">
+        {% endif %}
+
         {% if error_message %}
-            <p class="error">{{ error_message }}</p>
+        <p class="error">{{ error_message }}</p>
         {% endif %}
     </div>
 </body>
