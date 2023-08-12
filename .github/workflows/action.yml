@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  notify_update:
+  Update:
     runs-on: ubuntu-latest
 
     steps:
@@ -37,9 +37,6 @@ jobs:
         run: |
           TIMESTAMP=$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)
           LONG_DATE=$(date -u +"%A, %B %-d, %Y at %T")
-          COMMIT_MESSAGE="\\\"$COMMIT_MESSAGE\\\" "
-          COMMIT_URL="\\\"$COMMIT_URL\\\" "
-          SHORT_COMMIT_SHA="\\\"$SHORT_COMMIT_SHA\\\" "
           curl -X POST -H "Content-Type: application/json" -d '{
             "embeds": [
               {
@@ -52,15 +49,15 @@ jobs:
                 "fields": [
                   {
                     "name": "Latest Commit",
-                    "value": "$COMMIT_MESSAGE"
+                    "value": "'"$COMMIT_MESSAGE"'"
                   },
                   {
                     "name": "Commit ID",
-                    "value": "[View Commit]($COMMIT_URL)\n_Click the hyperlink to learn more about the changes._"
+                    "value": "[View Commit]('"$COMMIT_URL"')\n_Click the hyperlink to learn more about the changes._"
                   }
                 ],
                 "footer": {
-                  "text": "Updated: $LONG_DATE"
+                  "text": "Updated: '"$LONG_DATE"'"
                 }
               }
             ]
