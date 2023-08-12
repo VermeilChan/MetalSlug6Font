@@ -37,9 +37,9 @@ jobs:
         run: |
           TIMESTAMP=$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)
           LONG_DATE=$(date -u +"%A, %B %-d, %Y at %T")
-          COMMIT_MESSAGE="\\\"$COMMIT_MESSAGE\\\" "
-          COMMIT_URL="\\\"$COMMIT_URL\\\" "
-          SHORT_COMMIT_SHA="\\\"$SHORT_COMMIT_SHA\\\" "
+          COMMIT_MESSAGE=$(echo "$COMMIT_MESSAGE" | json.stringify)
+          COMMIT_URL=$(echo "$COMMIT_URL" | json.stringify)
+          SHORT_COMMIT_SHA=$(echo "$SHORT_COMMIT_SHA" | json.stringify)
           curl -X POST -H "Content-Type: application/json" -d '{
             "embeds": [
               {
