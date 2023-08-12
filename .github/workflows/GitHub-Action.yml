@@ -37,9 +37,9 @@ jobs:
           COMMIT_SHA=$(echo "$COMMIT_API_RESPONSE" | jq -r '.[0].sha')
           COMMIT_URL=$(echo "$COMMIT_API_RESPONSE" | jq -r '.[0].html_url')
           SHORT_COMMIT_SHA=$(echo "$COMMIT_SHA" | cut -c 1-7)
-          echo "::set-output name=commit_message::$COMMIT_MESSAGE"
-          echo "::set-output name=commit_url::$COMMIT_URL"
-          echo "::set-output name=short_commit_sha::$SHORT_COMMIT_SHA"
+          echo "commit_message=$COMMIT_MESSAGE" >> $GITHUB_ENV
+          echo "commit_url=$COMMIT_URL" >> $GITHUB_ENV
+          echo "short_commit_sha=$SHORT_COMMIT_SHA" >> $GITHUB_ENV
 
       - name: Send an embed message to Discord
         if: steps.check_secrets.outputs.result == 'success'
