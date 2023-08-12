@@ -98,3 +98,10 @@ input[type="submit"]:hover {
         width: 100%;
     }
 }
+
+.header-image {
+    width: 150px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
