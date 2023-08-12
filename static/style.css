@@ -3,7 +3,7 @@ body {
     padding: 0;
     font-family: 'Inter', sans-serif;
     color: #007bff;
-    background-image: url('https://cdn.discordapp.com/attachments/861700235890130986/1139848916062441552/bg.gif');
+    background-image: url('https://cdn.discordapp.com/attachments/861700235890130986/1139858875147894804/background.webp');
     background-size: cover;
 }
 
@@ -41,7 +41,6 @@ body {
 h1:hover, h2:hover {
     animation: Rainbow 5s infinite linear;
 }
-
 
 form {
     display: flex;
