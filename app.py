@@ -1,4 +1,5 @@
 import os
+import shutil
 from PIL import Image, ImageOps
 from flask import Flask, render_template, request
 
@@ -11,6 +12,7 @@ CHARACTER_FILES = {
 }
 
 def get_character_image(char):
+
     try:
         char_img_path = os.path.join('static', f"{CHARACTER_FILES.get(char, char)}.png")
         char_img = Image.open(char_img_path).convert('RGBA')
@@ -23,6 +25,7 @@ def resize_character(char_img, char_width, img_height):
     return ImageOps.fit(char_img, (char_width, img_height), method=Image.BILINEAR)
 
 def generate_image(text):
+
     try:
         img_widths = []
         img_height = None
@@ -51,7 +54,12 @@ def generate_image(text):
 
         img_path = os.path.join('static', 'result.png')
         img.save(img_path)
+
+        #Copy To Result Folder :
+        shutil.copy(img_path , "result")
+
         return img_path, None
+    
     except Exception as e:
         return None, str(e)
 

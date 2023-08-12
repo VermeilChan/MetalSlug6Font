@@ -1,29 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Metal Slug 6 Font</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
-</head>
-<body>
-    <div class="container">
-        <img src="{{ url_for('static', filename='Sv-001.gif') }}" alt="Sv-001" class="header-image">
-        <h1>Metal Slug 6 Font</h1>
-        <form action="/" method="post">
-            <input type="text" name="text" placeholder="Enter text" required>
-            <input type="submit" value="Generate">
-        </form>
-        {% if img_path %}
-        <h2>Generated Image:</h2>
-        <img src="{{ img_path }}" alt="Generated Image">
-        <div class="button-container">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Metal Slug 6 Font</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    </head>
+    <body>
+        <div class="container">
+            <img src="{{ url_for('static', filename='Sv-001.gif') }}" alt="Sv-001" class="header-image">
+            <h1>Metal Slug 6 Font</h1>
+            <form id='myform' action="/" method="post">
+                <input type="text" name="text" placeholder="Enter text" required>
+                <input type="submit" value="Generate">
+            </form>
+            {% if img_path %}
+            <h2>Generated Image:</h2>
+            <img src="{{ img_path }}" alt="Generated Image">
+            <div class="button-container">
+            </div>
+            {% endif %}
+            {% if error_message %}
+            <p class="error">{{ error_message }}</p>
+            {% endif %}
         </div>
-        {% endif %}
-        {% if error_message %}
-        <p class="error">{{ error_message }}</p>
-        {% endif %}
-    </div>
-</body>
+        <script>
+            // To Be Discused
+
+            // document.getElementById('myform').onsubmit = () => {
+            //     let img = document.querySelectorAll("img[alt='Generated Image']")[0]
+            //         .getAttribute('src');
+            //     let link = document.createElement('a');
+                    
+            //     link.setAttribute('href' , img);
+            //     link.setAttribute('download' , img);
+
+            //     link.click()
+            //     link.remove()
+            // }
+        </script>
+    </body>
 </html>
