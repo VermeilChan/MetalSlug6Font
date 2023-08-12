@@ -10,7 +10,6 @@ CHARACTER_FILES = {
     '!': 'exclamation'
 }
 
-
 def get_character_image(char):
     try:
         char_img_path = os.path.join('static', f"{CHARACTER_FILES.get(char, char)}.png")
@@ -22,7 +21,6 @@ def get_character_image(char):
 
 def resize_character(char_img, char_width, img_height):
     return ImageOps.fit(char_img, (char_width, img_height), method=Image.BILINEAR)
-
 
 def generate_image(text):
     try:
@@ -57,7 +55,6 @@ def generate_image(text):
     except Exception as e:
         return None, str(e)
 
-
 @app.route('/', methods=['GET', 'POST'])
 def index():
     img_path = None
@@ -72,7 +69,6 @@ def index():
             img_path, error_message = generate_image(text)
 
     return render_template('index.html', img_path=img_path, error_message=error_message)
-
 
 if __name__ == "__main__":
     app.run()

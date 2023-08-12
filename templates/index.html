@@ -15,14 +15,12 @@
             <input type="text" name="text" placeholder="Enter text" required>
             <input type="submit" value="Generate">
         </form>
-
         {% if img_path %}
         <h2>Generated Image:</h2>
         <img src="{{ img_path }}" alt="Generated Image">
         <div class="button-container">
         </div>
         {% endif %}
-
         {% if error_message %}
         <p class="error">{{ error_message }}</p>
         {% endif %}
