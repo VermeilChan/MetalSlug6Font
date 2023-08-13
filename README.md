@@ -1,6 +1,6 @@
-# Metal Slug 6 Font
+# Metal Slug Font
 
-Generate images with the iconic Metal Slug 6 font style! Write text using the distinctive font from the Metal Slug arcade game series. This tool allows you to create images of your text with custom spacing and supports characters, numbers, and symbols.
+Generate images with the iconic Metal Slug font style! Write text using the distinctive font from the Metal Slug arcade game series. This tool allows you to create images of your text with custom spacing and supports characters, numbers, and symbols.
 
 ## Table of Contents
 - [Features](#features)
@@ -41,7 +41,7 @@ Make sure you have Python installed. You can download Python from the official P
 1. Clone this repository to your local machine:
 
    ```bash
-   git clone https://github.com/VermeilChan/MetalSlug6Font.git
+   git clone https://github.com/VermeilChan/MetalSlugFont.git
    
    cd MetalSlug6Font
    ```

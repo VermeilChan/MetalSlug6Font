@@ -46,7 +46,7 @@ h1,
 h2 {
     margin-bottom: 1rem;
     transition: color 0.3s ease-in-out;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add this line for the shadow effect */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 form {
@@ -79,8 +79,6 @@ input[type="submit"] {
 input[type="submit"]:hover {
     background-color: #0056b3;
 }
-
-
 
 .error {
     color: #ff5555;
@@ -129,7 +127,6 @@ input[type="submit"]:hover {
     color:#fff;
     text-decoration:none;
 }
-
 
 #download_button:hover {
     background-color: #0056b3;
