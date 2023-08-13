@@ -13,7 +13,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3.7.0
         with:
-          node-version: 16.15.0
+          node-version: 20.5.1
 
       - name: Checkout the code
         uses: actions/checkout@v3.5.3
