@@ -34,7 +34,7 @@ Make sure you have Python installed. You can download Python from the official P
 
 ## Installing Python on Linux
 
-- [Installing Python 3 on Linux — The Hitchhiker's Guide to Python](https://docs.python-guide.org/starting/install3/linux/)
+- [Installing Python 3 on Linux](https://docs.python-guide.org/starting/install3/linux/)
 
 ## Getting Started
 
