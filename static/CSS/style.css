@@ -27,21 +27,6 @@ body {
     }
 }
 
-@keyframes Rainbow {
-    0% { color: #ff3399; }
-    14% { color: #ff66cc; }
-    28% { color: #ff9900; }
-    42% { color: #ffcc00; }
-    57% { color: #33cc33; }
-    71% { color: #3399ff; }
-    85% { color: #9966ff; }
-    100% { color: #ff3399; }
-}
-
-h1:hover, h2:hover {
-    animation: Rainbow 5s infinite linear;
-}
-
 h1,
 h2 {
     margin-bottom: 1rem;
@@ -119,13 +104,12 @@ input[type="submit"]:hover {
 }
 
 #download_button a {
-    color:#fff;
-    text-decoration:none;
+    color: #fff;
+    text-decoration: none;
 }
-
 #download_button a:active {
-    color:#fff;
-    text-decoration:none;
+    color: #fff;
+    text-decoration: none;
 }
 
 #download_button:hover {

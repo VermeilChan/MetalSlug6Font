@@ -6,19 +6,17 @@ from flask import Flask, render_template, request
 app = Flask(__name__)
 
 CHARACTER_FILES = {
-    ' ': 'space',
-    '?': 'question',
-    '!': 'exclamation'
+    '?': 'Symbols/question',
+    '!': 'Symbols/exclamation'
 }
 
-def get_character_image(char):
+GENERATED_IMAGE_PATH = 'result.png'
 
+def get_character_image(char):
     try:
-        
-        char_img_path = os.path.join('static', f"{CHARACTER_FILES.get(char, char)}.png")
+        char_img_path = os.path.join('static', f"{CHARACTER_FILES.get(char, 'Alphabets/' + char)}.png")
         char_img = Image.open(char_img_path).convert('RGBA')
         return char_img
-    
     except FileNotFoundError:
         return None
 
@@ -26,20 +24,24 @@ def resize_character(char_img, char_width, img_height):
     return ImageOps.fit(char_img, (char_width, img_height), method=Image.BILINEAR)
 
 def generate_image(text):
-
     try:
         img_widths = []
         img_height = None
         chars = []
 
         for char in text:
-            char_img = get_character_image(char)
-            if char_img is None:
-                raise ValueError(f"Character image not found for '{char}'")
+            if char == ' ':
+                char_width = 20  # Fixed width for space
+                char_img = Image.new('RGBA', (char_width, 1), (0, 0, 0, 0))
+            else:
+                char_img = get_character_image(char)
+                if char_img is None:
+                    raise ValueError(f"Character image not found for '{char}'")
+                char_size = char_img.size
+                char_width = char_size[0]
 
-            char_size = char_img.size
-            img_widths.append(char_size[0])
-            chars.append((char_img, char_size[0]))
+            img_widths.append(char_width)
+            chars.append((char_img, char_width))
 
             if img_height is None:
                 img_height = char_size[1]
@@ -53,14 +55,11 @@ def generate_image(text):
             img.paste(char_img_resized, (x, 0), char_img_resized)
             x += char_width
 
-        img_path = os.path.join('static', 'result.png')
+        img_path = os.path.join('static', GENERATED_IMAGE_PATH)
         img.save(img_path)
 
-        #Copy To Result Folder :
-        shutil.copy(img_path , "result")
+        return GENERATED_IMAGE_PATH, None
 
-        return img_path, None
-    
     except Exception as e:
         return None, str(e)
 
