@@ -32,7 +32,7 @@ jobs:
         id: latest_commit
         if: steps.check_secrets.outputs.result == 'success'
         run: |
-          COMMIT_API_RESPONSE=$(curl -s -H "Authorization: token ${{ secrets.GH_TOKEN }}" "https://api.github.com/repos/VermeilChan/MetalSlug6Font/commits?per_page=1")
+          COMMIT_API_RESPONSE=$(curl -s -H "Authorization: token ${{ secrets.GH_TOKEN }}" "https://api.github.com/repos/VermeilChan/MetalSlugFont/commits?per_page=1")
           COMMIT_MESSAGE=$(echo "$COMMIT_API_RESPONSE" | jq -r '.[0].commit.message')
           COMMIT_SHA=$(echo "$COMMIT_API_RESPONSE" | jq -r '.[0].sha')
           COMMIT_URL=$(echo "$COMMIT_API_RESPONSE" | jq -r '.[0].html_url')
@@ -52,8 +52,8 @@ jobs:
           curl -X POST -H "Content-Type: application/json" -d '{
             "embeds": [
               {
-                "title": "MetalSlug6Font Update",
-                "description": "MetalSlug6Font has been updated with the following changes:",
+                "title": "MetalSlugFont Update",
+                "description": "MetalSlugFont has been updated with the following changes:",
                 "color": 3447003,
                 "thumbnail": {
                   "url": "https://cdn.discordapp.com/attachments/905835784215592960/1136337834689712138/sv-001.png"
