@@ -11,12 +11,12 @@ jobs:
 
     steps:
       - name: Set up Node.js
-        uses: actions/setup-node@v3.7.0
+        uses: actions/setup-node@v3
         with:
-          node-version: 20.5.1
+          node-version: 16
 
       - name: Checkout the code
-        uses: actions/checkout@v3.5.3
+        uses: actions/checkout@v3
 
       - name: Check for GH_TOKEN and DISCORD_WEBHOOK_URL
         id: check_secrets
@@ -74,4 +74,3 @@ jobs:
               }
             ]
           }' "${{ secrets.DISCORD_WEBHOOK_URL }}"
-          
