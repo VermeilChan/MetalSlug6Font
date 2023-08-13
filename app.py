@@ -1,5 +1,6 @@
 import os
-from PIL import Image
+import shutil
+from PIL import Image, ImageOps
 from flask import Flask, render_template, request
 
 app = Flask(__name__)
@@ -9,39 +10,49 @@ CHARACTER_FILES = {
     '!': 'Symbols/exclamation'
 }
 
-SPACE_WIDTH = 20
 GENERATED_IMAGE_PATH = 'result.png'
+
+def get_character_image(char):
+    try:
+        char_img_path = os.path.join('static', f"{CHARACTER_FILES.get(char, 'Alphabets/' + char)}.png")
+        char_img = Image.open(char_img_path).convert('RGBA')
+        return char_img
+    except FileNotFoundError:
+        return None
+
+def resize_character(char_img, char_width, img_height):
+    return ImageOps.fit(char_img, (char_width, img_height), method=Image.BILINEAR)
 
 def generate_image(text):
     try:
+        img_widths = []
         img_height = None
         chars = []
-        char_size = None
 
         for char in text:
             if char == ' ':
-                char_img = Image.new('RGBA', (SPACE_WIDTH, 1), (0, 0, 0, 0))
-                char_width = SPACE_WIDTH
+                char_width = 20  # Fixed width for space
+                char_img = Image.new('RGBA', (char_width, 1), (0, 0, 0, 0))
             else:
-                char_img_path = os.path.join('static', f"{CHARACTER_FILES.get(char, 'Alphabets/' + char)}.png")
-                if not os.path.exists(char_img_path):
+                char_img = get_character_image(char)
+                if char_img is None:
                     raise ValueError(f"Character image not found for '{char}'")
-
-                char_img = Image.open(char_img_path).convert('RGBA')
                 char_size = char_img.size
                 char_width = char_size[0]
 
-                if img_height is None:
-                    img_height = char_size[1]
-
+            img_widths.append(char_width)
             chars.append((char_img, char_width))
 
-        total_width = sum(char_width for _, char_width in chars)
+            if img_height is None:
+                img_height = char_size[1]
+
+        total_width = sum(img_widths)
         img = Image.new('RGBA', (total_width, img_height), (0, 0, 0, 0))
         x = 0
 
         for char_img, char_width in chars:
-            img.paste(char_img, (x, 0), char_img)
+            char_img_resized = resize_character(char_img, char_width, img_height)
+            img.paste(char_img_resized, (x, 0), char_img_resized)
             x += char_width
 
         img_path = os.path.join('static', GENERATED_IMAGE_PATH)
