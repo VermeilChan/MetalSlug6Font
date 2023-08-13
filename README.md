@@ -43,7 +43,7 @@ Make sure you have Python installed. You can download Python from the official P
    ```bash
    git clone https://github.com/VermeilChan/MetalSlugFont.git
    
-   cd MetalSlug6Font
+   cd MetalSlugFont
    ```
 
 2. Install the required Python packages:
