@@ -4,8 +4,13 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-ALLOWED_CHARACTERS = set("ABCDEFGHIJKLMNOPQRSTUVWXYZ!? ")
-CHARACTER_FILES = {'?': 'Symbols/question', '!': 'Symbols/exclamation'}
+ALLOWED_CHARACTERS = set("ABCDEFGHIJKLMNOPQRSTUVWXYZ!?0123456789 ")
+CHARACTER_FOLDERS = {
+    '?': 'Symbols/Question',
+    '!': 'Symbols/Exclamation',
+}
+CHARACTER_FOLDER = 'Alphabets'
+NUMBER_FOLDER = 'Numbers'
 SPACE_WIDTH = 20
 GENERATED_IMAGE_PATH = 'result.png'
 
@@ -15,27 +20,25 @@ def generate_image(text):
 
         img_height = None
         chars = []
-        first_char = True
 
         for char in sanitized_text:
             if char == ' ':
-                if first_char:
-                    first_char = False
-                    char_img = Image.new('RGBA', (SPACE_WIDTH, 1), (0, 0, 0, 0))
-                    char_width = SPACE_WIDTH
-                else:
-                    chars[-1] = (chars[-1][0], chars[-1][1] + SPACE_WIDTH)
+                if chars and chars[-1][1] == ' ':
                     continue
+                char_img = Image.new('RGBA', (SPACE_WIDTH, 1), (0, 0, 0, 0))
+                char_width = SPACE_WIDTH
             else:
-                first_char = False
-                char_img_path = os.path.join('static', f"{CHARACTER_FILES.get(char, 'Alphabets/' + char)}.png")
-                if not os.path.exists(char_img_path):
-                    raise ValueError(f"The character '{char}' is not supported.")
-                char_img = Image.open(char_img_path).convert('RGBA')
-                char_size = char_img.size
-                char_width = char_size[0]
-                if img_height is None:
-                    img_height = char_size[1]
+                if char in CHARACTER_FOLDERS:
+                    char_img_path = os.path.join('static', CHARACTER_FOLDERS[char] + '.png')
+                elif char.isdigit():
+                    char_img_path = os.path.join('static', NUMBER_FOLDER, char + '.png')
+                else:
+                    char_img_path = os.path.join('static', CHARACTER_FOLDER, char + '.png')
+                
+                with Image.open(char_img_path).convert('RGBA') as char_img:
+                    char_size = char_img.size
+                    char_width = char_size[0]
+                    img_height = char_size[1] if img_height is None else img_height
             chars.append((char_img, char_width))
 
         total_width = sum(char_width for _, char_width in chars)
@@ -50,9 +53,10 @@ def generate_image(text):
 
         return GENERATED_IMAGE_PATH, None
 
+    except FileNotFoundError:
+        return None, "Some characters are not supported."
     except Exception as e:
-        app.logger.error("An error occurred: %s", str(e))
-        return None, "An error occurred. Please try again later."
+        return None, f"An error occurred: {str(e)}"
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
