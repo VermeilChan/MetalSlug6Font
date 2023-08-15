@@ -67,7 +67,7 @@ Make sure you have Python installed. You can download Python from the official P
 ## Usage
 
 1. Enter the desired text to convert into Metal Slug font style.
-2. The generated image will be saved in the `Assets/Generated_Images` folder.
+2. The generated image will be saved your desktop.
 
 ## Converting to Executable
 
