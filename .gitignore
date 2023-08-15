@@ -161,6 +161,6 @@ cython_debug/
 .vscode/
 
 # Ignored Folders And Files 
-/Assets/Generated_Images
 scan.py
 Sv-001.ico
+directory_tree.txt
