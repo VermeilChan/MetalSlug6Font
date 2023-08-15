@@ -87,19 +87,20 @@ def generate_image_with_filename(text, filename):
 
 # Main function
 def main():
-    text = input("Enter the desired output: ").upper()
-    
-    if not text:
-        print("Please Enter Text.")
-        return
-    
-    filename = generate_filename(text)
-    img_path, error_message = generate_image_with_filename(text, filename)
-    
-    if error_message:
-        print(error_message)
-    else:
-        print(f"Image generated successfully: {img_path}")
+    while True:
+        text = input("Enter the desired output (press Enter to quit): ").upper()
+        
+        if not text:
+            print("Goodbye!")
+            break
+        
+        filename = generate_filename(text)
+        img_path, error_message = generate_image_with_filename(text, filename)
+        
+        if error_message:
+            print(error_message)
+        else:
+            print(f"Image generated successfully: {img_path}")
 
 if __name__ == "__main__":
     main()
