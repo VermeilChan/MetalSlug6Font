@@ -18,14 +18,11 @@ CHARACTER_FOLDER = os.environ.get('CHARACTER_FOLDER', 'Alphabets')
 NUMBER_FOLDER = os.environ.get('NUMBER_FOLDER', 'Numbers')
 SYMBOLS_FOLDER = os.environ.get('SYMBOLS_FOLDER', 'Symbols')
 
-MAX_IMAGE_AGE_DAYS = 7
 SPACE_WIDTH = 20
 
 # Define the path for generated images directory
 GENERATED_IMAGES_DIR = os.path.join('static', 'Generated_Images')
 os.makedirs(GENERATED_IMAGES_DIR, exist_ok=True)
-
-# Helper functions
 
 # Generate a unique filename based on user input and current date and time
 def generate_filename(user_input):
@@ -33,15 +30,6 @@ def generate_filename(user_input):
     sanitized_input = user_input.replace(" ", "_").replace("?", "_")
     filename = f"{sanitized_input}_{timestamp}.png"
     return filename
-
-# Clean up old generated images
-def cleanup_generated_images():
-    now = datetime.now()
-    for filename in os.listdir(GENERATED_IMAGES_DIR):
-        file_path = os.path.join(GENERATED_IMAGES_DIR, filename)
-        file_creation_time = datetime.fromtimestamp(os.path.getctime(file_path))
-        if now - file_creation_time > timedelta(days=MAX_IMAGE_AGE_DAYS):
-            os.remove(file_path)
 
 # Get the path of the character image based on the character
 def get_character_image_path(char):
@@ -108,9 +96,6 @@ def generate_image_with_filename(text, filename):
 def index():
     img_path = None
     error_message = None
-
-    # Call the cleanup function before processing the request
-    cleanup_generated_images()
 
     if request.method == 'POST':
         text = request.form.get('text', '').upper()
