@@ -2,7 +2,7 @@
 
 Generate images with the iconic Metal Slug font style! Write text using the distinctive font from the Metal Slug arcade game series. This tool allows you to create images of your text with custom spacing and supports characters, numbers, and symbols.
 
-**Important Note:** This version of the software is still in its developmental phase and operates within a terminal-based interface. Please be aware that it might require certain adjustments to ensure proper functionality across various operating systems, including Linux and macOS. Given its early stage of development, there are currently several bugs present within the system. It is highly recommended to exercise caution and refrain from trying out this version until further refinements have been made. Alternatively, you can continue to utilize the web application until the official website becomes accessible. In case the website isn't available, you have the option to host the application on your own computer. Detailed instructions can be found in the README.md file on the master branch for additional information.
+**Important Note:** This version of the software is still in its developmental phase and operates within a terminal-based interface. Please be aware that it might require certain adjustments to ensure proper functionality across various operating systems, including Linux and MacOS. Given its early stage of development, there are currently several bugs present within the system. It is highly recommended to exercise caution and refrain from trying out this version until further refinements have been made. Alternatively, you can continue to utilize the web application until the official website becomes accessible. In case the website isn't available, you have the option to host the application on your own computer. Detailed instructions can be found in the README.md file on the master branch for additional information.
 
 ## Table of Contents
 - [Features](#features)
@@ -33,7 +33,7 @@ Generated Image:
 
 Make sure you have Python installed. You can download Python from the official Python website:
 
-- [Python Downloads](https://www.python.org/downloads/)
+- [Python Downloads | Windows And MacOS](https://www.python.org/downloads/)
 
 ## Installing Python On Linux
 
@@ -71,13 +71,14 @@ Make sure you have Python installed. You can download Python from the official P
 
 ## Converting to Executable
 
-If you want to convert the terminal-based script into an executable (.exe) for Windows, you might want to consider using Wine. Wine allows you to run Windows applications on Linux.
+If you want to convert the terminal-based script into an executable (.exe) for Windows, you might want to consider using Wine. Wine allows you to run Windows applications on Linux and MacOS.
 
 Here are guides for installing and setting up Wine on various Linux distributions:
 
 - Ubuntu: [WineHQ Ubuntu Guide](https://wiki.winehq.org/Ubuntu)
 - Debian: [WineHQ Debian Guide](https://wiki.winehq.org/Debian)
 - Fedora: [WineHQ Fedora Guide](https://wiki.winehq.org/Fedora)
+- MacOS: [WineHQ MacOS Guide](https://wiki.winehq.org/MacOS)
 
 Please note that Wine might have limitations and not all Windows applications work flawlessly under it. Be sure to test your executable thoroughly.
 
