@@ -42,8 +42,7 @@ Make sure you have Python installed. You can download Python from the official P
 
    ```bash
    git clone https://github.com/VermeilChan/MetalSlugFont.git
-   ```
-   ```
+   
    cd MetalSlugFont
    ```
 
