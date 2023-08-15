@@ -113,7 +113,7 @@ def index():
     cleanup_generated_images()
 
     if request.method == 'POST':
-        text = request.form.get('text', '')
+        text = request.form.get('text', '').upper()
         sanitized_text = escape(text)
 
         if not sanitized_text:
