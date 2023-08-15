@@ -65,8 +65,7 @@ db.sqlite3-journal
 # Flask stuff:
 instance/
 .webassets-cache
-static/result.png
-result
+static/generated_images/
 
 # Scrapy stuff:
 .scrapy
