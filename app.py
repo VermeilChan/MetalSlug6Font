@@ -1,43 +1,68 @@
 import os
 from PIL import Image
-from flask import Flask, render_template, request
+import PIL
+from datetime import datetime
 
-app = Flask(__name__)
+# Constants
+ALLOWED_ALPHABETS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+ALLOWED_NUMBERS = "123456789"
+ALLOWED_SYMBOLS = "?!"
+ALLOWED_CHARACTERS = ALLOWED_ALPHABETS + ALLOWED_NUMBERS + ALLOWED_SYMBOLS + ' '
 
-ALLOWED_CHARACTERS = set("ABCDEFGHIJKLMNOPQRSTUVWXYZ!? ")
-CHARACTER_FILES = {'?': 'Symbols/question', '!': 'Symbols/exclamation'}
+CHARACTERS_FOLDER = 'Assets/Alphabets'
+NUMBERS_FOLDER = 'Assets/Numbers'
+SYMBOLS_FOLDER = 'Assets/Symbols'
+
 SPACE_WIDTH = 20
-GENERATED_IMAGE_PATH = 'result.png'
 
-def generate_image(text):
+# Generate a unique filename based on user input and current date and time
+def generate_filename(user_input):
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    input = user_input.replace(" ", "_").replace("?", "_")
+    filename = f"{input}_{timestamp}.png"
+    return filename
+
+# Get the path of the character image based on the character
+def get_character_image_path(char):
+    if char in ALLOWED_ALPHABETS:
+        return os.path.join(CHARACTERS_FOLDER, char + '.png')
+    elif char in ALLOWED_NUMBERS:
+        return os.path.join(NUMBERS_FOLDER, char + '.png')
+    elif char == '!':
+        return os.path.join(SYMBOLS_FOLDER, 'Exclamation.png')
+    elif char == '?':
+        return os.path.join(SYMBOLS_FOLDER, 'Question.png')
+    else:
+        raise ValueError(f"The character '{char}' is not supported.")
+
+# Generate an image from the provided text and save it with the provided filename
+def generate_image_with_filename(text, filename):
     try:
-        sanitized_text = ''.join(char for char in text if char in ALLOWED_CHARACTERS)
-
+        text = ''.join(char for char in text if char in ALLOWED_CHARACTERS)
         img_height = None
         chars = []
-        first_char = True
 
-        for char in sanitized_text:
+        for char in text:
             if char == ' ':
-                if first_char:
-                    first_char = False
-                    char_img = Image.new('RGBA', (SPACE_WIDTH, 1), (0, 0, 0, 0))
-                    char_width = SPACE_WIDTH
-                else:
-                    chars[-1] = (chars[-1][0], chars[-1][1] + SPACE_WIDTH)
+                # Handle spaces by creating a transparent image
+                if chars and chars[-1][1] == ' ':
                     continue
+                char_img = Image.new('RGBA', (SPACE_WIDTH, 1), (0, 0, 0, 0))
+                char_width = SPACE_WIDTH
             else:
-                first_char = False
-                char_img_path = os.path.join('static', f"{CHARACTER_FILES.get(char, 'Alphabets/' + char)}.png")
-                if not os.path.exists(char_img_path):
-                    raise ValueError(f"The character '{char}' is not supported.")
-                char_img = Image.open(char_img_path).convert('RGBA')
-                char_size = char_img.size
-                char_width = char_size[0]
-                if img_height is None:
-                    img_height = char_size[1]
+                char_img_path = get_character_image_path(char)
+                try:
+                    with Image.open(char_img_path).convert('RGBA') as char_img:
+                        char_size = char_img.size
+                        char_width = char_size[0]
+                        img_height = char_size[1] if img_height is None else img_height
+                except FileNotFoundError as fnfe:
+                    raise ValueError(f"Image file not found: {str(fnfe)}")
+                except PIL.Image.Error as img_err:
+                    raise ValueError(f"Error processing image: {str(img_err)}")
             chars.append((char_img, char_width))
 
+        # Create a composite image by pasting individual character images
         total_width = sum(char_width for _, char_width in chars)
         img = Image.new('RGBA', (total_width, img_height), (0, 0, 0, 0))
         x = 0
@@ -45,29 +70,32 @@ def generate_image(text):
             img.paste(char_img, (x, 0), char_img)
             x += char_width
 
-        img_path = os.path.join('static', GENERATED_IMAGE_PATH)
+        # Save the composite image with the provided filename and new path
+        img_path = os.path.join('Assets/Generated_Images', filename)
         img.save(img_path)
 
-        return GENERATED_IMAGE_PATH, None
+        return filename, None
 
+    except ValueError as ve:
+        return None, str(ve)
     except Exception as e:
-        app.logger.error("An error occurred: %s", str(e))
-        return None, "An error occurred. Please try again later."
+        return None, f"An error occurred: {str(e)}"
 
-@app.route('/', methods=['GET', 'POST'])
-def index():
-    img_path = None
-    error_message = None
-
-    if request.method == 'POST':
-        text = request.form.get('text', '').upper()
-
-        if not text:
-            error_message = "Please enter text."
-        else:
-            img_path, error_message = generate_image(text)
-
-    return render_template('index.html', img_path=img_path, error_message=error_message)
+# Main function
+def main():
+    text = input("Enter the desired output: ").upper()
+    
+    if not text:
+        print("Please Enter Text.")
+        return
+    
+    filename = generate_filename(text)
+    img_path, error_message = generate_image_with_filename(text, filename)
+    
+    if error_message:
+        print(error_message)
+    else:
+        print(f"Image generated successfully: {img_path}")
 
 if __name__ == "__main__":
-    app.run()
+    main()
