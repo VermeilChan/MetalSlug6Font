@@ -56,8 +56,10 @@ def generate_image_with_filename(text, filename):
                         char_size = char_img.size
                         char_width = char_size[0]
                         img_height = char_size[1] if img_height is None else img_height
+
                 except FileNotFoundError as fnfe:
                     raise ValueError(f"Image file not found: {str(fnfe)}")
+                
                 except PIL.Image.Error as img_err:
                     raise ValueError(f"Error processing image: {str(img_err)}")
             chars.append((char_img, char_width))
@@ -78,8 +80,9 @@ def generate_image_with_filename(text, filename):
 
     except ValueError as ve:
         return None, str(ve)
+    
     except Exception as e:
-        return None, f"An error occurred: {str(e)}"
+        return None, f"An error occurred: {str(e)} . Try adding the folder inside assets"
 
 # Main function
 def main():
