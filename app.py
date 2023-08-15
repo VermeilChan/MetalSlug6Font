@@ -81,8 +81,9 @@ def generate_image_with_filename(text, filename):
     except ValueError as ve:
         return None, str(ve)
     
-    except Exception as e:
-        return None, f"An error occurred: {str(e)} . Try adding the folder inside assets"
+    except FileNotFoundError as e:
+        os.mkdir("Assets/Generated_Images")
+        generate_image_with_filename(text , filename)
 
 # Main function
 def main():
