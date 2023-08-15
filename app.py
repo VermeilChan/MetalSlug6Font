@@ -2,6 +2,7 @@ import os
 from PIL import Image
 import PIL
 from datetime import datetime
+from pathlib import Path
 
 # Constants
 ALLOWED_ALPHABETS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
@@ -15,11 +16,16 @@ SYMBOLS_FOLDER = 'Assets/Symbols'
 
 SPACE_WIDTH = 20
 
+# Get the user's desktop folder
+def get_desktop_path():
+    desktop = Path.home() / "Desktop"
+    return str(desktop)
+
 # Generate a unique filename based on user input and current date and time
 def generate_filename(user_input):
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    input = user_input.replace(" ", "_").replace("?", "_")
-    filename = f"{input}_{timestamp}.png"
+    input_filename = user_input.replace(" ", "_").replace("?", "_")
+    filename = f"{input_filename}_{timestamp}.png"
     return filename
 
 # Get the path of the character image based on the character
@@ -72,31 +78,28 @@ def generate_image_with_filename(text, filename):
             img.paste(char_img, (x, 0), char_img)
             x += char_width
 
-        # Save the composite image with the provided filename and new path
-        img_path = os.path.join('Assets/Generated_Images', filename)
+        # Get the desktop path and save the composite image
+        desktop_path = get_desktop_path()
+        img_path = os.path.join(desktop_path, filename)
         img.save(img_path)
 
         return filename, None
 
     except ValueError as ve:
         return None, str(ve)
-    
-    except FileNotFoundError as e:
-        os.mkdir("Assets/Generated_Images")
-        generate_image_with_filename(text , filename)
 
 # Main function
 def main():
     while True:
         text = input("Enter the desired output (press Enter to quit): ").upper()
-        
+
         if not text:
             print("Goodbye!")
             break
-        
+
         filename = generate_filename(text)
         img_path, error_message = generate_image_with_filename(text, filename)
-        
+
         if error_message:
             print(error_message)
         else:
