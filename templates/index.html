@@ -24,11 +24,11 @@
     <!-- Generated Image Section -->
     {% if img_path %}
     <h2>Generated Image:</h2>
-    <img src="{{ url_for('static', filename=img_path) }}" alt="Generated Image">
+    <img src="{{ url_for('static', filename='Generated_Images/' + img_path) }}" alt="Generated Image">
     <div class="button-container">
         <!-- Download Button -->
         <button id="download_button">
-            <a href="{{ url_for('static', filename='result.png') }}" download="result.png">Download</a>
+            <a href="{{ url_for('static', filename='Generated_Images/' + img_path) }}" download="{{ img_path }}">Download</a>
         </button>
     </div>
     {% endif %}
