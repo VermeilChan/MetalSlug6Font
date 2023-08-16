@@ -3,6 +3,7 @@ from PIL import Image
 import PIL
 from datetime import datetime
 from pathlib import Path
+from colorama import Fore, Style
 
 # Constants
 ALLOWED_ALPHABETS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
@@ -91,19 +92,19 @@ def generate_image_with_filename(text, filename):
 # Main function
 def main():
     while True:
-        text = input("Enter the desired output (press Enter to quit): ").upper()
+        text = input(Fore.CYAN + "Enter the desired output (press Enter to quit): " + Style.RESET_ALL).upper()
 
         if not text:
-            print("Goodbye!")
+            print(Fore.YELLOW + "Goodbye!" + Style.RESET_ALL)
             break
 
         filename = generate_filename(text)
         img_path, error_message = generate_image_with_filename(text, filename)
 
         if error_message:
-            print(error_message)
+            print(Fore.RED + error_message + Style.RESET_ALL)
         else:
-            print(f"Image generated successfully: {img_path}")
+            print(Fore.GREEN + f"Image generated successfully: {img_path}" + Style.RESET_ALL)
 
 if __name__ == "__main__":
     main()
