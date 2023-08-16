@@ -1,9 +1,12 @@
 import os
-from PIL import Image
+import re
 import PIL
-from datetime import datetime
+import random
+from PIL import Image
 from pathlib import Path
-from colorama import Fore, Style
+from colorama import init
+from color import *
+from datetime import datetime
 
 # Constants
 ALLOWED_ALPHABETS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
@@ -17,6 +20,9 @@ SYMBOLS_FOLDER = 'Assets/Symbols'
 
 SPACE_WIDTH = 20
 
+# Initialize colorama
+init(autoreset=True)
+
 # Get the user's desktop folder
 def get_desktop_path():
     desktop = Path.home() / "Desktop"
@@ -25,8 +31,8 @@ def get_desktop_path():
 # Generate a unique filename based on user input and current date and time
 def generate_filename(user_input):
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    input_filename = user_input.replace(" ", "_").replace("?", "_")
-    filename = f"{input_filename}_{timestamp}.png"
+    sanitized_input = re.sub(r'[^a-zA-Z0-9]', '_', user_input)
+    filename = f"{sanitized_input}_{timestamp}.png"
     return filename
 
 # Get the path of the character image based on the character
@@ -88,23 +94,3 @@ def generate_image_with_filename(text, filename):
 
     except ValueError as ve:
         return None, str(ve)
-
-# Main function
-def main():
-    while True:
-        text = input(Fore.CYAN + "Enter the desired output (press Enter to quit): " + Style.RESET_ALL).upper()
-
-        if not text:
-            print(Fore.YELLOW + "Goodbye!" + Style.RESET_ALL)
-            break
-
-        filename = generate_filename(text)
-        img_path, error_message = generate_image_with_filename(text, filename)
-
-        if error_message:
-            print(Fore.RED + error_message + Style.RESET_ALL)
-        else:
-            print(Fore.GREEN + f"Image generated successfully: {img_path}" + Style.RESET_ALL)
-
-if __name__ == "__main__":
-    main()
