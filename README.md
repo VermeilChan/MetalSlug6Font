@@ -1,4 +1,4 @@
-# Metal Slug Font Generator
+# Metal Slug Font
 
 Create captivating images using the iconic Metal Slug font style! Compose text with the distinct typography from the beloved Metal Slug arcade game series. This tool empowers you to fashion images of your text with customizable spacing, accommodating characters, numbers, and symbols.
 
