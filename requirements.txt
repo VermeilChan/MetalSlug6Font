@@ -1,3 +1,4 @@
 Pillow
 Flask
 pyinstaller
+PyQt6

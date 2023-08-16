@@ -58,7 +58,7 @@ Python is often preinstalled on most Linux operating systems.
 2. Install the required Python packages:
 
    ```bash
-   pip install Pillow
+   pip install -r requirements.txt
    ```
 
 3. Run the Metal Slug Font:
