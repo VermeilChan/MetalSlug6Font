@@ -1,13 +1,13 @@
-# Metal Slug Font
+# Metal Slug Font Generator
 
-Generate images with the iconic Metal Slug font style! Write text using the distinctive font from the Metal Slug arcade game series. This tool allows you to create images of your text with custom spacing and supports characters, numbers, and symbols.
+Create captivating images using the iconic Metal Slug font style! Compose text with the distinct typography from the beloved Metal Slug arcade game series. This tool empowers you to fashion images of your text with customizable spacing, accommodating characters, numbers, and symbols.
 
-**Important Note:** This version of the software is still in its developmental phase and operates within a terminal-based interface. Please be aware that it might require certain adjustments to ensure proper functionality across various operating systems, including Linux and MacOS. Given its early stage of development, there are currently several bugs present within the system. It is highly recommended to exercise caution and refrain from trying out this version until further refinements have been made. Alternatively, you can continue to utilize the web application until the official website becomes accessible. In case the website isn't available, you have the option to host the application on your own computer. Detailed instructions can be found in the README.md file on the master branch for additional information.
+**Important Note:** This software version is still in its developmental phase and operates through a terminal-based interface. Please be advised that it might necessitate certain adjustments to ensure optimal functionality across diverse operating systems, including Linux and MacOS. Given its early developmental stage, a few bugs currently inhabit the system. We strongly recommend exercising caution and refraining from experimenting with this version until further refinements are introduced. Alternatively, you can continue utilizing the web application until the official website becomes accessible. If the website isn't available, you have the option to host the application on your local machine. Comprehensive instructions can be found in the README.md file on the master branch for supplementary information.
 
 ## Table of Contents
 - [Features](#features)
 - [Requirements](#requirements)
-- - [Installing Python](#installing-python)
+  - [Installing Python](#python-downloads)
 - [Getting Started](#getting-started)
 - [Usage](#usage)
 - [Converting to Executable](#converting-to-executable)
@@ -17,9 +17,9 @@ Generate images with the iconic Metal Slug font style! Write text using the dist
 
 ## Features
 
-- Convert text into images with the Metal Slug font style.
-- Customize spacing between characters for creative layouts.
-- Support for uppercase and lowercase alphabets (A-Z, a-z), numbers (1-9), exclamation (!), and question marks (?).
+- Transform text into images with the captivating Metal Slug font style.
+- Personalize spacing between characters for imaginative layouts.
+- Support for uppercase and lowercase alphabets (A-Z, a-z), numbers (1-9), exclamation marks (!), and question marks (?).
 
 ## Examples
 
@@ -31,13 +31,18 @@ Generated Image:
 
 ## Requirements
 
-Make sure you have Python installed. You can download Python from the official Python website:
+Ensure that you have Python installed. You can download Python from the official Python website:
 
-- [Python Downloads | Windows And MacOS](https://www.python.org/downloads/)
+## Python Downloads
 
-## Installing Python On Linux
+| Operating System | Download Link                                                                    |
+|------------------|----------------------------------------------------------------------------------|
+| Windows          | [Python Downloads Windows](https://www.python.org/downloads/)                    |
+| MacOS            | [Python Downloads MacOS](https://www.python.org/downloads/)                      |
+| Linux            | [Python Downloads Linux](https://docs.python-guide.org/starting/install3/linux/) |
 
-- [Installing Python On Linux](https://docs.python-guide.org/starting/install3/linux/)
+**Note for Linux Users:**
+Python is often preinstalled on most Linux operating systems.
 
 ## Getting Started
 
@@ -53,7 +58,7 @@ Make sure you have Python installed. You can download Python from the official P
 2. Install the required Python packages:
 
    ```bash
-   pip install Flask Pillow pyinstaller
+   pip install Pillow
    ```
 
 3. Run the Metal Slug Font:
@@ -62,29 +67,36 @@ Make sure you have Python installed. You can download Python from the official P
    python app.py
    ```
 
-4. Follow the on-screen instructions to generate Metal Slug font images.
+4. Follow the on-screen instructions to create Metal Slug font images.
 
 ## Usage
 
-1. Enter the desired text to convert into Metal Slug font style.
-2. The generated image will be saved your desktop.
+1. Input the desired text to transform it into the Metal Slug font style.
+2. The generated image will be saved on your desktop.
 
 ## Converting to Executable
 
-If you want to convert the terminal-based script into an executable (.exe) for Windows, you might want to consider using Wine. Wine allows you to run Windows applications on Linux and MacOS.
+If you wish to convert the terminal-based script into a Windows executable (.exe), you can consider using Wine. Wine allows you to run Windows applications on Linux and MacOS.
 
 Here are guides for installing and setting up Wine on various Linux distributions:
 
-- Ubuntu: [WineHQ Ubuntu Guide](https://wiki.winehq.org/Ubuntu)
-- Debian: [WineHQ Debian Guide](https://wiki.winehq.org/Debian)
-- Fedora: [WineHQ Fedora Guide](https://wiki.winehq.org/Fedora)
-- MacOS: [WineHQ MacOS Guide](https://wiki.winehq.org/MacOS)
+| Linux Distribution | WineHQ Guide                                          |
+|--------------------|-------------------------------------------------------|
+| Ubuntu             | [WineHQ Ubuntu Guide](https://wiki.winehq.org/Ubuntu) |
+| Debian             | [WineHQ Debian Guide](https://wiki.winehq.org/Debian) |
+| Fedora             | [WineHQ Fedora Guide](https://wiki.winehq.org/Fedora) |
 
-Please note that Wine might have limitations and not all Windows applications work flawlessly under it. Be sure to test your executable thoroughly.
+**MacOS Guide:**
+
+| Operating System | WineHQ Guide                                          |
+|------------------|-------------------------------------------------------|
+| MacOS            | [WineHQ MacOS Guide](https://wiki.winehq.org/MacOS)   |
+
+Please note that Wine might have limitations, and not all Windows applications work flawlessly under it. Make sure to thoroughly test your executable.
 
 ## Contributing
 
-Contributions are welcome! If you find any issues or have suggestions for improvements, please feel free to open an issue or submit a pull request.
+Contributions are highly welcome! If you encounter any issues or have suggestions for improvements, please feel free to open an issue or submit a pull request.
 
 ## License
 
