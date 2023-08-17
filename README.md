@@ -28,13 +28,18 @@ Generated Image:
 
 ## Requirements
 
-Make sure you have Python installed. You can download Python from the official Python website:
+Ensure that you have Python installed. You can download Python from the official Python website:
 
-- [Python Downloads](https://www.python.org/downloads/)
+## Python Downloads
 
-## Installing Python on Linux
+| Operating System | Download Link                                                                    |
+|------------------|----------------------------------------------------------------------------------|
+| Windows          | [Python Downloads Windows](https://www.python.org/downloads/)                    |
+| Linux            | [Python Downloads Linux](https://docs.python-guide.org/starting/install3/linux/) |
+| MacOS            | [Python Downloads MacOS](https://www.python.org/downloads/)                      |
 
-- [Installing Python 3 on Linux](https://docs.python-guide.org/starting/install3/linux/)
+**Note for Linux Users:**
+Python is often preinstalled on most Linux operating systems.
 
 ## Getting Started
 
@@ -49,7 +54,7 @@ Make sure you have Python installed. You can download Python from the official P
 2. Install the required Python packages:
 
    ```bash
-   pip install Flask Pillow
+   pip install -r requirements.txt
    ```
 
 3. Place your character images (A.png, B.png, ..., question.png, exclamation.png) in the `static` directory.
