@@ -1,18 +1,18 @@
 import os
 import re
 import PIL
-import random
+import string
+from color import *
 from PIL import Image
 from pathlib import Path
 from colorama import init
-from color import *
 from datetime import datetime
 
 # Constants
-ALLOWED_ALPHABETS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
-ALLOWED_NUMBERS = "123456789"
-ALLOWED_SYMBOLS = "?!"
-ALLOWED_CHARACTERS = ALLOWED_ALPHABETS + ALLOWED_NUMBERS + ALLOWED_SYMBOLS + ' '
+ALLOWED_ALPHABETS = string.ascii_letters
+ALLOWED_NUMBERS = string.digits
+ALLOWED_SYMBOLS = string.punctuation
+ALLOWED_CHARACTERS = set(ALLOWED_ALPHABETS + ALLOWED_NUMBERS + ALLOWED_SYMBOLS + ' ')
 
 CHARACTERS_FOLDER = 'Assets/Alphabets'
 NUMBERS_FOLDER = 'Assets/Numbers'
@@ -31,8 +31,8 @@ def get_desktop_path():
 # Generate a unique filename based on user input and current date and time
 def generate_filename(user_input):
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    sanitized_input = re.sub(r'[^a-zA-Z0-9]', '_', user_input)
-    filename = f"{sanitized_input}_{timestamp}.png"
+    input = re.sub(r'[^a-zA-Z0-9]', '_', user_input)
+    filename = f"{input}_{timestamp}.png"
     return filename
 
 # Get the path of the character image based on the character
