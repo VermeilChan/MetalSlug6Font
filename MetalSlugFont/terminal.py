@@ -1,7 +1,7 @@
 import sys
 import random
-from app import *
-from color import *
+from app import generate_filename, generate_image_with_filename
+from color import COLORS, BOLD, RESET
 
 # Prevent the generation of __pycache__ directories
 sys.dont_write_bytecode = True

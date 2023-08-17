@@ -10,15 +10,10 @@ COLORS = [
 
 # Text formatting options
 BOLD = Style.BRIGHT
-ITALIC = "\x1B[3m"
 RESET = Style.RESET_ALL
 
 def generate_unique_color_combinations(colors):
-    combinations = []
-    for i, color1 in enumerate(colors):
-        for j, color2 in enumerate(colors):
-            if i != j:
-                combinations.append(color1 + color2)
+    combinations = [(color1, color2) for i, color1 in enumerate(colors) for j, color2 in enumerate(colors) if i != j]
     return combinations
 
 DISTINCT_COLOR_COMBINATIONS = generate_unique_color_combinations(COLORS)
