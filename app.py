@@ -2,11 +2,21 @@ import os
 from PIL import Image
 import PIL
 from flask import Flask, render_template, request, send_from_directory
+from flask_assets import Environment, Bundle
+
 from html import escape
 from datetime import datetime, timedelta
 
+
+
 # Create a Flask web app instance
 app = Flask(__name__)
+assets = Environment(app)
+
+assets.url = app.static_url_path
+scss = Bundle('CSS/style.scss' , output='all.css')
+assets.register('scss_all' , scss)
+
 
 # Constants
 ALLOWED_ALPHABETS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
