@@ -14,7 +14,7 @@ ALLOWED_NUMBERS = string.digits
 ALLOWED_SYMBOLS = string.punctuation
 ALLOWED_CHARACTERS = set(ALLOWED_ALPHABETS + ALLOWED_NUMBERS + ALLOWED_SYMBOLS + ' ')
 
-CHARACTERS_FOLDER = 'Assets/Alphabets'
+CHARACTERS_FOLDER = 'Assets/Alphabets/Upper_Case'
 NUMBERS_FOLDER = 'Assets/Numbers'
 SYMBOLS_FOLDER = 'Assets/Symbols'
 
