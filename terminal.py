@@ -1,11 +1,10 @@
-import random
-
 import sys
-sys.dont_write_bytecode = True
-
+import random
 from app import *
 from color import *
 
+# Prevent the generation of __pycache__ directories
+sys.dont_write_bytecode = True
 
 # Main function
 def main():
