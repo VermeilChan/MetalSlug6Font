@@ -21,7 +21,9 @@ Create captivating images using the iconic Metal Slug font style! Compose text w
 - Personalize spacing between characters for imaginative layouts.
 - Support for uppercase and lowercase alphabets (A-Z, a-z), numbers (1-9), exclamation marks (!), and question marks (?).
 
-## Examples
+**Note:** Using the Metal Slug font style to turn text into images might not work perfectly with all fonts. Some fonts might not have all the features like uppercase and lowercase letters (A-Z, a-z), numbers (1-9), exclamation marks (!), and question marks (?).
+
+## Examples Using Font-1
 
 Input: `I Love Cats!`
 
@@ -39,10 +41,31 @@ Ensure that you have Python installed. You can download Python from the official
 |------------------|----------------------------------------------------------------------------------|
 | Windows          | [Python Downloads Windows](https://www.python.org/downloads/)                    |
 | MacOS            | [Python Downloads MacOS](https://www.python.org/downloads/)                      |
-| Linux            | [Python Downloads Linux](https://docs.python-guide.org/starting/install3/linux/) |
+
+## Linux
 
 **Note for Linux Users:**
 Python is often preinstalled on most Linux operating systems.
+
+If you are using a Linux distribution that does not come with Python pre-installed, you can install it using the following commands:
+
+For Ubuntu and Debian:
+```bash
+sudo apt install python3
+```
+For Fedora and CentOS:
+```bash
+sudo dnf install python3
+```
+For Arch Linux:
+```bash
+sudo pacman -S python3
+```
+Once Python is installed, you can verify the installation by running the following command:
+```bash
+python3 --version
+```
+This will print the version of Python that is installed on your system.
 
 ## Getting Started
 
@@ -105,3 +128,4 @@ This project is licensed under the [MIT License](LICENSE).
 ## Credits
 
 - [GussPrint](https://www.spriters-resource.com/submitter/Gussprint/)
+---
