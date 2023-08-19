@@ -128,4 +128,5 @@ This project is licensed under the [MIT License](LICENSE).
 ## Credits
 
 - [GussPrint](https://www.spriters-resource.com/submitter/Gussprint/)
+- [BinRich](https://www.discordapp.com/users/477459550904254464)
 ---
