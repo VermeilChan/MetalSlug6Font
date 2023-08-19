@@ -9,7 +9,7 @@ sys.dont_write_bytecode = True
 # Main function
 def main():
     while True:
-        text = input(random.choice(COLORS) + BOLD + "Enter the desired output (press Enter to quit): " + RESET).upper()
+        text = input(random.choice(COLORS) + BOLD + "Enter the desired output (press Enter to quit): " + RESET)
 
         if not text:
             print(random.choice(COLORS) + BOLD + "Goodbye!" + RESET)
