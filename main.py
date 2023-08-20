@@ -124,11 +124,19 @@ def generate_image_with_filename(text, filename):
             img.paste(char_img, (x, 0), char_img)
             x += char_width
 
-        # Get the user's desktop path and save the composite image
+        # Get the desktop path and save the composite image
         desktop_path = get_desktop_path()
-        img_path = os.path.join(desktop_path, filename)
 
-        img.save(img_path)
+        try:
+            img_path = os.path.join("Output", filename)
+            img.save(img_path)
+
+        except FileNotFoundError:
+            print("Processing File")
+            os.mkdir("Output")
+            img_path = os.path.join("Output", filename)
+            img.save(img_path)
+    
 
         return filename, None
 
