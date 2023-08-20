@@ -27,7 +27,7 @@ Font 1 provides support for a wide range of characters, including:
 - Braces (Curly Brackets) - `{}`, `{}`, `()`
 - Brackets (Square Brackets) - `[]`, `[]`, `()`
 - Caret (^)
-- Colon (:)
+- Colon ( : )
 - Dollar Sign ($)
 - Equals (=)
 - Exclamation Mark (!)
@@ -42,7 +42,7 @@ Font 1 provides support for a wide range of characters, including:
 - Ampersand (&)
 - Question Mark (?)
 - Quotation Marks - Double ("), Single ('), and Backtick (`)
-- Semicolon (;)
+- Semicolon ( ; )
 - Slash (/)
 - Tilde (~)
 - Underscore (_)
@@ -89,7 +89,7 @@ Font 3 provides support for a wide range of characters, including:
 - Brackets (Curly Brackets) - `{}`, `{}`
 - Brackets (Square Brackets) - `[]`, `[]`
 - Brackets - `()`
-- Colon (:)
+- Colon ( : )
 - Comma (,)
 - Equals (=)
 - Exclamation Mark (!)
@@ -100,7 +100,7 @@ Font 3 provides support for a wide range of characters, including:
 - Plus Sign (+)
 - Question Mark (?)
 - Quotation Marks (Single and Double) - ('), (")
-- Semicolon (;)
+- Semicolon ( ; )
 - Slash (/)
 - Underscore (_)
 - Vertical Bar (|)
@@ -124,7 +124,7 @@ Font 4 provides support for a wide range of characters, including:
 - Brackets (Curly Brackets) - `{}`, `{}`, `()`
 - Brackets (Square Brackets) - `[]`, `[]`, `()`
 - Caret (^)
-- Colon (:)
+- Colon ( : )
 - Dollar Sign ($)
 - Equals (=)
 - Exclamation Mark (!)
@@ -139,10 +139,10 @@ Font 4 provides support for a wide range of characters, including:
 - Question Mark (?)
 - Quotation Marks - Double ("), Single (')
 - File: scan-2.py
-- Semicolon (;)
+- Semicolon ( ; )
 - Slash (/)
 - Tilde (~)
-- Underscore (_)
+- Underscore ( _ )
 - Vertical Bar (|)
 
-Thank you for using this font and its supported characters! If you have any questions, you can check the assets folder at https://github.com/VermeilChan/MetalSlugFont/tree/experimental/Assets
+Thank you for using this font and its supported characters! If you have any questions, you can check the [assets](https://github.com/VermeilChan/MetalSlugFont/tree/experimental/Assets) folder.
