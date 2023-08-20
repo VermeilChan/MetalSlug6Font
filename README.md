@@ -87,7 +87,7 @@ This will print the version of Python that is installed on your system.
 3. Run the Metal Slug Font:
 
    ```bash
-   python app.py
+   python terminal.py
    ```
 
 4. Follow the on-screen instructions to create Metal Slug font images.
