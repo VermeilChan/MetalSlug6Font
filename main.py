@@ -39,11 +39,6 @@ def GET(font):
 
     return (CHAR , SYB , NUM)
 
-
-
-   
-
-
 SPACE_WIDTH = 20
 
 # Initialize colorama
@@ -65,9 +60,6 @@ font = int(input(f"{Fore.GREEN}Chose A Font From 1 To 4 : {Fore.RESET}"))
 
 # Get the path of the character image based on the character
 def get_character_image_path(char:str):
-   
-    
-
     f = GET(font)
 
     CHARACTERS_FOLDER = f[0]
@@ -132,16 +124,9 @@ def generate_image_with_filename(text, filename):
             img.paste(char_img, (x, 0), char_img)
             x += char_width
 
-        # Get the desktop path and save the composite image
+        # Get the user's desktop path and save the composite image
         desktop_path = get_desktop_path()
-
-        try:
-            img_path = os.path.join("Output", filename)
-
-        except FileNotFoundError as error:
-
-            os.mkdir("Output")
-            img_path = os.path.join("Output", filename)
+        img_path = os.path.join(desktop_path, filename)
 
         img.save(img_path)
 
