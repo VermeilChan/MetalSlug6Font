@@ -137,13 +137,14 @@ def generate_image_with_filename(text, filename):
 
         try:
             img_path = os.path.join("Output", filename)
+            img.save(img_path)
 
-        except FileNotFoundError as error:
-
+        except FileNotFoundError:
+            print("Processing File")
             os.mkdir("Output")
             img_path = os.path.join("Output", filename)
-
-        img.save(img_path)
+            img.save(img_path)
+    
 
         return filename, None
 
