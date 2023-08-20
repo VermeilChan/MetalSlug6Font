@@ -1,16 +1,17 @@
 import sys
 import random
-from app import generate_filename, generate_image_with_filename
-from terminal import COLORS, BOLD, RESET
-
 # Prevent the generation of __pycache__ directories
 sys.dont_write_bytecode = True
+from main import generate_filename, generate_image_with_filename 
+
+sys.dont_write_bytecode = True
+from color import COLORS, BOLD, RESET
 
 # Main function
 def main():
     while True:
         text = input(random.choice(COLORS) + BOLD + "Enter the desired output (press Enter to quit): " + RESET)
-
+        
         if not text:
             print(random.choice(COLORS) + BOLD + "Goodbye!" + RESET)
             break

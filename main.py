@@ -14,9 +14,35 @@ ALLOWED_NUMBERS = string.digits
 ALLOWED_SYMBOLS = string.punctuation
 ALLOWED_CHARACTERS = set(ALLOWED_ALPHABETS + ALLOWED_NUMBERS + ALLOWED_SYMBOLS + ' ')
 
-CHARACTERS_FOLDER = 'Assets\Font-1\Alphabets\Upper_Case'
-NUMBERS_FOLDER = 'Assets\Font-1\Numbers'
-SYMBOLS_FOLDER = 'Assets\Font-1\Symbols'
+def GET(font):
+
+    if font == 1:
+            CHAR = f'Assets\\Font-1\\Letters'
+            SYB  = f'Assets\\Font-1\\Numbers'
+            NUM  = f'Assets\\Font-1\\Symbols'
+
+    if font == 2:
+            CHAR = f'Assets\\Font-2\\Letters'
+            SYB  = f'Assets\\Font-2\\Numbers'
+            NUM  = f'Assets\\Font-2\\Symbols'
+
+    if font == 3:
+            CHAR = f'Assets\\Font-3\\Letters'
+            SYB  = f'Assets\\Font-3\\Numbers'
+            NUM  = f'Assets\\Font-3\\Symbols'
+
+    if font == 4:
+            CHAR = f'Assets\\Font-4\\Letters'
+            SYB  = f'Assets\\Font-4\\Numbers'
+            NUM  = f'Assets\\Font-4\\Symbols'
+
+
+    return (CHAR , SYB , NUM)
+
+
+
+   
+
 
 SPACE_WIDTH = 20
 
@@ -35,16 +61,34 @@ def generate_filename(user_input):
     filename = f"{input}_{timestamp}.png"
     return filename
 
+font = int(input(f"{Fore.GREEN}Chose A Font From 1 To 4 : {Fore.RESET}"))
+
 # Get the path of the character image based on the character
-def get_character_image_path(char):
+def get_character_image_path(char:str):
+   
+    
+
+    f = GET(font)
+
+    CHARACTERS_FOLDER = f[0]
+    NUMBERS_FOLDER    = f[1]
+    SYMBOLS_FOLDER    = f[2]
+
     if char in ALLOWED_ALPHABETS:
-        return os.path.join(CHARACTERS_FOLDER, char + '.png')
+        if char.islower():
+            return os.path.join(CHARACTERS_FOLDER+'\\Lower-Case', char + '.png')
+        else:
+            return os.path.join(CHARACTERS_FOLDER+'\\Upper-Case', char + '.png')
+    
     elif char in ALLOWED_NUMBERS:
         return os.path.join(NUMBERS_FOLDER, char + '.png')
+    
     elif char == '!':
         return os.path.join(SYMBOLS_FOLDER, 'Exclamation.png')
+    
     elif char == '?':
         return os.path.join(SYMBOLS_FOLDER, 'Question.png')
+    
     else:
         raise ValueError(f"The character '{char}' is not supported.")
 
@@ -62,9 +106,11 @@ def generate_image_with_filename(text, filename):
                     continue
                 char_img = Image.new('RGBA', (SPACE_WIDTH, 1), (0, 0, 0, 0))
                 char_width = SPACE_WIDTH
+
             else:
                 char_img_path = get_character_image_path(char)
                 try:
+
                     with Image.open(char_img_path).convert('RGBA') as char_img:
                         char_size = char_img.size
                         char_width = char_size[0]
@@ -75,6 +121,7 @@ def generate_image_with_filename(text, filename):
                 
                 except PIL.Image.Error as img_err:
                     raise ValueError(f"Error processing image: {str(img_err)}")
+                
             chars.append((char_img, char_width))
 
         # Create a composite image by pasting individual character images
@@ -87,7 +134,15 @@ def generate_image_with_filename(text, filename):
 
         # Get the desktop path and save the composite image
         desktop_path = get_desktop_path()
-        img_path = os.path.join(desktop_path, filename)
+
+        try:
+            img_path = os.path.join("Output", filename)
+
+        except FileNotFoundError as error:
+
+            os.mkdir("Output")
+            img_path = os.path.join("Output", filename)
+
         img.save(img_path)
 
         return filename, None
