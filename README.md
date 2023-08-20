@@ -7,7 +7,7 @@ Create captivating images using the iconic Metal Slug font style! Compose text w
 ## Table of Contents
 - [Features](#features)
 - [Requirements](#requirements)
-  - [Installing Python](#python-downloads)
+- [Installing Python](#python-downloads)
 - [Getting Started](#getting-started)
 - [Usage](#usage)
 - [Converting to Executable](#converting-to-executable)
