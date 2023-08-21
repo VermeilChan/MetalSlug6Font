@@ -39,7 +39,7 @@ def GET(font):
 
     return (CHAR , SYB , NUM)
 
-SPACE_WIDTH = 20
+SPACE_WIDTH = 10
 
 # Initialize colorama
 init(autoreset=True)
@@ -74,13 +74,64 @@ def get_character_image_path(char:str):
     
     elif char in ALLOWED_NUMBERS:
         return os.path.join(NUMBERS_FOLDER, char + '.png')
-    
-    elif char == '!':
+    if char == '!':
         return os.path.join(SYMBOLS_FOLDER, 'Exclamation.png')
-    
     elif char == '?':
         return os.path.join(SYMBOLS_FOLDER, 'Question.png')
-    
+    elif char == "'":
+        return os.path.join(SYMBOLS_FOLDER, 'Apostrophe.png')
+    elif char == '*':
+        return os.path.join(SYMBOLS_FOLDER, 'Asterisk.png')
+    elif char == ')':
+        return os.path.join(SYMBOLS_FOLDER, 'Bracket-Left.png')
+    elif char == '}':
+        return os.path.join(SYMBOLS_FOLDER, 'Bracket-Left-2.png')
+    elif char == ']':
+        return os.path.join(SYMBOLS_FOLDER, 'Bracket-Left-3.png')
+    elif char == '(':
+        return os.path.join(SYMBOLS_FOLDER, 'Bracket-Right.png')
+    elif char == '{':
+        return os.path.join(SYMBOLS_FOLDER, 'Bracket-Right-2.png')
+    elif char == '[':
+        return os.path.join(SYMBOLS_FOLDER, 'Bracket-Right-3.png')
+    elif char == '^':
+        return os.path.join(SYMBOLS_FOLDER, 'Caret.png')
+    elif char == ':':
+        return os.path.join(SYMBOLS_FOLDER, 'Colon.png')
+    elif char == '$':
+        return os.path.join(SYMBOLS_FOLDER, 'Dollar.png')
+    elif char == '=':
+        return os.path.join(SYMBOLS_FOLDER, 'Equals.png')
+    elif char == '>':
+        return os.path.join(SYMBOLS_FOLDER, 'Greater-than.png')
+    elif char == '-':
+        return os.path.join(SYMBOLS_FOLDER, 'Hyphen.png')
+    elif char == '∞':
+        return os.path.join(SYMBOLS_FOLDER, 'Infinity.png')
+    elif char == '<':
+        return os.path.join(SYMBOLS_FOLDER, 'Less-than.png')
+    elif char == '#':
+        return os.path.join(SYMBOLS_FOLDER, 'Number.png')
+    elif char == '%':
+        return os.path.join(SYMBOLS_FOLDER, 'Percent.png')
+    elif char == '.':
+        return os.path.join(SYMBOLS_FOLDER, 'Period.png')
+    elif char == '+':
+        return os.path.join(SYMBOLS_FOLDER, 'Plus.png')
+    elif char in string.punctuation:
+        return os.path.join(SYMBOLS_FOLDER, 'Punctuation.png')
+    elif char == '"':
+        return os.path.join(SYMBOLS_FOLDER, 'Quotation.png')
+    elif char == ';':
+        return os.path.join(SYMBOLS_FOLDER, 'Semicolon.png')
+    elif char == '/':
+        return os.path.join(SYMBOLS_FOLDER, 'Slash.png')
+    elif char == '~':
+        return os.path.join(SYMBOLS_FOLDER, 'Tilde.png')
+    elif char == '_':
+        return os.path.join(SYMBOLS_FOLDER, 'Underscore.png')
+    elif char == '|':
+        return os.path.join(SYMBOLS_FOLDER, 'Vertical-bar.png')
     else:
         raise ValueError(f"The character '{char}' is not supported.")
 
