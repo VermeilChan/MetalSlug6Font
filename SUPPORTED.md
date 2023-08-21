@@ -145,4 +145,6 @@ Font 4 provides support for a wide range of characters, including:
 - Underscore ( _ )
 - Vertical Bar (|)
 
-Thank you for using this font and its supported characters! If you have any questions, you can check the [Assets](Assets) folder.
+---
+
+If you encounter any issues or have suggestions for improvements, please feel free to open an issue or submit a pull request. Additionally, if you have any questions, you can reach out to me on Discord: `mommy_vermeil`.
