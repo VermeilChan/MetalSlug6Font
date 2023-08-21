@@ -1,5 +1,6 @@
 import sys
 import random
+from colorama import Fore
 from color import COLORS
 from main import generate_filename, generate_image_with_filename
 
@@ -8,10 +9,9 @@ sys.dont_write_bytecode = True
 
 # Main function
 def main():
-    print("Note: Using the Metal Slug font style to turn text into images might not work perfectly with all fonts. Check The SUPPORTED.md file for more information")
-    
+    print(Fore.RED + "Note: Metal Slug font style conversion may not be compatible with all fonts. Refer to the SUPPORTED.md file for details.")
     while True:
-        text = input(random.choice(COLORS) + "Enter the desired output (press Enter to quit): ")
+        text = input(random.choice(COLORS) + "Enter Text: ")
         
         if not text:
             print(random.choice(COLORS) + "Goodbye!")

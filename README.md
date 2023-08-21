@@ -130,4 +130,5 @@ This project is licensed under the [MIT License](LICENSE).
 - [Division 六](https://6th-divisions-den.com/)
 - [GussPrint](https://www.spriters-resource.com/submitter/Gussprint/)
 - [BinRich](https://www.discordapp.com/users/477459550904254464)
+
 ---
