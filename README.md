@@ -30,7 +30,7 @@ Input: `I Love Cats!`
 
 Generated Image:
 
-![Metal Slug Font Image](Assets\Image\Example.png)
+![Metal Slug Font Image](Assets\Example.png)
 
 ## Requirements
 
