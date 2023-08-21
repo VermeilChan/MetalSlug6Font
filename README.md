@@ -19,7 +19,8 @@ Create captivating images using the iconic Metal Slug font style! Compose text w
 
 - Transform text into images with the captivating Metal Slug font style.
 - Personalize spacing between characters for imaginative layouts.
-- Support for uppercase and lowercase alphabets (A-Z, a-z), numbers (1-9), exclamation marks (!), and question marks (?).
+- Support for uppercase and lowercase alphabets (A-Z, a-z), numbers (1-9), exclamation marks (!), and question marks (?). 
+Check [SUPPORTED.md](SUPPORTED.md) For More Information.
 
 **Note:** Using the Metal Slug font style to turn text into images might not work perfectly with all fonts. Some fonts might not have all the features like uppercase and lowercase letters (A-Z, a-z), numbers (1-9), exclamation marks (!), and question marks (?).
 

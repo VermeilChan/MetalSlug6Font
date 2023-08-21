@@ -145,4 +145,4 @@ Font 4 provides support for a wide range of characters, including:
 - Underscore ( _ )
 - Vertical Bar (|)
 
-Thank you for using this font and its supported characters! If you have any questions, you can check the [assets](https://github.com/VermeilChan/MetalSlugFont/tree/experimental/Assets) folder.
+Thank you for using this font and its supported characters! If you have any questions, you can check the [Assets](Assets) folder.
