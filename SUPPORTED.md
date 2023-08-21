@@ -1,6 +1,6 @@
-# Supported Characters in Current Font
+# Supported Characters in the MetalSlugFont
 
-Welcome to our documentation! If you're wondering which letters, numbers, and symbols are supported in MetalSlugFont, you've come to the right place. Please review the following list to see if your current font includes these characters.
+Welcome to our documentation! Here, you can find a comprehensive list of letters, numbers, and symbols supported by the MetalSlugFont. Whether you're curious about the characters available in your current font, you're in the right place. Take a look at the following sections to see the inclusive characters for each font variant.
 
 ## Table of Contents
 - [Font 1](#font-1-support)
