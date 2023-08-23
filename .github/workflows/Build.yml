@@ -3,7 +3,7 @@ name: Build and Upload Executable
 on:
   push:
     branches:
-      - main
+      - experimental
 
 jobs:
   build:
