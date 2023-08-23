@@ -32,7 +32,7 @@ jobs:
 
     - name: Create artifacts folder
       run: |
-        mkdir artifacts
+        mkdir -p artifacts
         mv dist/MetalSlugFont/MetalSlugFont.exe artifacts/
 
     - name: Upload artifact
