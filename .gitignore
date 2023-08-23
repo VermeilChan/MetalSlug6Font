@@ -161,6 +161,3 @@ cython_debug/
 .vscode/
 
 # Ignored Folders And Files 
-scan.py
-Sv-001.ico
-directory_tree.txt
