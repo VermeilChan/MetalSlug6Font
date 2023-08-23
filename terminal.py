@@ -1,11 +1,12 @@
 import sys
 import random
 import traceback
-from color import COLORS  # Importing COLORS from the 'color' module
-from colorama import Fore  # Importing the 'Fore' class from the 'colorama' module
+from color import COLORS
+from colorama import Fore
 from main import generate_filename, generate_image_with_filename, get_font_paths, font
 
-sys.dont_write_bytecode = True  # Disable writing compiled bytecode files
+# Disable writing compiled bytecode files
+sys.dont_write_bytecode = True 
 
 def main():
     # Print a note about compatibility
@@ -13,25 +14,35 @@ def main():
     
     # Start an infinite loop for user input
     while True:
-        color_choice = random.choice(COLORS)  # Choose a random color from the COLORS list
-        text = input(f"{color_choice}Enter Text: ")  # Prompt the user for input
+        # Choose a random color from the COLORS list
+        color_choice = random.choice(COLORS)
+        # Prompt the user for input
+        text = input(f"{color_choice}Enter Text: ")
         
         if not text:
-            print(f"{color_choice}Goodbye!")  # Exit loop if no input is provided
+            # Exit loop if no input is provided
+            print(f"{color_choice}Goodbye!")
             break
 
         try:
-            filename = generate_filename(text)  # Generate a filename based on the entered text
-            font_paths = get_font_paths(font)  # Get the paths of available fonts
-            img_path, error_message = generate_image_with_filename(text, filename, font_paths)  # Generate an image with the given text and font
+            # Generate a filename based on the entered text
+            filename = generate_filename(text)
+            # Get the paths of available fonts
+            font_paths = get_font_paths(font)
+            # Generate an image with the given text and font
+            img_path, error_message = generate_image_with_filename(text, filename, font_paths)
             
             if error_message:
-                print(f"{color_choice}Error: {error_message}")  # Print error message if there's an issue
+                # Print error message if there's an issue
+                print(f"{color_choice}Error: {error_message}")
             else:
-                print(f"{color_choice}Image generated successfully: {img_path}")  # Print success message with image path
+                # Print success message with image path
+                print(f"{color_choice}Image generated successfully: {img_path}")
         except Exception as e:
-            print(f"{color_choice}An error occurred: {e}")  # Print an error message if an exception occurs
-            traceback.print_exc()  # Print the traceback for debugging purposes
+            # Print an error message if an exception occurs
+            print(f"{color_choice}An error occurred: {e}")
+            # Print the traceback for debugging purposes
+            traceback.print_exc()
 
 if __name__ == "__main__":
-    main()  # Execute the 'main' function when the script is run directly
+    main()
