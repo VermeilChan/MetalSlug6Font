@@ -20,7 +20,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        pip install -r requirements.txt
+        pip install pyinstaller
 
     - name: Build executable
       run: |
@@ -36,3 +36,19 @@ jobs:
       with:
         name: executable-artifact
         path: artifacts/
+
+    - name: Check artifact size
+      run: |
+        artifact_size=$(du -h artifacts/ | cut -f1)
+        echo "Artifact size: $artifact_size"
+
+    - name: Error handling and checks
+      run: |
+        if [ ! -f artifacts/main.exe ]; then
+          echo "Error: Executable not found in artifacts folder."
+          exit 1
+        fi
+
+        if [[ $artifact_size == *"M"* && $(echo $artifact_size | cut -d'M' -f1) -gt 10 ]]; then
+          echo "Warning: Artifact size exceeds 10 MB."
+        fi
