@@ -1,57 +1,38 @@
-name: Build and Package MSI Installer
+name: Build and Upload Executable
+
 on:
   push:
     branches:
-      - experimental
+      - main
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      matrix:
-        os: [windows-latest, macos-latest, ubuntu-latest]
+    runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Repository
+    - name: Checkout repository
       uses: actions/checkout@v3.5.3
 
-    - name: Set up MSBuild
-      if: matrix.os == 'windows-latest'
-      uses: microsoft/setup-msbuild@v1.3.1
+    - name: Set up Python
+      uses: actions/setup-python@v4.7.0
+      with:
+        python-version: 3.11.4
 
-    - name: Install Mono (Linux)
-      if: matrix.os == 'ubuntu-latest'
+    - name: Install dependencies
       run: |
-        sudo apt update
-        sudo apt install -y mono-complete
+        pip install -r requirements.txt
 
-    - name: Build MSI
+    - name: Build executable
       run: |
-        try {
-          msbuild YourSolution.sln /t:Rebuild /p:Configuration=Release
-        } catch {
-          echo "Build failed"
-          exit 1
-        }
+        pyinstaller --onefile main.py
 
-    - name: Install WiX Toolset (Windows)
-      if: matrix.os == 'windows-latest'
+    - name: Create artifacts folder
       run: |
-        choco install wixtoolset --version=3.11.2
+        mkdir artifacts
+        mv dist/main.exe artifacts/
 
-    - name: Build Installer (Linux and macOS)
-      run: |
-        try {
-          candle Path/To/Your/Product.wxs -o Path/To/Output/Folder
-          light Path/To/Output/Folder/YourProduct.wixobj -o Path/To/Output/Folder
-        } catch {
-          echo "WiX Toolset commands failed"
-          exit 1
-        }
-
-    - name: Upload Artifact
+    - name: Upload artifact
       uses: actions/upload-artifact@v3.1.2
       with:
-        name: Installer
-        path: Path/To/Output/Folder/YourProductInstaller.msi
+        name: executable-artifact
+        path: artifacts/
