@@ -1,28 +1,19 @@
 import os
 import re
 import PIL
-import string
 from PIL import Image
-from pathlib import Path
 from colorama import Fore
 from datetime import datetime
 
-# Set of allowed characters for the generated image
-ALLOWED_CHARACTERS = set(string.ascii_letters + string.digits + string.punctuation + ' ')
-
 # Width of a space character in pixels
-SPACE_WIDTH = 10
-
-# Function to get the user's desktop path
-def get_desktop_path():
-    desktop = Path.home() / "Desktop"
-    return str(desktop)
+SPACE_WIDTH = 30
 
 # Function to generate a filename based on user input and current timestamp
 def generate_filename(user_input):
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     sanitized_input = re.sub(r'\W+', '_', user_input)
-    return f"{sanitized_input}_{timestamp}.png"
+    filename = f"{sanitized_input}_{timestamp}.png"
+    return filename
 
 # Get user input for font choice
 font = int(input(f"{Fore.GREEN}Choose A Font From 1 To 4 : {Fore.RESET}"))
@@ -44,12 +35,9 @@ def get_character_image_path(char, font_paths):
         folder = 'Lower-Case' if char.islower() else 'Upper-Case'
         return os.path.join(CHARACTERS_FOLDER, folder, char + '.png')
     elif char.isdigit():
-
         return os.path.join(NUMBERS_FOLDER, char + '.png')
-    
     elif char == ' ':
         return None
-    
     else:
         # Special characters mapping
         SPE_CHAR = {
@@ -90,33 +78,23 @@ def get_character_image_path(char, font_paths):
 # Function to generate an image based on input text, filename, and font paths
 def generate_image_with_filename(text, filename, font_paths):
     try:
-        # Remove any characters not in the allowed set
-        text = ''.join(char for char in text if char in ALLOWED_CHARACTERS)
         img_height = None
-        chars = []
+        char_images = {}
 
-        # Generate a list of character images and widths
+        # Load character images into dictionary
         for char in text:
-            if char == ' ':
-                if chars and chars[-1][1] == ' ':
-                    continue
-                char_img = Image.new('RGBA', (SPACE_WIDTH, 1), (0, 0, 0, 0))
-                char_width = SPACE_WIDTH
-            else:
-                char_img_path = get_character_image_path(char, font_paths)
-                try:
+            if char not in char_images:
+                if char == ' ':
+                    char_images[char] = Image.new('RGBA', (SPACE_WIDTH, 1), (0, 0, 0, 0))
+                else:
+                    char_img_path = get_character_image_path(char, font_paths)
                     char_img = Image.open(char_img_path).convert('RGBA')
+                    char_images[char] = char_img
                     char_size = char_img.size
-                    char_width = char_size[0]
                     img_height = char_size[1] if img_height is None else img_height
 
-                except FileNotFoundError as fnfe:
-                    raise ValueError(f"Image file not found: {str(fnfe)}")
-                
-                except PIL.Image.Error as img_err:
-                    raise ValueError(f"Error processing image: {str(img_err)}")
-
-            chars.append((char_img, char_width))
+        # Generate list of character images and widths using list comprehension
+        chars = [(char_images[char], SPACE_WIDTH if char == ' ' else char_images[char].size[0]) for char in text]
 
         # Calculate total width of the image
         total_width = sum(char_width for _, char_width in chars)
@@ -127,15 +105,12 @@ def generate_image_with_filename(text, filename, font_paths):
             x += char_width
 
         # Save the generated image to the user's desktop
-        try:
-            img_path = os.path.join("Output", filename)
-            img.save(img_path)
-        except FileNotFoundError:
-            os.mkdir("Output")
-            img_path = os.path.join("Output", filename)
-            img.save(img_path)
+        output_dir = "Output"
+        os.makedirs(output_dir, exist_ok=True)
+        img_path = os.path.join(output_dir, filename)
+        img.save(img_path)
 
         return filename, None
 
-    except ValueError as ve:
-        return None, str(ve)
+    except (FileNotFoundError, PIL.UnidentifiedImageError, ValueError) as e:
+        return None, str(e)
