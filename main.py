@@ -44,11 +44,12 @@ def get_character_image_path(char, font_paths):
         folder = 'Lower-Case' if char.islower() else 'Upper-Case'
         return os.path.join(CHARACTERS_FOLDER, folder, char + '.png')
     elif char.isdigit():
+
         return os.path.join(NUMBERS_FOLDER, char + '.png')
-    elif char in string.punctuation:
-        return os.path.join(SYMBOLS_FOLDER, char + '.png')
+    
     elif char == ' ':
         return None
+    
     else:
         # Special characters mapping
         SPE_CHAR = {
@@ -81,7 +82,7 @@ def get_character_image_path(char, font_paths):
             '_': 'Underscore',
             '|': 'Vertical-bar'
         }
-        if char in SPE_CHAR:
+        if char in SPE_CHAR.keys():
             return os.path.join(SYMBOLS_FOLDER, f"{SPE_CHAR[char]}.png")
         else:
             raise ValueError(f"The character '{char}' is not supported.")
@@ -108,8 +109,10 @@ def generate_image_with_filename(text, filename, font_paths):
                     char_size = char_img.size
                     char_width = char_size[0]
                     img_height = char_size[1] if img_height is None else img_height
+
                 except FileNotFoundError as fnfe:
                     raise ValueError(f"Image file not found: {str(fnfe)}")
+                
                 except PIL.Image.Error as img_err:
                     raise ValueError(f"Error processing image: {str(img_err)}")
 
@@ -124,9 +127,13 @@ def generate_image_with_filename(text, filename, font_paths):
             x += char_width
 
         # Save the generated image to the user's desktop
-        desktop_path = get_desktop_path()
-        img_path = os.path.join(desktop_path, filename)
-        img.save(img_path)
+        try:
+            img_path = os.path.join("Output", filename)
+            img.save(img_path)
+        except FileNotFoundError:
+            os.mkdir("Output")
+            img_path = os.path.join("Output", filename)
+            img.save(img_path)
 
         return filename, None
 

@@ -1,8 +1,13 @@
 import sys
 import random
 import traceback
-from color import COLORS
+
 from colorama import Fore
+
+import sys
+sys.dont_write_bytecode = True
+
+from color import COLORS
 from main import generate_filename, generate_image_with_filename, get_font_paths, font
 
 # Disable writing compiled bytecode files
