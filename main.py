@@ -63,6 +63,7 @@ def get_character_image_path(char, font_paths):
             '~': 'Tilde',
             '_': 'Underscore',
             '|': 'Vertical-bar'
+
         }
         if char in SPE_CHAR.keys():
             return os.path.join(SYMBOLS_FOLDER, f"{SPE_CHAR[char]}.png")
@@ -73,32 +74,34 @@ def generate_image_with_filename(text, filename, font_paths):
     try:
         img_height = None
         char_images = {}
+        output_dir = "Output"
+        os.makedirs(output_dir, exist_ok=True)
+        img_path = os.path.join(output_dir, filename)
 
         for char in text:
-            if char not in char_images:
-                if char == ' ':
-                    char_images[char] = Image.new('RGBA', (SPACE_WIDTH, 1), (0, 0, 0, 0))
-                else:
+            if char == ' ':
+                char_img = Image.new('RGBA', (SPACE_WIDTH, 1), (0, 0, 0, 0))
+            else:
+                try:
                     char_img_path = get_character_image_path(char, font_paths)
                     char_img = Image.open(char_img_path).convert('RGBA')
-                    char_images[char] = char_img
-                    char_size = char_img.size
-                    img_height = char_size[1] if img_height is None else img_height
+                except FileNotFoundError:
+                    return None, f"Image not found for character '{char}'"
+
+            char_images[char] = char_img
+            img_height = char_img.size[1] if img_height is None else img_height
 
         chars = [(char_images[char], SPACE_WIDTH if char == ' ' else char_images[char].size[0]) for char in text]
         total_width = sum(char_width for _, char_width in chars)
         img = Image.new('RGBA', (total_width, img_height), (0, 0, 0, 0))
         x = 0
+
         for char_img, char_width in chars:
             img.paste(char_img, (x, 0), char_img)
             x += char_width
 
-        output_dir = "Output"
-        os.makedirs(output_dir, exist_ok=True)
-        img_path = os.path.join(output_dir, filename)
         img.save(img_path)
-
         return filename, None
 
-    except (FileNotFoundError, PIL.UnidentifiedImageError, ValueError) as e:
+    except (PIL.UnidentifiedImageError, ValueError) as e:
         return None, str(e)
