@@ -1,8 +1,8 @@
 # Metal Slug Font
 
-Create captivating images using the iconic Metal Slug font style! Compose text with the distinct typography from the beloved Metal Slug arcade game series. This tool empowers you to fashion images of your text with customizable spacing, accommodating characters, numbers, and symbols.
+Generate images with the iconic Metal Slug font style! Write text using the distinctive font from the Metal Slug arcade game series. This tool allows you to create images of your text with custom spacing and supports characters, numbers, and symbols.
 
-**Important Note:** This software version is still in its developmental phase and operates through a terminal-based interface. Please be advised that it might necessitate certain adjustments to ensure optimal functionality across diverse operating systems, including Linux and MacOS. Given its early developmental stage, a few bugs currently inhabit the system. We strongly recommend exercising caution and refraining from experimenting with this version until further refinements are introduced. Alternatively, you can continue utilizing the web application until the official website becomes accessible. If the website isn't available, you have the option to host the application on your local machine. Comprehensive instructions can be found in the README.md file on the master branch for supplementary information.
+**Important Note:** This version is still in its developmental phase and operates through a terminal-based interface.  Given its early developmental stage, a few bugs currently inhabit the system. Alternatively, you can continue utilizing the web application until the official website becomes accessible. If the website isn't available, you have the option to host the application on your local machine. instructions can be found in the README.md file on the master branch for more information.
 
 ## Table of Contents
 - [Features](#features)
@@ -10,7 +10,6 @@ Create captivating images using the iconic Metal Slug font style! Compose text w
 - [Installing Python](#python-downloads)
 - [Getting Started](#getting-started)
 - [Usage](#usage)
-- [Converting to Executable](#converting-to-executable)
 - [Contributing](#contributing)
 - [License](#license)
 - [Credits](#credits)
@@ -19,12 +18,12 @@ Create captivating images using the iconic Metal Slug font style! Compose text w
 
 - Transform text into images with the captivating Metal Slug font style.
 - Personalize spacing between characters for imaginative layouts.
-- Support for uppercase and lowercase alphabets (A-Z, a-z), numbers (1-9), exclamation marks (!), and question marks (?). 
+- Support for uppercase and lowercase alphabets (A-Z, a-z), numbers (1-9), Symbols. 
 Check [SUPPORTED.md](SUPPORTED.md) For More Information.
 
-**Note:** Using the Metal Slug font style to turn text into images might not work perfectly with all fonts. Some fonts might not have all the features like uppercase and lowercase letters (A-Z, a-z), numbers (1-9), exclamation marks (!), and question marks (?).
+**Note:** Using the Metal Slug font style to turn text into images might not work perfectly with all fonts. Some fonts might not have all the features like uppercase and lowercase letters (A-Z, a-z), numbers (1-9), Symbols.
 
-## Examples Using Font-1
+## Examples Using Font 1
 
 Input: `I Love Cats!`
 
@@ -96,27 +95,7 @@ This will print the version of Python that is installed on your system.
 ## Usage
 
 1. Input the desired text to transform it into the Metal Slug font style.
-2. The generated image will be saved on your desktop.
-
-## Converting to Executable
-
-If you wish to convert the terminal-based script into a Windows executable (.exe), you can consider using Wine. Wine allows you to run Windows applications on Linux and MacOS.
-
-Here are guides for installing and setting up Wine on various Linux distributions:
-
-| Linux Distribution | WineHQ Guide                                          |
-|--------------------|-------------------------------------------------------|
-| Ubuntu             | [WineHQ Ubuntu Guide](https://wiki.winehq.org/Ubuntu) |
-| Debian             | [WineHQ Debian Guide](https://wiki.winehq.org/Debian) |
-| Fedora             | [WineHQ Fedora Guide](https://wiki.winehq.org/Fedora) |
-
-**MacOS Guide:**
-
-| Operating System | WineHQ Guide                                          |
-|------------------|-------------------------------------------------------|
-| MacOS            | [WineHQ MacOS Guide](https://wiki.winehq.org/MacOS)   |
-
-Please note that Wine might have limitations, and not all Windows applications work flawlessly under it. Make sure to thoroughly test your executable.
+2. The generated image will be saved in the "output" folder within the same directory.
 
 ## Contributing
 
