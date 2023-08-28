@@ -5,20 +5,16 @@ from PIL import Image
 from colorama import Fore
 from datetime import datetime
 
-# Width of a space character in pixels
 SPACE_WIDTH = 30
 
-# Function to generate a filename based on user input and current timestamp
 def generate_filename(user_input):
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     sanitized_input = re.sub(r'\W+', '_', user_input)
     filename = f"{sanitized_input}_{timestamp}.png"
     return filename
 
-# Get user input for font choice
 font = int(input(f"{Fore.GREEN}Choose A Font From 1 To 4 : {Fore.RESET}"))
 
-# Function to get paths to font resources
 def get_font_paths(font):
     base_path = f'Assets/Font-{font}'
     return (
@@ -27,7 +23,6 @@ def get_font_paths(font):
         os.path.join(base_path, 'Symbols')
     )
 
-# Function to get the image path for a specific character
 def get_character_image_path(char, font_paths):
     CHARACTERS_FOLDER, NUMBERS_FOLDER, SYMBOLS_FOLDER = font_paths
 
@@ -39,7 +34,6 @@ def get_character_image_path(char, font_paths):
     elif char == ' ':
         return None
     else:
-        # Special characters mapping
         SPE_CHAR = {
             '!': 'Exclamation',
             '?': 'Question',
@@ -75,13 +69,11 @@ def get_character_image_path(char, font_paths):
         else:
             raise ValueError(f"The character '{char}' is not supported.")
 
-# Function to generate an image based on input text, filename, and font paths
 def generate_image_with_filename(text, filename, font_paths):
     try:
         img_height = None
         char_images = {}
 
-        # Load character images into dictionary
         for char in text:
             if char not in char_images:
                 if char == ' ':
@@ -93,10 +85,7 @@ def generate_image_with_filename(text, filename, font_paths):
                     char_size = char_img.size
                     img_height = char_size[1] if img_height is None else img_height
 
-        # Generate list of character images and widths using list comprehension
         chars = [(char_images[char], SPACE_WIDTH if char == ' ' else char_images[char].size[0]) for char in text]
-
-        # Calculate total width of the image
         total_width = sum(char_width for _, char_width in chars)
         img = Image.new('RGBA', (total_width, img_height), (0, 0, 0, 0))
         x = 0
@@ -104,7 +93,6 @@ def generate_image_with_filename(text, filename, font_paths):
             img.paste(char_img, (x, 0), char_img)
             x += char_width
 
-        # Save the generated image to the user's desktop
         output_dir = "Output"
         os.makedirs(output_dir, exist_ok=True)
         img_path = os.path.join(output_dir, filename)
