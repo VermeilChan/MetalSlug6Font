@@ -23,14 +23,6 @@ Check [SUPPORTED.md](SUPPORTED.md) For More Information.
 
 **Note:** Using the Metal Slug font style to turn text into images might not work perfectly with all fonts. Some fonts might not have all the features like uppercase and lowercase letters (A-Z, a-z), numbers (1-9), Symbols.
 
-## Examples Using Font 1
-
-Input: `I Love Cats!`
-
-Generated Image:
-
-![Metal Slug Font Image](Assets\Example-Image\Example.png)
-
 ## Requirements
 
 Ensure that you have Python installed. You can download Python from the official Python website:
