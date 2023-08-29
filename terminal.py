@@ -36,7 +36,7 @@ def main():
         text = get_user_input(color_choice)
         
         if not text:
-            print(f"{color_choice}Goodbye!")
+            print(f"{color_choice}Closing...")
             break
 
         generate_and_display_image(text, color_choice)
