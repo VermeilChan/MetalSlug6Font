@@ -8,8 +8,8 @@ SPACE_WIDTH = 30
 
 def generate_filename(user_input):
     timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
-    input = '-'.join(filter(str.isalnum, user_input.split()))
-    filename = f"{input}-{timestamp}.png"
+    sanitized_input = '-'.join(filter(str.isalnum, user_input.split()))
+    filename = f"{sanitized_input}-{timestamp}.png"
     return filename
 
 while True:
@@ -71,7 +71,7 @@ def get_character_image_path(char, font_paths):
             '_': 'Underscore',
             '|': 'Vertical-bar'
         }
-        if char in SPE_CHAR.keys():
+        if char in SPE_CHAR:
             return os.path.join(SYMBOLS_FOLDER, f"{SPE_CHAR[char]}.png")
         else:
             raise ValueError(f"The character '{char}' is not supported.")
@@ -90,9 +90,12 @@ def generate_image_with_filename(text, filename, font_paths):
             else:
                 try:
                     char_img_path = get_character_image_path(char, font_paths)
-                    char_img = Image.open(char_img_path).convert('RGBA')
+                    with Image.open(char_img_path) as char_img:
+                        char_img = char_img.convert('RGBA')
                 except FileNotFoundError:
                     return None, f"Image not found for character '{char}'"
+                except Exception as e:
+                    return None, f"An error occurred for character '{char}': {e}"
 
             char_images[char] = char_img
             img_height = char_img.size[1] if img_height is None else img_height
@@ -112,4 +115,6 @@ def generate_image_with_filename(text, filename, font_paths):
     except FileNotFoundError as e:
         return None, f"Image not found for character '{char}': {e}"
     except (PIL.UnidentifiedImageError, ValueError) as e:
-        return None, str(e)
+        return None, f"Error processing character '{char}': {e}"
+    except Exception as e:
+        return None, f"An error occurred: {e}"
