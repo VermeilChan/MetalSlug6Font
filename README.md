@@ -2,7 +2,7 @@
 
 Generate images with the iconic Metal Slug font style! Write text using the distinctive font from the Metal Slug arcade game series. This tool allows you to create images of your text with custom spacing and supports characters, numbers, and symbols.
 
-**Important Note:** This version is still in its developmental phase and operates through a terminal-based interface.  Given its early developmental stage, a few bugs currently inhabit the system. Alternatively, you can continue utilizing the web application until the official website becomes accessible. If the website isn't available, you have the option to host the application on your local machine. instructions can be found in the README.md file on the master branch for more information.
+**Important Note:** This version is still in its developmental phase and operates through a terminal-based interface.  Given its early developmental stage, a few bugs currently inhabit the system. Alternatively, you can continue utilizing the web app until the this version becomes accessible. If the web app isn't available, you have the option to host the application on your local machine. instructions can be found in the README.md file on the master branch for more information.
 
 ## Table of Contents
 - [Features](#features)
@@ -29,7 +29,7 @@ Input: `I Love Cats!`
 
 Generated Image:
 
-![Metal Slug Font Image](Assets\Example.png)
+![Metal Slug Font Image](Assets\Example-Image\Example.png)
 
 ## Requirements
 
