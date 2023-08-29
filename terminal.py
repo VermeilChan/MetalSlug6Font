@@ -5,7 +5,7 @@ from color import COLORS
 from colorama import Fore
 from main import generate_filename, generate_image_with_filename, get_font_paths, font
 
-sys.dont_write_bytecode = True 
+sys.dont_write_bytecode = True
 
 def display_intro_message():
     print(f"{Fore.RED}Note: Metal Slug font style conversion may not be compatible with all fonts."
