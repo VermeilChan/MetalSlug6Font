@@ -1,8 +1,10 @@
+# **CHECK SUPPORTED.md And GUIDE.md**
+
 # Metal Slug Font
 
 Generate images with the iconic Metal Slug font style! Write text using the distinctive font from the Metal Slug arcade game series. This tool allows you to create images of your text with custom spacing and supports characters, numbers, and symbols.
 
-**Important Note:** This version is still in its developmental phase and operates through a terminal-based interface.  Given its early developmental stage, a few bugs currently inhabit the system. Alternatively, you can continue utilizing the web app until the this version becomes accessible. If the web app isn't available, you have the option to host the application on your local machine. instructions can be found in the README.md file on the master branch for more information.
+**Note:** This version is still in its developmental phase and operates through a terminal-based interface.  Given its early developmental stage, a few bugs currently inhabit the system. Alternatively, you can continue utilizing the web app until the this version becomes accessible. If the web app isn't available, you have the option to host the application on your local machine. instructions can be found in the README.md file on the master branch for more information.
 
 ## Table of Contents
 - [Features](#features)
@@ -18,10 +20,10 @@ Generate images with the iconic Metal Slug font style! Write text using the dist
 
 - Transform text into images with the captivating Metal Slug font style.
 - Personalize spacing between characters for imaginative layouts.
-- Support for uppercase and lowercase alphabets (A-Z, a-z), numbers (1-9), Symbols. 
-Check [SUPPORTED.md](SUPPORTED.md) For More Information.
+- Support for uppercase and lowercase alphabets (A-Z, a-z), numbers (0-9), Symbols. 
+Check [SUPPORTED.md](SUPPORTED.md) And [GUIDE.md](GUIDE.md) For More Information.
 
-**Note:** Using the Metal Slug font style to turn text into images might not work perfectly with all fonts. Some fonts might not have all the features like uppercase and lowercase letters (A-Z, a-z), numbers (1-9), Symbols.
+**Note:** Using the Metal Slug font style to turn text into images might not work perfectly with all fonts. Some fonts might not have all the features like uppercase and lowercase letters (A-Z, a-z), numbers (0-9), Symbols.
 
 ## Requirements
 
@@ -100,7 +102,5 @@ This project is licensed under the [MIT License](LICENSE).
 ## Credits
 
 - [Division 六](https://6th-divisions-den.com/)
-- [GussPrint](https://www.spriters-resource.com/submitter/Gussprint/)
-- [BinRich](https://www.discordapp.com/users/477459550904254464)
 
 ---
