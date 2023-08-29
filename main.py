@@ -1,5 +1,4 @@
 import os
-import re
 import PIL
 from PIL import Image
 from colorama import Fore
@@ -8,12 +7,20 @@ from datetime import datetime
 SPACE_WIDTH = 30
 
 def generate_filename(user_input):
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    sanitized_input = re.sub(r'\W+', '_', user_input)
-    filename = f"{sanitized_input}_{timestamp}.png"
+    timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
+    input = '-'.join(filter(str.isalnum, user_input.split()))
+    filename = f"{input}-{timestamp}.png"
     return filename
 
-font = int(input(f"{Fore.GREEN}Choose A Font From 1 To 4 : {Fore.RESET}"))
+while True:
+    try:
+        font = int(input(f"{Fore.GREEN}Choose A Font From 1 To 4 : {Fore.RESET}"))
+        if 1 <= font <= 4:
+            break
+        else:
+            print(f"{Fore.RED}Invalid input. Please choose a font between 1 and 4.{Fore.RESET}")
+    except ValueError:
+        print(f"{Fore.RED}Invalid input. Please enter a valid number.{Fore.RESET}")
 
 def get_font_paths(font):
     base_path = f'Assets/Font-{font}'
@@ -63,7 +70,6 @@ def get_character_image_path(char, font_paths):
             '~': 'Tilde',
             '_': 'Underscore',
             '|': 'Vertical-bar'
-
         }
         if char in SPE_CHAR.keys():
             return os.path.join(SYMBOLS_FOLDER, f"{SPE_CHAR[char]}.png")
@@ -103,5 +109,7 @@ def generate_image_with_filename(text, filename, font_paths):
         img.save(img_path)
         return filename, None
 
+    except FileNotFoundError as e:
+        return None, f"Image not found for character '{char}': {e}"
     except (PIL.UnidentifiedImageError, ValueError) as e:
         return None, str(e)

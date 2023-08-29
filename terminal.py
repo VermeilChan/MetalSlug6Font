@@ -8,11 +8,11 @@ from main import generate_filename, generate_image_with_filename, get_font_paths
 sys.dont_write_bytecode = True 
 
 def display_intro_message():
-    print(Fore.RED + "Note: Metal Slug font style conversion may not be compatible with all fonts. Refer to the SUPPORTED.md file for details.")
+    print(f"{Fore.RED}Note: Metal Slug font style conversion may not be compatible with all fonts."
+            " Refer to the SUPPORTED.md file for details.")
 
 def get_user_input(color_choice):
-    text = input(f"{color_choice}Enter Text: ")
-    return text
+    return input(f"{color_choice}Enter Text: ")
 
 def generate_and_display_image(text, color_choice):
     try:
