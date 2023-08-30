@@ -160,5 +160,4 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 .vscode/
 
-# Ignored Folders And Files 
-update_package.py
+# Ignored Folders And Files
