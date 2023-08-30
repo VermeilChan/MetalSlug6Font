@@ -11,7 +11,7 @@ app = Flask(__name__)
 assets = Environment(app)
 
 assets.url = app.static_url_path
-scss = Bundle('CSS/style.scss' , output='all.css')
+scss = Bundle('SCSS/style.scss' , output='all.css')
 assets.register('scss_all' , scss)
 
 # Constants
