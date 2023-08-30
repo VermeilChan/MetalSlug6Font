@@ -161,3 +161,4 @@ cython_debug/
 .vscode/
 
 # Ignored Folders And Files 
+update_package.py
