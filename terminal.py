@@ -6,11 +6,11 @@ sys.dont_write_bytecode = True
 from main import generate_filename, generate_image_with_filename, get_font_paths, font, color
 
 def display_intro_message():
-    print("Note: Metal Slug font style conversion may not be compatible with all fonts."
+    print("Note : Metal Slug font style conversion may not be compatible with all fonts."
             " Refer to the SUPPORTED.md file for details.")
 
 def get_user_input():
-    return input("Enter Text: ")
+    return input("Enter Text : ")
 
 def generate_and_display_image(text):
     try:
@@ -21,7 +21,7 @@ def generate_and_display_image(text):
         if error_message:
             print(f"Error: {error_message}")
         else:
-            print(f"Image generated successfully: {img_path}")
+            print(f"Image generated successfully : {img_path}")
     except Exception as e:
         print(f"An error occurred: {e}")
         traceback.print_exc()
