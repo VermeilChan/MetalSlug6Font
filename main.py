@@ -6,6 +6,10 @@ from datetime import datetime
 
 SPACE_WIDTH = 30
 
+class ColorError(Exception):
+    def __init__(self, *args: object) -> None:
+        super().__init__(*args)
+
 def generate_filename(user_input):
     timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
     sanitized_input = '-'.join(filter(str.isalnum, user_input.split()))
@@ -14,16 +18,28 @@ def generate_filename(user_input):
 
 while True:
     try:
-        font = int(input(f"{Fore.GREEN}Choose A Font From 1 To 4 : {Fore.RESET}"))
+        font  = int(input(f"{Fore.GREEN}Choose A Font From 1 To 4 :{Fore.RESET}"))
+        print("Orange-1 | Orange-2 | Blue")
+        color = input(f"{Fore.GREEN}Chose A Color :{Fore.RESET}")
+
+        if (3 <= font <= 4) and color == "Orange-2":
+            raise ColorError()
+        
         if 1 <= font <= 4:
             break
+
+        
         else:
             print(f"{Fore.RED}Invalid input. Please choose a font between 1 and 4.{Fore.RESET}")
+
     except ValueError:
         print(f"{Fore.RED}Invalid input. Please enter a valid number.{Fore.RESET}")
 
-def get_font_paths(font):
-    base_path = f'Assets/Font-{font}'
+    except ColorError:
+        print("Color Font not available")
+
+def get_font_paths(font , color):
+    base_path = f'Assets/Font-{font}/Font-{font}-{color}'
     return (
         os.path.join(base_path, 'Letters'),
         os.path.join(base_path, 'Numbers'),
@@ -116,7 +132,9 @@ def generate_image_with_filename(text, filename, font_paths):
 
     except FileNotFoundError as e:
         return None, f"Image not found for character '{char}': {e}"
+    
     except (PIL.UnidentifiedImageError, ValueError) as e:
         return None, f"Error processing character '{char}': {e}"
+    
     except Exception as e:
         return None, f"An error occurred: {e}"
