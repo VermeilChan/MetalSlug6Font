@@ -21,16 +21,26 @@ It seems that I might not be very skilled at explaining things clearly, which is
 4. Wait for the download to finish.
 
 ## Running the Program
-1. Get the latest release of the program. [Here](https://github.com/VermeilChan/MetalSlugFont/releases)
-2. Run the program.
-3. The program will ask you to choose a font from a selection of 4.
-4. Note that some fonts might not support certain symbols.
-5. Refer to the 'SUPPORTED.md' file to check symbol compatibility.
-6. The program will prompt you to input the text you want to convert to the style of Metal Slug.
-7. Enter your desired text and hit 'enter'.
+1. Download the project from the repository.
 
+![Repo Download](Assets\GUIDE\REPO-DOWNLOAD.png)
+
+2. Extract the downloaded ZIP file to a location of your choice.
+3. Run the 'terminal.py' file.
+4. The program will prompt you to select a font:
+   - Choose A Font From 1 To 4.
+5. Next, the program will ask you to choose a color:
+   - Type 1 for blue.
+   - Type 2 for orange.
+6. If you select the color orange, the program will then prompt you to choose the specific type of orange you'd like:
+   - Type 1 for Orange 1.
+   - Type 2 for Orange 2.
+7. Once the font and color are selected, the program will ask you to input the text you want to convert to the style of Metal Slug.
+8. Enter your desired text and press 'enter'.
 ## Viewing the Result
 1. After pressing 'enter', the generated image should appear in the same directory.
 2. You'll find it within a folder named 'Output'.
 
 And that's pretty much it, I think! If you have any questions or need further assistance, don't hesitate to ask.
+
+Here's my Discord: `mommy_vermeil`.
