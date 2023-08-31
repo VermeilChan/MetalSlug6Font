@@ -23,7 +23,7 @@ It seems that I might not be very skilled at explaining things clearly, which is
 ## Running the Program
 1. Download the project from the repository.
 
-![Repo Download](Assets\GUIDE\Repo-Download.png)
+![Repo Download](Assets/GUIDE/REPO-DOWNLOAD.png)
 
 2. Extract the downloaded ZIP file to a location of your choice.
 3. Run the 'terminal.py' file.
