@@ -1,7 +1,6 @@
 import os
 import PIL
 from PIL import Image
-from colorama import Fore
 from datetime import datetime
 
 SPACE_WIDTH = 30
@@ -18,27 +17,23 @@ def generate_filename(user_input):
 
 while True:
     try:
-        font = int(input(f"{Fore.GREEN}Choose A Font From 1 To 4 :{Fore.RESET}"))
+        font = int(input("Choose A Font From 1 To 4:"))
 
         if 1 <= font <= 4:
-            if font == 3 or font == 4:
-                valid_colors = ["Blue"]
-            else:
-                valid_colors = ["Blue", "Orange-1", "Orange-2"]
-
+            valid_colors = ["Blue"] if font == 3 or font == 4 else ["Blue", "Orange-1", "Orange-2"]
             print(" | ".join(valid_colors))
-            color = input(f"{Fore.GREEN}Choose A Color: {Fore.RESET}")
+            color = input("Choose A Color: ")
 
             if color in valid_colors:
                 break
             else:
-                print(f"{Fore.RED}Invalid color. Please choose a valid color.{Fore.RESET}")
+                print("Invalid color. Please choose a valid color.")
 
         else:
-            print(f"{Fore.RED}Invalid input. Please choose a font between 1 and 4.{Fore.RESET}")
+            print("Invalid input. Please choose a font between 1 and 4.")
 
     except ValueError:
-        print(f"{Fore.RED}Invalid input. Please enter a valid number.{Fore.RESET}")
+        print("Invalid input. Please enter a valid number.")
 
 def get_font_paths(font , color):
     base_path = f'Assets/Font-{font}/Font-{font}-{color}'
@@ -100,9 +95,7 @@ def generate_image_with_filename(text, filename, font_paths):
     try:
         img_height = None
         char_images = {}
-        output_dir = "Output"
-        os.makedirs(output_dir, exist_ok=True)
-        img_path = os.path.join(output_dir, filename)
+        img_path = os.path.join(os.path.expanduser("~/Desktop"), filename)
 
         for char in text:
             if char == ' ':
