@@ -17,10 +17,10 @@ def generate_filename(user_input):
 
 while True:
     try:
-        font = int(input("Choose A Font From 1 To 4 :"))
+        font = int(input("Choose A Font From 1 To 4: "))
 
         if 1 <= font <= 4:
-            valid_colors = ["Blue | Orange-1"] if font == 3 or font == 4 else ["Blue", "Orange-1", "Orange-2"]
+            valid_colors = ["Blue", "Orange-1", "Orange-2"] if font == 1 or font == 2 else ["Blue", "Orange-1"]
             print(" | ".join(valid_colors))
             color = input("Choose A Color: ")
 
@@ -34,6 +34,7 @@ while True:
 
     except ValueError:
         print("Invalid input. Please enter a valid number.")
+
 
 def get_font_paths(font , color):
     base_path = f'Assets/Font-{font}/Font-{font}-{color}'
