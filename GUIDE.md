@@ -10,12 +10,17 @@
 ![Program](Assets/GUIDE/PROGRAM.png)
 
 4. The program will prompt you to select a font:
+
    - Choose A Font From 1 To 4.
+
 5. Next, the program will ask you to choose a color:
+
    - Type 'Blue' for the color Blue.
    - Type 'Orange-1' for Orange 1.
    - Type 'Orange-2' for Orange 2.
+
 6. Once the font and color are selected, the program will ask you to input the text you want to convert to the style of Metal Slug.
+
 7. Enter your desired text and press 'enter'.
 
 ## Viewing the Result
