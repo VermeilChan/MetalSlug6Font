@@ -69,7 +69,9 @@ def get_character_image_path(char, font_paths):
             '/': 'Slash',
             '~': 'Tilde',
             '_': 'Underscore',
-            '|': 'Vertical-bar'
+            '|': 'Vertical-bar',
+            ',': 'Comma',
+            '&': 'Ampersand',
         }
         if char in SPE_CHAR:
             return os.path.join(SYMBOLS_FOLDER, f"{SPE_CHAR[char]}.png")

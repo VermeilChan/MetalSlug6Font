@@ -19,7 +19,7 @@ def generate_and_display_image(text, color_choice):
         filename = generate_filename(text)
         font_paths = get_font_paths(font)
         img_path, error_message = generate_image_with_filename(text, filename, font_paths)
-        
+
         if error_message:
             print(f"{color_choice}Error: {error_message}")
         else:
@@ -34,7 +34,7 @@ def main():
 
     while True:
         text = get_user_input(color_choice)
-        
+
         if not text:
             print(f"{color_choice}Closing...")
             break
