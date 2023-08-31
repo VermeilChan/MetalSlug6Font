@@ -1,5 +1,3 @@
-I'm here to assist you, I'll do my best to guide you through the process.
-
 ## Running the Program
 1. Get the latest release of the program. [Here](https://github.com/VermeilChan/MetalSlugFont/releases)
 
@@ -23,8 +21,9 @@ I'm here to assist you, I'll do my best to guide you through the process.
 ## Viewing the Result
 - After pressing 'enter', the generated image should appear in your desktop.
 
-And that's pretty much it, I think! If you have any questions or need further assistance, don't hesitate to ask.
+If you have any questions or need further assistance, don't hesitate to ask.
 
 Here's my Discord: `mommy_vermeil`.
 
 ![Cat](Assets/GUIDE/CAT.png)
+--
