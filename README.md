@@ -1,4 +1,4 @@
-# **CHECK SUPPORTED.md And GUIDE.md**
+# **CHECK [GUIDE.md](GUIDE.md) And [SUPPORTED.md](SUPPORTED.md) IF YOU ENCOUNTER ANY PROBLEMS**
 
 # Metal Slug Font
 
@@ -59,6 +59,10 @@ Once Python is installed, you can verify the installation by running the followi
 ```bash
 python3 --version
 ```
+or
+```bash
+python --version
+```
 This will print the version of Python that is installed on your system.
 
 ## Getting Started
@@ -89,7 +93,7 @@ This will print the version of Python that is installed on your system.
 ## Usage
 
 1. Input the desired text to transform it into the Metal Slug font style.
-2. The generated image will be saved in the "output" folder within the same directory.
+2. The generated image will be saved in the "Output" folder within the same directory.
 
 ## Contributing
 
