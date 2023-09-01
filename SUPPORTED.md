@@ -1,12 +1,13 @@
 # Supported Characters in the MetalSlugFont
 
-Welcome to our documentation! Here, you can find a comprehensive list of letters, numbers, and symbols supported by the MetalSlugFont. Whether you're curious about the characters available in your current font, you're in the right place. Take a look at the following sections to see the inclusive characters for each font variant.
+Here you can find a comprehensive list of letters, numbers, and symbols supported by MetalSlugFont. Whether you're curious about the characters available in your current font, you're in the right place. Take a look at the following sections to see the inclusive characters for each font variant.
 
 ## Table of Contents
 - [Font 1](#font-1-support)
 - [Font 2](#font-2-support)
 - [Font 3](#font-3-support)
 - [Font 4](#font-4-support)
+- [Font 5](#font-5-support)
 
 ## Font 1 Support
 
@@ -138,12 +139,28 @@ Font 4 provides support for a wide range of characters, including:
 - Punctuation (&)
 - Question Mark (?)
 - Quotation Marks - Double ("), Single (')
-- File: scan-2.py
 - Semicolon ( ; )
 - Slash (/)
 - Tilde (~)
 - Underscore ( _ )
 - Vertical Bar (|)
+
+## Font 5 Support
+
+Font 5 provides support for characters, including:
+
+### Letters
+
+- Uppercase Letters
+
+### Numbers
+
+- Numerals from 1 to 9
+
+### Symbols
+
+- Exclamation Mark (!)
+- Question Mark (?)
 
 ---
 
