@@ -89,4 +89,4 @@ Input: `I Love Cats!`
 Generated Image:
 
 ![Metal Slug Font Image](Assets\EXAMPLES\Font-4\Font-4-Color-Orange-1.png)
-
+---
