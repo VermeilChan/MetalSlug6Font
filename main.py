@@ -15,14 +15,22 @@ def generate_filename(user_input):
     filename = f"{sanitized_input}-{timestamp}.png"
     return filename
 
+VALID_COLORS_BY_FONT = {
+    1: ["Blue", "Orange-1", "Orange-2"],
+    2: ["Blue", "Orange-1", "Orange-2"],
+    3: ["Blue", "Orange-1"],
+    4: ["Blue", "Orange-1"],
+    5: ["Orange-1"]
+}
+
 while True:
     try:
-        font = int(input("Choose A Font From 1 To 4 (Refer to EXAMPLE.md for Font Preview) : "))
+        font = int(input("Choose a font from 1 to 5 (Refer to EXAMPLE.md for Font Preview) : "))
 
-        if 1 <= font <= 4:
-            valid_colors = ["Blue", "Orange-1", "Orange-2"] if font == 1 or font == 2 else ["Blue", "Orange-1"]
+        if font in VALID_COLORS_BY_FONT:
+            valid_colors = VALID_COLORS_BY_FONT[font]
             print(" | ".join(valid_colors))
-            color = input("Choose A Color : ")
+            color = input("Choose a color : ")
 
             if color in valid_colors:
                 break
@@ -30,11 +38,10 @@ while True:
                 print("Invalid color. Please choose a valid color.")
 
         else:
-            print("Invalid input. Please choose a font between 1 and 4.")
+            print("Invalid input. Please choose a font between 1 and 5.")
 
     except ValueError:
         print("Invalid input. Please enter a valid number.")
-
 
 def get_font_paths(font , color):
     base_path = f'Assets/Font-{font}/Font-{font}-{color}'
