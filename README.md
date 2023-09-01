@@ -1,8 +1,8 @@
-# Metal Slug Font Generator
+# Metal Slug Font
 
-Create captivating images with the iconic Metal Slug font style! Easily transform your text into visually appealing images reminiscent of the Metal Slug arcade game series. This tool allows you to craft images with custom character spacing and supports a wide range of characters, numbers, and symbols.
+Create images with the iconic Metal Slug font style! Easily transform your text into visually appealing images reminiscent of the Metal Slug arcade game series. This tool allows you to craft images with custom character spacing and supports a wide range of characters, numbers, and symbols.
 
-## **Note:** The terminal-based version of the program is now stable and recommended for use. Please be aware that the web app is no longer actively maintained, and it might be down at anytime. However, you can still access it if preferred. The terminal version also offers a wider selection of fonts than the web app.
+#### **Note:** The terminal-based version of the program is now stable and recommended for use. Please be aware that the web app is no longer actively maintained, and it might be down at anytime. However, you can still access it if preferred. The terminal version also offers a wider selection of fonts than the web app.
 
 ## Table of Contents
 - [Features](#features)
@@ -83,10 +83,15 @@ Ensure that you have Python installed. You can download Python from the official
   sudo pacman -S python3
   ```
 
-## Usage
-
-1. Input your desired text to transform it into the Metal Slug font style.
-2. The generated image will be saved to your desktop.
+**Using the Metal Slug Font**
+1. Upon running the program, you will be prompted to choose a font.
+2. Choose a font by entering a number from 1 to 5.
+3. Once you've chosen your font, the available color options will depend on your selection.
+4. Enter one of the following color options based on the font you've chosen:
+5. For some fonts, type `Blue` for the color Blue.
+6. For specific fonts, type `Orange-1` for Orange 1.
+7. For other fonts, type `Orange-2` for Orange 2.
+8. The generated image will be saved to your desktop.
 
 ## Contributing
 
