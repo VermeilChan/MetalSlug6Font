@@ -8,7 +8,7 @@ Follow these steps to use MSFONT:
    ![Program Download](Assets/MARKDOWN/GUIDE/PROGRAM-DOWNLOAD.png)
 
 2. **Installation and Setup**
-   - After downloading and installing it the program, navigate to your downloads and locate the folder named `MSFONT`.
+   - After installing it, navigate to your downloads and locate the folder named `MSFONT`.
    - Inside the `MSFONT` folder, find and run the `MSFONT.exe` executable.
 
    ![Program](Assets/MARKDOWN/GUIDE/PROGRAM.png)
