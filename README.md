@@ -101,3 +101,5 @@ This project is licensed under the [MIT License](LICENSE).
 - [Division 六](https://6th-divisions-den.com/)
 
 ---
+
+**If you're still unsure about what to do or need further assistance, feel free to reach out to me on Discord: `mommy_vermeil`.**
