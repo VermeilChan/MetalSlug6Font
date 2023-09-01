@@ -1,20 +1,26 @@
+# Import necessary libraries
 import os
-import PIL
-from PIL import Image
 from datetime import datetime
 
+import PIL
+from PIL import Image
+
+# Set the width of spaces in the generated image
 SPACE_WIDTH = 30
 
+# Custom exception class for color validation
 class ColorError(Exception):
     def __init__(self, *args: object) -> None:
         super().__init__(*args)
 
+# Function to generate a filename based on user input and timestamp
 def generate_filename(user_input):
     timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
     sanitized_input = '-'.join(filter(str.isalnum, user_input.split()))
     filename = f"{sanitized_input}-{timestamp}.png"
     return filename
 
+# Valid color options for each font
 VALID_COLORS_BY_FONT = {
     1: ["Blue", "Orange-1", "Orange-2"],
     2: ["Blue", "Orange-1", "Orange-2"],
@@ -23,6 +29,7 @@ VALID_COLORS_BY_FONT = {
     5: ["Orange-1"]
 }
 
+# User input loop to select a font and color
 while True:
     try:
         font = int(input("Choose a font from 1 to 5 (Refer to EXAMPLE.md for Font Preview) : "))
@@ -43,6 +50,7 @@ while True:
     except ValueError:
         print("Invalid input. Please enter a valid number.")
 
+# Function to get paths for font files based on font and color
 def get_font_paths(font , color):
     base_path = f'Assets/FONTS/Font-{font}/Font-{font}-{color}'
     return (
@@ -51,6 +59,7 @@ def get_font_paths(font , color):
         os.path.join(base_path, 'Symbols')
     )
 
+# Function to get the path of an image for a given character in a font
 def get_character_image_path(char, font_paths):
     CHARACTERS_FOLDER, NUMBERS_FOLDER, SYMBOLS_FOLDER = font_paths
 
@@ -62,6 +71,7 @@ def get_character_image_path(char, font_paths):
     elif char == ' ':
         return None
     else:
+        # Special characters mapping
         SPE_CHAR = {
             '!': 'Exclamation',
             '?': 'Question',
@@ -99,6 +109,7 @@ def get_character_image_path(char, font_paths):
         else:
             raise ValueError(f"The character '{char}' is not supported.")
 
+# Function to generate an image from text and save it with a given filename
 def generate_image_with_filename(text, filename, font_paths):
     try:
         img_height = None
