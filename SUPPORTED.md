@@ -23,32 +23,31 @@ Font 1 provides support for a wide range of characters, including:
 
 ### Symbols
 
-- Apostrophe (')
-- Asterisk (*)
-- Braces (Curly Brackets) - `{}`, `{}`, `()`
-- Brackets (Square Brackets) - `[]`, `[]`, `()`
-- Caret (^)
+- Comma ( , )
+- Asterisk ( * )
+- Braces - `{}`, `{}`, `()`
+- Caret ( ^ )
 - Colon ( : )
-- Dollar Sign ($)
-- Equals (=)
-- Exclamation Mark (!)
-- Greater-than Sign (>)
-- Hyphen (-)
-- Infinity (∞)
-- Less-than Sign (<)
-- Number Sign (#)
-- Percent Sign (%)
-- Period (.)
-- Plus Sign (+)
-- Ampersand (&)
-- Question Mark (?)
-- Quotation Marks - Double ("), Single ('), and Backtick (`)
+- Dollar Sign ( $ )
+- Equals ( = )
+- Exclamation Mark ( ! )
+- Greater-than Sign ( > )
+- Hyphen ( - )
+- Infinity ( ∞ )
+- Less-than Sign ( < )
+- Number Sign ( # )
+- Percent Sign ( % )
+- Period ( . )
+- Plus Sign ( + )
+- Ampersand ( & )
+- Question Mark ( ? )
+- Quotation Marks - Double ( " )
 - Semicolon ( ; )
-- Slash (/)
-- Tilde (~)
-- Underscore (_)
-- Vertical Bar (|)
-
+- Slash ( / )
+- Tilde ( ~ )
+- Underscore ( _ )
+- Vertical Bar ( | )
+---
 ## Font 2 Support
 
 Font 2 provides support for a wide range of characters, including:
@@ -63,14 +62,15 @@ Font 2 provides support for a wide range of characters, including:
 
 ### Symbols
 
-- Apostrophe (')
-- Equals (=)
-- Exclamation Mark (!)
-- Hyphen (-)
-- Period (.)
-- Plus Sign (+)
-- Question Mark (?)
-- Slash (/)
+- Comma ( , )
+- Equals ( = )
+- Exclamation Mark ( ! )
+- Hyphen ( - )
+- Period ( . )
+- Plus Sign ( + )
+- Ampersand ( & )
+- Question Mark ( ? )
+- Slash ( / )
 
 ## Font 3 Support
 
@@ -86,25 +86,23 @@ Font 3 provides support for a wide range of characters, including:
 
 ### Symbols
 
-- Apostrophe (')
-- Brackets (Curly Brackets) - `{}`, `{}`
-- Brackets (Square Brackets) - `[]`, `[]`
-- Brackets - `()`
+- Apostrophe ( ' )
+- Braces - `{}`, `{}`, `()`
 - Colon ( : )
-- Comma (,)
-- Equals (=)
-- Exclamation Mark (!)
-- Greater-than Sign (>)
-- Hyphen (-)
-- Less-than Sign (<)
-- Period (.)
-- Plus Sign (+)
-- Question Mark (?)
-- Quotation Marks (Single and Double) - ('), (")
+- Comma ( , )
+- Equals ( = )
+- Exclamation Mark ( ! )
+- Greater-than Sign ( > )
+- Hyphen ( - )
+- Less-than Sign ( < )
+- Period ( . )
+- Plus Sign ( + )
+- Question Mark ( ? )
+- Quotation Mark ( " )
 - Semicolon ( ; )
-- Slash (/)
-- Underscore (_)
-- Vertical Bar (|)
+- Slash ( / )
+- Underscore ( _ )
+- Vertical Bar ( | )
 
 ## Font 4 Support
 
@@ -120,30 +118,29 @@ Font 4 provides support for a wide range of characters, including:
 
 ### Symbols
 
-- Apostrophe (')
-- Asterisk (*)
-- Brackets (Curly Brackets) - `{}`, `{}`, `()`
-- Brackets (Square Brackets) - `[]`, `[]`, `()`
-- Caret (^)
+- Apostrophe ( ' )
+- Asterisk ( * )
+- Braces - `{}`, `{}`, `()`
+- Caret ( ^ )
 - Colon ( : )
-- Dollar Sign ($)
-- Equals (=)
-- Exclamation Mark (!)
-- Greater-than Sign (>)
-- Hyphen (-)
-- Less-than Sign (<)
-- Number Sign (#)
-- Percent Sign (%)
-- Period (.)
-- Plus Sign (+)
-- Punctuation (&)
-- Question Mark (?)
-- Quotation Marks - Double ("), Single (')
+- Dollar Sign ( $ )
+- Equals ( = )
+- Exclamation Mark ( ! )
+- Greater-than Sign ( > )
+- Hyphen ( - )
+- Less-than Sign ( < )
+- Number Sign ( # )
+- Percent Sign ( % )
+- Period ( . )
+- Plus Sign ( + )
+- Punctuation ( & )
+- Question Mark ( ? )
+- Quotation Mark ( " )
 - Semicolon ( ; )
-- Slash (/)
-- Tilde (~)
+- Slash ( / )
+- Tilde ( ~ )
 - Underscore ( _ )
-- Vertical Bar (|)
+- Vertical Bar ( | )
 
 ## Font 5 Support
 
@@ -159,8 +156,8 @@ Font 5 provides support for characters, including:
 
 ### Symbols
 
-- Exclamation Mark (!)
-- Question Mark (?)
+- Exclamation Mark ( ! )
+- Question Mark ( ? )
 
 ---
 
