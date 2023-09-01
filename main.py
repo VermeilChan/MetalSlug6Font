@@ -17,12 +17,12 @@ def generate_filename(user_input):
 
 while True:
     try:
-        font = int(input("Choose A Font From 1 To 4: "))
+        font = int(input("Choose A Font From 1 To 4 (Refer to EXAMPLE.md for Font Preview) : "))
 
         if 1 <= font <= 4:
             valid_colors = ["Blue", "Orange-1", "Orange-2"] if font == 1 or font == 2 else ["Blue", "Orange-1"]
             print(" | ".join(valid_colors))
-            color = input("Choose A Color: ")
+            color = input("Choose A Color : ")
 
             if color in valid_colors:
                 break
