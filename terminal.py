@@ -10,7 +10,7 @@ from main import generate_filename, generate_image_with_filename, get_font_paths
 # Display an introductory message to the user
 def display_intro_message():
     print("Note : Metal Slug font style conversion may not be compatible with all fonts."
-          " Refer to the SUPPORTED.md file for details.")
+            " Refer to the SUPPORTED.md file for details.")
 
 # Get user input for the text they want to generate
 def get_user_input():
