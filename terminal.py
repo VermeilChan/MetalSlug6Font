@@ -10,7 +10,7 @@ def display_intro_message():
             " Refer to the SUPPORTED.md file for details.")
 
 def get_user_input():
-    return input("Enter Text : ")
+    return input("Enter the text you want to generate: ")
 
 def generate_and_display_image(text):
     try:
@@ -21,7 +21,7 @@ def generate_and_display_image(text):
         if error_message:
             print(f"Error: {error_message}")
         else:
-            print(f"Image generated successfully : {img_path}")
+            print(f"successfully generated and saved!: {img_path}")
     except Exception as e:
         print(f"An error occurred: {e}")
         traceback.print_exc()

@@ -30,7 +30,7 @@ while True:
         if font in VALID_COLORS_BY_FONT:
             valid_colors = VALID_COLORS_BY_FONT[font]
             print(" | ".join(valid_colors))
-            color = input("Choose a color : ")
+            color = input("Enter the color you want to use: ")
 
             if color in valid_colors:
                 break
