@@ -1,10 +1,20 @@
-# **CHECK [GUIDE.md](GUIDE.md) And [SUPPORTED.md](SUPPORTED.md) IF YOU ENCOUNTER ANY PROBLEMS**
-
 # Metal Slug Font
 
 Generate images with the iconic Metal Slug font style! Write text using the distinctive font from the Metal Slug arcade game series. This tool allows you to create images of your text with custom spacing and supports characters, numbers, and symbols.
 
-**Note:** This version is still in its developmental phase and operates through a terminal-based interface.  Given its early developmental stage, a few bugs currently inhabit the system. Alternatively, you can continue utilizing the web app until the this version becomes accessible. If the web app isn't available, you have the option to host the application on your local machine. instructions can be found in the README.md file on the master branch for more information.
+**Note:** The terminal-based version of the program is now stable. The web app is no longer being maintained but you can still use it, so please use this version instead. This version also has more fonts than the web app.
+
+## How To Set Up The Program
+
+[REFER TO THE GUIDE](GUIDE.md)
+
+## Supported Letters, Numbers, And Symbols
+
+[SEE THE LIST OF SUPPORTED CHARACTERS](SUPPORTED.md)
+
+## Preview Your Current Font
+
+[SEE THE EXAMPLE FONTS](EXAMPLE.md)
 
 ## Table of Contents
 - [Features](#features)
@@ -88,12 +98,12 @@ This will print the version of Python that is installed on your system.
    python terminal.py
    ```
 
-4. Follow the on-screen instructions to create Metal Slug font images.
+4. Follow the on-screen instructions or [REFER TO THE GUIDE](GUIDE.md) | [SEE THE LIST OF SUPPORTED CHARACTERS](SUPPORTED.md) to create Metal Slug font images.
 
 ## Usage
 
 1. Input the desired text to transform it into the Metal Slug font style.
-2. The generated image will be saved in the "Output" folder within the same directory.
+2. The generated image will be saved in your desktop.
 
 ## Contributing
 
