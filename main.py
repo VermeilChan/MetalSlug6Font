@@ -44,7 +44,7 @@ while True:
         print("Invalid input. Please enter a valid number.")
 
 def get_font_paths(font , color):
-    base_path = f'Assets/Font-{font}/Font-{font}-{color}'
+    base_path = f'Assets/FONTS/Font-{font}/Font-{font}-{color}'
     return (
         os.path.join(base_path, 'Letters'),
         os.path.join(base_path, 'Numbers'),
