@@ -112,38 +112,60 @@ def get_character_image_path(char, font_paths):
 # Function to generate an image from text and save it with a given filename
 def generate_image_with_filename(text, filename, font_paths):
     try:
+        # Initialize variables
         img_height = None
         char_images = {}
         img_path = os.path.join(os.path.expanduser("~/Desktop"), filename)
-
+        
+        # Iterate through each character in the input text
         for char in text:
             if char == ' ':
+                # Create a transparent space if the character is a space
                 char_img = Image.new('RGBA', (SPACE_WIDTH, 1), (0, 0, 0, 0))
             else:
                 try:
+                    # Attempt to get the image path for the character
                     char_img_path = get_character_image_path(char, font_paths)
+                    
+                    # Open and convert the character image to RGBA format
                     with Image.open(char_img_path) as char_img:
                         char_img = char_img.convert('RGBA')
+
                 except FileNotFoundError:
+                    # Handle the case where the character image is not found
                     return None, f"Image not found for character '{char}'"
                 except Exception as e:
+                    # Handle other exceptions that may occur during image processing
                     return None, f"An error occurred for character '{char}': {e}"
 
+            # Store the character image in a dictionary
             char_images[char] = char_img
+
+            # Update the image height (used for creating the final image)
             img_height = char_img.size[1] if img_height is None else img_height
 
+        # Create a list of tuples, each containing the character image and its width
         chars = [(char_images[char], SPACE_WIDTH if char == ' ' else char_images[char].size[0]) for char in text]
+        
+        # Calculate the total width of the final image
         total_width = sum(char_width for _, char_width in chars)
+        
+        # Create an empty RGBA image with the calculated dimensions
         img = Image.new('RGBA', (total_width, img_height), (0, 0, 0, 0))
         x = 0
-
+        
+        # Paste each character image onto the final image
         for char_img, char_width in chars:
             img.paste(char_img, (x, 0), char_img)
             x += char_width
 
+        # Save the final image to the specified path
         img.save(img_path)
+        
+        # Return the filename and no error message
         return filename, None
 
+    # Handle specific exceptions
     except FileNotFoundError as e:
         return None, f"Image not found for character '{char}': {e}"
     
