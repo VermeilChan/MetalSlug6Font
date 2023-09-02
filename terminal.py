@@ -10,7 +10,7 @@ logging.basicConfig(filename='app.log', level=logging.ERROR, format='%(asctime)s
 
 # Display an introductory message to the user
 def display_intro_message():
-    print("Note: Metal Slug font style conversion may not be compatible with all fonts.")
+    print("Note: Metal Slug Font style conversion may not be compatible with all fonts.")
     print("Refer to the SUPPORTED.md file for details.")
 
 # Get user input for the text they want to generate
