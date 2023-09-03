@@ -1,9 +1,7 @@
 # Import necessary libraries
 import os
 from datetime import datetime
-
-import PIL
-from PIL import Image
+from PIL import Image, UnidentifiedImageError
 
 # Set the width of spaces in the generated image
 SPACE_WIDTH = 30
@@ -38,7 +36,7 @@ while True:
 
         if font in VALID_COLORS_BY_FONT:
             valid_colors = VALID_COLORS_BY_FONT[font]
-            print(" | ".join(valid_colors))
+            print("Available colors: " + " | ".join(valid_colors))
             color = input("Enter the color you want to use: ")
 
             if color in valid_colors:
@@ -67,9 +65,9 @@ def get_character_image_path(char, font_paths):
 
     if char.isalpha():
         folder = 'Lower-Case' if char.islower() else 'Upper-Case'
-        return os.path.join(CHARACTERS_FOLDER, folder, char + '.png')
+        char_img_path = os.path.join(CHARACTERS_FOLDER, folder, char + '.png')
     elif char.isdigit():
-        return os.path.join(NUMBERS_FOLDER, char + '.png')
+        char_img_path = os.path.join(NUMBERS_FOLDER, char + '.png')
     elif char == ' ':
         return None
     else:
@@ -107,9 +105,15 @@ def get_character_image_path(char, font_paths):
             '&': 'Punctuation',
         }
         if char in SPE_CHAR:
-            return os.path.join(SYMBOLS_FOLDER, f"{SPE_CHAR[char]}.png")
+            char_img_path = os.path.join(SYMBOLS_FOLDER, f"{SPE_CHAR[char]}.png")
         else:
             raise ValueError(f"The character '{char}' is not supported.")
+
+    # Check if the image file exists
+    if not os.path.isfile(char_img_path):
+        raise FileNotFoundError(f"Image not found for character '{char}'")
+
+    return char_img_path
 
 # Function to generate an image from text and save it with a given filename
 def generate_image_with_filename(text, filename, font_paths):
@@ -118,27 +122,18 @@ def generate_image_with_filename(text, filename, font_paths):
         img_height = None
         char_images = {}
         img_path = os.path.join(os.path.expanduser("~/Desktop"), filename)
-        
+
         # Iterate through each character in the input text
         for char in text:
             if char == ' ':
                 # Create a transparent space if the character is a space
                 char_img = Image.new('RGBA', (SPACE_WIDTH, 1), (0, 0, 0, 0))
             else:
-                try:
-                    # Attempt to get the image path for the character
-                    char_img_path = get_character_image_path(char, font_paths)
-                    
-                    # Open and convert the character image to RGBA format
-                    with Image.open(char_img_path) as char_img:
-                        char_img = char_img.convert('RGBA')
+                char_img_path = get_character_image_path(char, font_paths)
 
-                except FileNotFoundError:
-                    # Handle the case where the character image is not found
-                    return None, f"Image not found for character '{char}'"
-                except Exception as e:
-                    # Handle other exceptions that may occur during image processing
-                    return None, f"An error occurred for character '{char}': {e}"
+                # Open and convert the character image to RGBA format
+                with Image.open(char_img_path) as char_img:
+                    char_img = char_img.convert('RGBA')
 
             # Store the character image in a dictionary
             char_images[char] = char_img
@@ -148,14 +143,14 @@ def generate_image_with_filename(text, filename, font_paths):
 
         # Create a list of tuples, each containing the character image and its width
         chars = [(char_images[char], SPACE_WIDTH if char == ' ' else char_images[char].size[0]) for char in text]
-        
+
         # Calculate the total width of the final image
         total_width = sum(char_width for _, char_width in chars)
-        
+
         # Create an empty RGBA image with the calculated dimensions
         img = Image.new('RGBA', (total_width, img_height), (0, 0, 0, 0))
         x = 0
-        
+
         # Paste each character image onto the final image
         for char_img, char_width in chars:
             img.paste(char_img, (x, 0), char_img)
@@ -163,16 +158,18 @@ def generate_image_with_filename(text, filename, font_paths):
 
         # Save the final image to the specified path
         img.save(img_path)
-        
-        # Return the filename and no error message
-        return filename, None
 
-    # Handle specific exceptions
+        # Return the filename and no error message
+        return filename, None 
+
+        # Handle file not found errors
     except FileNotFoundError as e:
-        return None, f"Image not found for character '{char}': {e}"
-    
-    except (PIL.UnidentifiedImageError, ValueError) as e:
-        return None, f"Error processing character '{char}': {e}"
-    
+        return None, str(e) 
+
+        # Handle image processing errors
+    except (UnidentifiedImageError, ValueError) as e:
+        return None, str(e)
+
+        # Handle other unexpected errors
     except Exception as e:
-        return None, f"An error occurred: {e}"
+        return None, str(e)
