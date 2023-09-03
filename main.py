@@ -32,7 +32,7 @@ VALID_COLORS_BY_FONT = {
 # User input loop to select a font and color
 while True:
     try:
-        font = int(input("Choose a font from 1 to 5 (Refer to EXAMPLE.md for Font Preview) : "))
+        font = int(input("Choose a font from 1 to 5 (Refer to EXAMPLE.md for Font Preview): "))
 
         if font in VALID_COLORS_BY_FONT:
             valid_colors = VALID_COLORS_BY_FONT[font]

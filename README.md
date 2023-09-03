@@ -2,7 +2,7 @@
 
 Create images with the iconic Metal Slug font style! Easily transform your text into visually appealing images reminiscent of the Metal Slug arcade game series. This tool allows you to generate images with a wide range of characters, numbers, and symbols.
 
-#### **Note:** The terminal-based version of the program is now stable and recommended for use. Please be aware that the web app is no longer actively maintained, and it might be down at anytime. However, you can still access it if preferred. The terminal version also offers a wider selection of fonts than the web app.
+#### **Note:** The web app is no longer actively maintained, and it might be down at any time. However, if someone cannot use the terminal-based version, I may consider working on it again in the future.
 
 ## Table of Contents
 - [Features](#features)
