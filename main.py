@@ -73,36 +73,13 @@ def get_character_image_path(char, font_paths):
     else:
         # Special characters mapping
         SPE_CHAR = {
-            '!': 'Exclamation',
-            '?': 'Question',
-            "'": 'Apostrophe',
-            '*': 'Asterisk',
-            ')': 'Bracket-Left',
-            '}': 'Bracket-Left-2',
-            ']': 'Bracket-Left-3',
-            '(': 'Bracket-Right',
-            '{': 'Bracket-Right-2',
-            '[': 'Bracket-Right-3',
-            '^': 'Caret',
-            ':': 'Colon',
-            '$': 'Dollar',
-            '=': 'Equals',
-            '>': 'Greater-than',
-            '-': 'Hyphen',
-            '∞': 'Infinity',
-            '<': 'Less-than',
-            '#': 'Number',
-            '%': 'Percent',
-            '.': 'Period',
-            '+': 'Plus',
-            '"': 'Quotation',
-            ';': 'Semicolon',
-            '/': 'Slash',
-            '~': 'Tilde',
-            '_': 'Underscore',
-            '|': 'Vertical-bar',
-            ',': 'Comma',
-            '&': 'Punctuation',
+            '!': 'Exclamation', '?': 'Question', "'": 'Apostrophe', '*': 'Asterisk',
+            ')': 'Bracket-Left', '}': 'Bracket-Left-2', ']': 'Bracket-Left-3',
+            '(': 'Bracket-Right', '{': 'Bracket-Right-2', '[': 'Bracket-Right-3',
+            '^': 'Caret', ':': 'Colon', '$': 'Dollar', '=': 'Equals', '>': 'Greater-than',
+            '-': 'Hyphen', '∞': 'Infinity', '<': 'Less-than', '#': 'Number', '%': 'Percent',
+            '.': 'Period', '+': 'Plus', '"': 'Quotation', ';': 'Semicolon', '/': 'Slash',
+            '~': 'Tilde', '_': 'Underscore', '|': 'Vertical-bar', ',': 'Comma', '&': 'Ampersand',
         }
         if char in SPE_CHAR:
             char_img_path = os.path.join(SYMBOLS_FOLDER, f"{SPE_CHAR[char]}.png")
@@ -160,7 +137,7 @@ def generate_image_with_filename(text, filename, font_paths):
         img.save(img_path)
 
         # Return the filename and no error message
-        return filename, None 
+        return filename, None
 
         # Handle file not found errors
     except FileNotFoundError as e:
