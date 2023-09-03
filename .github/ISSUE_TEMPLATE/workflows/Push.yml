@@ -1,0 +1,51 @@
+name: Notify Discord on Push or Pull Request
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  notify-discord:
+    runs-on: ubuntu-latest
+
+    env:
+      DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+
+    steps:
+      - name: Validate Secrets
+        id: check_secrets
+        run: |
+          if [[ -z "$DISCORD_WEBHOOK_URL" ]]; then
+            echo "ERROR: Secret DISCORD_WEBHOOK_URL not provided"
+            exit 1
+          fi
+
+      - name: Send Discord Message
+        if: steps.check_secrets.outputs.result == 'success'
+        run: |
+          TIMESTAMP=$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)
+          LONG_DATE=$(date -u +"%A, %B %-d, %Y at %T")
+          curl -X POST -H "Content-Type: application/json" \
+            -d '{
+                  "embeds": [
+                    {
+                      "title": "GitHub Event",
+                      "description": "A new event has occurred on the repository.",
+                      "color": 3447003,
+                      "fields": [
+                        {
+                          "name": "Event Type",
+                          "value": "'"$GITHUB_EVENT_NAME"'"
+                        },
+                        {
+                          "name": "Event Action",
+                          "value": "'"$GITHUB_EVENT_ACTION"'"
+                        }
+                      ],
+                      "footer": {
+                        "text": "Occurred: ${LONG_DATE}"
+                      }
+                    }
+                  ]
+                }' \
+            $DISCORD_WEBHOOK_URL
