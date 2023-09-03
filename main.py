@@ -18,6 +18,8 @@ def generate_filename(user_input):
     timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
     sanitized_input = '-'.join(filter(str.isalnum, user_input.split()))
     filename = f"{sanitized_input}-{timestamp}.png"
+    if len(filename) > 255:
+        filename = f"{timestamp}.png"
     return filename
 
 # Valid color options for each font
