@@ -1,3 +1,4 @@
+# Import necessary libraries
 import sys
 import logging
 from main import generate_filename, generate_image_with_filename, get_font_paths, font, color
@@ -15,7 +16,7 @@ def display_intro_message():
 
 # Get user input for the text they want to generate
 def get_user_input():
-    return input("Enter the text you want to generate (type 'exit' to quit): ")
+    return input("Enter the text you want to generate: ")
 
 # Generate an image from the user's text and display it or an error message
 def generate_and_display_image(text):
@@ -23,6 +24,8 @@ def generate_and_display_image(text):
         if text.lower() == 'exit':
             print("Closing...")
             sys.exit(0)
+
+        print("Generating the image. Please wait...")
 
         # Generate a filename based on the user's input
         filename = generate_filename(text)
@@ -37,11 +40,11 @@ def generate_and_display_image(text):
             print(f"Error: {error_message}")
             logging.error(error_message)
         else:
-            print(f"Successfully generated and saved: {img_path}")
+            print(f"Image successfully generated and saved as: {img_path}")
     except Exception as e:
         error_message = f"An error occurred: {e}"
         print(error_message)
-        logging.error(error_message, exc_info=True)
+        logging.exception(error_message)
 
 # The main function that orchestrates the program
 def main():
