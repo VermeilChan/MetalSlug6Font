@@ -51,7 +51,9 @@ def get_character_image_path(char, font_paths):
             '-': 'Hyphen', '∞': 'Infinity', '<': 'Less-than', '#': 'Number', '%': 'Percent',
             '.': 'Period', '+': 'Plus', '"': 'Quotation', ';': 'Semicolon', '/': 'Slash',
             '~': 'Tilde', '_': 'Underscore', '|': 'Vertical-bar', ',': 'Comma', '&': 'Ampersand',
-            '♥': 'Heart', '©': 'Copyright',
+            '♥': 'Heart', '©': 'Copyright', '⛶': 'Square', 'Ⅰ': 'One', 'Ⅱ': 'Two', 'Ⅲ': 'Three',
+            'Ⅳ': 'Four', 'Ⅴ': 'Five', '◀': 'Left', '▲': 'Up', '▶': 'Right', '▼': 'Down',
+            '★': 'Star', '⋆': 'Star-2', '☞': 'Hand', '¥': 'Yen', '♪': 'Musical-Note', '︷': 'Up-Arrow'
         }
         if char in SPE_CHAR:
             char_img_path = os.path.join(SYMBOLS_FOLDER, f"{SPE_CHAR[char]}.png")
