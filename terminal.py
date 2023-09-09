@@ -8,7 +8,7 @@ from main import generate_filename, generate_image_with_filename, get_font_paths
 sys.dont_write_bytecode = True
 
 # Initialize logging
-logging.basicConfig(filename='app.log', level=logging.ERROR, format='%(asctime)s - %(levelname)s: %(message)s')
+logging.basicConfig(filename='app.log', level=logging.INFO, format='%(asctime)s - %(levelname)s: %(message)s')
 
 # Display an introductory message to the user
 def display_intro_message():
@@ -39,6 +39,7 @@ def select_font_and_color():
                 color = input("Enter the color you want to use: ")
 
                 if color in valid_colors:
+                    logging.info(f"Chosen Font: {font}, Chosen Color: {color}")
                     return font, color
                 else:
                     print("Invalid color. Please choose a valid color.")
@@ -56,7 +57,7 @@ def generate_and_display_image(text, font, color):
             print("Closing...")
             sys.exit(0)
 
-        print("Generating the image. Please wait...")
+        print(f"Generating the image for Text: '{text}', Font: {font}, Color: {color}. Please wait...")
 
         # Generate a filename based on the user's input
         filename = generate_filename(text)
@@ -72,6 +73,7 @@ def generate_and_display_image(text, font, color):
             logging.error(error_message)
         else:
             print(f"Image successfully generated and saved as: {img_path}")
+            logging.info(f"Generated Image Path: {img_path}")
     except Exception as e:
         error_message = f"An error occurred: {e}"
         print(error_message)
@@ -80,9 +82,10 @@ def generate_and_display_image(text, font, color):
 # The main function that orchestrates the program
 def main():
     display_intro_message()
-
+    
+    font, color = select_font_and_color()  # Ask for font and color once at the beginning
+    
     while True:
-        font, color = select_font_and_color()
         text = get_user_input()
         generate_and_display_image(text, font, color)
 
