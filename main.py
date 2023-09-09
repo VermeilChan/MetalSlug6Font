@@ -1,6 +1,7 @@
 # Import necessary libraries
 import os
 from datetime import datetime
+
 from PIL import Image, UnidentifiedImageError
 
 # Set the width of spaces in the generated image
@@ -20,38 +21,8 @@ def generate_filename(user_input):
         filename = f"{timestamp}.png"
     return filename
 
-# Valid color options for each font
-VALID_COLORS_BY_FONT = {
-    1: ["Blue", "Orange-1", "Orange-2"],
-    2: ["Blue", "Orange-1", "Orange-2"],
-    3: ["Blue", "Orange-1"],
-    4: ["Blue", "Orange-1"],
-    5: ["Orange-1"]
-}
-
-# User input loop to select a font and color
-while True:
-    try:
-        font = int(input("Choose a font from 1 to 5 (Refer to EXAMPLE.md for Font Preview): "))
-
-        if font in VALID_COLORS_BY_FONT:
-            valid_colors = VALID_COLORS_BY_FONT[font]
-            print("Available colors: " + " | ".join(valid_colors))
-            color = input("Enter the color you want to use: ")
-
-            if color in valid_colors:
-                break
-            else:
-                print("Invalid color. Please choose a valid color.")
-
-        else:
-            print("Invalid input. Please choose a font between 1 and 5.")
-
-    except ValueError:
-        print("Invalid input. Please enter a valid number.")
-
 # Function to get paths for font files based on font and color
-def get_font_paths(font , color):
+def get_font_paths(font, color):
     base_path = f'Assets/FONTS/Font-{font}/Font-{font}-{color}'
     return (
         os.path.join(base_path, 'Letters'),
@@ -80,6 +51,7 @@ def get_character_image_path(char, font_paths):
             '-': 'Hyphen', '∞': 'Infinity', '<': 'Less-than', '#': 'Number', '%': 'Percent',
             '.': 'Period', '+': 'Plus', '"': 'Quotation', ';': 'Semicolon', '/': 'Slash',
             '~': 'Tilde', '_': 'Underscore', '|': 'Vertical-bar', ',': 'Comma', '&': 'Ampersand',
+            '♥': 'Heart', '©': 'Copyright',
         }
         if char in SPE_CHAR:
             char_img_path = os.path.join(SYMBOLS_FOLDER, f"{SPE_CHAR[char]}.png")
@@ -139,14 +111,14 @@ def generate_image_with_filename(text, filename, font_paths):
         # Return the filename and no error message
         return filename, None
 
-        # Handle file not found errors
+    # Handle file not found errors
     except FileNotFoundError as e:
-        return None, str(e) 
+        return None, f"File not found: {e}"
 
-        # Handle image processing errors
+    # Handle image processing errors
     except (UnidentifiedImageError, ValueError) as e:
-        return None, str(e)
+        return None, f"Image processing error: {e}"
 
-        # Handle other unexpected errors
+    # Handle other unexpected errors
     except Exception as e:
-        return None, str(e)
+        return None, f"An unexpected error occurred: {e}"

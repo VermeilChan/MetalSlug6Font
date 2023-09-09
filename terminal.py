@@ -1,7 +1,8 @@
 # Import necessary libraries
 import sys
 import logging
-from main import generate_filename, generate_image_with_filename, get_font_paths, font, color
+
+from main import generate_filename, generate_image_with_filename, get_font_paths
 
 # Prevent the generation of bytecode files (.pyc)
 sys.dont_write_bytecode = True
@@ -16,10 +17,40 @@ def display_intro_message():
 
 # Get user input for the text they want to generate
 def get_user_input():
-    return input("Enter the text you want to generate: ")
+    return input("Enter the text you want to generate (type 'exit' to close): ")
+
+# Get user input for font and color selection
+def select_font_and_color():
+    VALID_COLORS_BY_FONT = {
+        1: ["Blue", "Orange-1", "Orange-2"],
+        2: ["Blue", "Orange-1", "Orange-2"],
+        3: ["Blue", "Orange-1"],
+        4: ["Blue", "Orange-1"],
+        5: ["Orange-1"]
+    }
+
+    while True:
+        try:
+            font = int(input("Choose a font from 1 to 5 (Refer to EXAMPLE.md for Font Preview): "))
+
+            if font in VALID_COLORS_BY_FONT:
+                valid_colors = VALID_COLORS_BY_FONT[font]
+                print("Available colors: " + " | ".join(valid_colors))
+                color = input("Enter the color you want to use: ")
+
+                if color in valid_colors:
+                    return font, color
+                else:
+                    print("Invalid color. Please choose a valid color.")
+
+            else:
+                print("Invalid input. Please choose a font between 1 and 5.")
+
+        except ValueError:
+            print("Invalid input. Please enter a valid number.")
 
 # Generate an image from the user's text and display it or an error message
-def generate_and_display_image(text):
+def generate_and_display_image(text, font, color):
     try:
         if text.lower() == 'exit':
             print("Closing...")
@@ -51,8 +82,9 @@ def main():
     display_intro_message()
 
     while True:
+        font, color = select_font_and_color()
         text = get_user_input()
-        generate_and_display_image(text)
+        generate_and_display_image(text, font, color)
 
 if __name__ == "__main__":
     main()
