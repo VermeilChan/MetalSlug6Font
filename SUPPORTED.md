@@ -14,15 +14,12 @@ Here you can find a comprehensive list of letters, numbers, and symbols supporte
 Font 1 provides support for a wide range of characters, including:
 
 ### Letters
-
 - Lowercase and Uppercase Letters
 
 ### Numbers
-
 - Numerals from 0 to 9
 
 ### Symbols
-
 - Comma ( , )
 - Asterisk ( * )
 - Braces - `{}`, `{}`, `()`
@@ -47,23 +44,34 @@ Font 1 provides support for a wide range of characters, including:
 - Tilde ( ~ )
 - Underscore ( _ )
 - Vertical Bar ( | )
+- Yen ( ¥ )
+- Square ( ⛶ )
+- Copyright ( © )
+- Heart ( ♥ )
+- Up ( ▲ )
+- Down ( ▼ )
+- Left ( ◀ )
+- Right ( ▶ )
+- Mini-Star ( ⋆ )
+- Star ( ★ )
+- Hand ( ☞ )
+
 ---
+
 ## Font 2 Support
 
 Font 2 provides support for a wide range of characters, including:
 
 ### Letters
-
 - Lowercase and Uppercase Letters
 
 ### Numbers
-
 - Numerals from 0 to 9
 
 ### Symbols
-
 - Comma ( , )
 - Equals ( = )
+- Braces - ︷
 - Exclamation Mark ( ! )
 - Hyphen ( - )
 - Period ( . )
@@ -71,21 +79,26 @@ Font 2 provides support for a wide range of characters, including:
 - Ampersand ( & )
 - Question Mark ( ? )
 - Slash ( / )
+- Musical Note ( ♪ )
+- One ( Ⅰ )
+- Two ( Ⅱ )
+- Three ( Ⅲ )
+- Four ( Ⅳ )
+- Five ( Ⅴ )
+
+---
 
 ## Font 3 Support
 
 Font 3 provides support for a wide range of characters, including:
 
 ### Letters
-
 - Lowercase and Uppercase Letters
 
 ### Numbers
-
 - Numerals from 0 to 9
 
 ### Symbols
-
 - Apostrophe ( ' )
 - Braces - `{}`, `{}`, `()`
 - Colon ( : )
@@ -103,21 +116,31 @@ Font 3 provides support for a wide range of characters, including:
 - Slash ( / )
 - Underscore ( _ )
 - Vertical Bar ( | )
+- Yen ( ¥ )
+- Square ( ⛶ )
+- Copyright ( © )
+- Heart ( ♥ )
+- Up ( ▲ )
+- Down ( ▼ )
+- Left ( ◀ )
+- Right ( ▶ )
+- Mini-Star ( ⋆ )
+- Star ( ★ )
+- Hand ( ☞ )
+
+---
 
 ## Font 4 Support
 
 Font 4 provides support for a wide range of characters, including:
 
 ### Letters
-
 - Lowercase and Uppercase Letters
 
 ### Numbers
-
 - Numerals from 0 to 9
 
 ### Symbols
-
 - Apostrophe ( ' )
 - Asterisk ( * )
 - Braces - `{}`, `{}`, `()`
@@ -141,21 +164,31 @@ Font 4 provides support for a wide range of characters, including:
 - Tilde ( ~ )
 - Underscore ( _ )
 - Vertical Bar ( | )
+- Yen ( ¥ )
+- Square ( ⛶ )
+- Copyright ( © )
+- Heart ( ♥ )
+- Up ( ▲ )
+- Down ( ▼ )
+- Left ( ◀ )
+- Right ( ▶ )
+- Mini-Star ( ⋆ )
+- Star ( ★ )
+- Hand ( ☞ )
+
+---
 
 ## Font 5 Support
 
 Font 5 provides support for characters, including:
 
 ### Letters
-
 - Uppercase Letters
 
 ### Numbers
-
 - Numerals from 1 to 9
 
 ### Symbols
-
 - Exclamation Mark ( ! )
 - Question Mark ( ? )
 
