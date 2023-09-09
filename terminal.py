@@ -34,9 +34,9 @@ def select_font_and_color():
             font = int(input("Choose a font from 1 to 5 (Refer to EXAMPLE.md for Font Preview): "))
 
             if font in VALID_COLORS_BY_FONT:
-                valid_colors = VALID_COLORS_BY_FONT[font]
+                valid_colors = [color.lower() for color in VALID_COLORS_BY_FONT[font]]
                 print("Available colors: " + " | ".join(valid_colors))
-                color = input("Enter the color you want to use: ")
+                color = input("Enter the color you want to use: ").lower()
 
                 if color in valid_colors:
                     logging.info(f"Chosen Font: {font}, Chosen Color: {color}")
@@ -56,8 +56,6 @@ def generate_and_display_image(text, font, color):
         if text.lower() == 'exit':
             print("Closing...")
             sys.exit(0)
-
-        print(f"Generating the image for Text: '{text}', Font: {font}, Color: {color}. Please wait...")
 
         # Generate a filename based on the user's input
         filename = generate_filename(text)
@@ -83,7 +81,8 @@ def generate_and_display_image(text, font, color):
 def main():
     display_intro_message()
     
-    font, color = select_font_and_color()  # Ask for font and color once at the beginning
+    # Ask for font and color once at the beginning
+    font, color = select_font_and_color() 
     
     while True:
         text = get_user_input()

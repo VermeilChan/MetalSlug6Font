@@ -4,8 +4,9 @@ from datetime import datetime
 
 from PIL import Image, UnidentifiedImageError
 
-# Set the width of spaces in the generated image
+# Constant
 SPACE_WIDTH = 30
+MAX_FILENAME_LENGTH = 255
 
 # Custom exception class for color validation
 class ColorError(Exception):
@@ -17,7 +18,7 @@ def generate_filename(user_input):
     timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
     sanitized_input = '-'.join(filter(str.isalnum, user_input.split()))
     filename = f"{sanitized_input}-{timestamp}.png"
-    if len(filename) > 255:
+    if len(filename) > MAX_FILENAME_LENGTH:
         filename = f"{timestamp}.png"
     return filename
 
