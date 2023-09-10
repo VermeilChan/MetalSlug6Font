@@ -9,12 +9,14 @@ SPACE_WIDTH = 30
 MAX_FILENAME_LENGTH = 255
 DESKTOP_PATH = os.path.expanduser("~/Desktop")
 
-# Function to generate a filename based on user input and current timestamp
+# Function to generate a filename based on user input and timestamp
 def generate_filename(user_input):
     timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
     sanitized_input = '-'.join(filter(str.isalnum, user_input.split()))
     filename = f"{sanitized_input}-{timestamp}.png"
-    return filename[:MAX_FILENAME_LENGTH]  # Limit the filename length
+    if len(filename) > MAX_FILENAME_LENGTH:
+        filename = f"{timestamp}.png"
+    return filename
 
 # Function to get paths to font assets (letters, numbers, symbols) based on font and color
 def get_font_paths(font, color):
