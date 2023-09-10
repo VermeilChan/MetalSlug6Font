@@ -70,11 +70,13 @@ def generate_image_with_filename(text, filename, font_paths):
 
         # Iterate through each character in the input text
         for char in text:
-            char_img = (
-                Image.new('RGBA', (SPACE_WIDTH, 1), (0, 0, 0, 0))
-                if char == ' '
-                else Image.open(get_character_image_path(char, font_paths)).convert('RGBA')
-            )
+            if char == ' ':
+                char_img = Image.new('RGBA', (SPACE_WIDTH, 1), (0, 0, 0, 0))
+            else:
+                char_img_path = get_character_image_path(char, font_paths)
+                if char_img_path is None:
+                    raise FileNotFoundError(f"Image not found for character '{char}'")
+                char_img = Image.open(char_img_path).convert('RGBA')
 
             char_images[char] = char_img
             img_height = char_img.size[1] if img_height is None else img_height
@@ -96,7 +98,7 @@ def generate_image_with_filename(text, filename, font_paths):
         return filename, None
 
     except FileNotFoundError as e:
-        return None, f"Error: Image not found for character '{e.filename}'"
+        return None, str(e)
 
     except UnidentifiedImageError:
         return None, "Error: Unsupported image format"
