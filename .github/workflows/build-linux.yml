@@ -54,5 +54,5 @@ jobs:
     - name: Upload artifacts
       uses: actions/upload-artifact@v3.1.3
       with:
-        name: MSFONT  # Specify the name of the artifact
-        path: dist/MSFONT  # Specify the path to the artifact files
+        name: MSFONT
+        path: dist/MSFONT
