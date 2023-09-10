@@ -12,9 +12,9 @@ Follow these steps to use MSFONT:
 
 ##  *Pre-Release*
    
-   ![Program Download](Assets\MARKDOWN\GUIDE\GITHUB-ACTIONS-SELECT.png)
+   ![Program Download](Assets/MARKDOWN/GUIDE/GITHUB-ACTIONS-SELECT.png)
 
-   ![Program Download](Assets\MARKDOWN\GUIDE\GITHUB-ACTIONS-DOWNLOAD.png)
+   ![Program Download](Assets/MARKDOWN/GUIDE/GITHUB-ACTIONS-DOWNLOAD.png)
 
 2. **Installation and Setup**
    - After installing it, navigate to your downloads and locate the folder named `MSFONT`.
