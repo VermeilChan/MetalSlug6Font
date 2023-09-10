@@ -4,8 +4,17 @@ Follow these steps to use MSFONT:
 
 1. **Download the Program**
    - Download the latest release of the program from the [Releases Page](https://github.com/VermeilChan/MetalSlugFont/releases).
+   - You can also consider trying the pre-release version, but you will need a GitHub account. If you don't have one, you can use the stable version instead [GitHub Actions](https://github.com/VermeilChan/MetalSlugFont/actions).
+
+##  *Stable Release*
 
    ![Program Download](Assets/MARKDOWN/GUIDE/PROGRAM-DOWNLOAD.png)
+
+##  *Pre-Release*
+   
+   ![Program Download](Assets\MARKDOWN\GUIDE\GITHUB-ACTIONS-SELECT.png)
+
+   ![Program Download](Assets\MARKDOWN\GUIDE\GITHUB-ACTIONS-DOWNLOAD.png)
 
 2. **Installation and Setup**
    - After installing it, navigate to your downloads and locate the folder named `MSFONT`.
@@ -36,4 +45,6 @@ Follow these steps to use MSFONT:
 ## Need Help?
 If you have any questions or require further assistance, feel free to ask. You can also reach out to me on Discord: `mommy_vermeil`.
 
-![Cat](Assets/MARKDOWN/GUIDE/CAT.png)
+![Cat](Assets/MARKDOWN/GUIDE/CAT-1.png)
+![Cat](Assets/MARKDOWN/GUIDE/CAT-2.png)
+---
