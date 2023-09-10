@@ -20,8 +20,5 @@ Steps to reproduce the behavior:
 2. What color did you choose? '...'
 3. What did you generate? '...'
 
-**Version Information**
-If relevant, specify the version of the software you are using.
-
 **Additional Context**
 Add any other context about the problem here.
