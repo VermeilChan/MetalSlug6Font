@@ -33,7 +33,8 @@ jobs:
     # Step 4: Convert Windows '.ico' icon to macOS '.icns' icon
     - name: Convert Icon
       run: |
-        convert_icon.sh  # Execute the icon conversion script
+        chmod +x ${{ env.CONVERT_SCRIPT_PATH }}
+        ./${{ env.CONVERT_SCRIPT_PATH }}  # Execute the icon conversion script
       env:
         CONVERT_SCRIPT_PATH: ./convert_icon.sh
 
