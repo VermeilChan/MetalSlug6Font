@@ -1,0 +1,52 @@
+name: Build Python Application
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python-version: [3.7, 3.8, 3.9, 3.10]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4.0.0
+
+      - name: Set up Python
+        uses: actions/setup-python@v4.7.0
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Cache dependencies
+        uses: actions/cache@v3.3.2
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ matrix.python-version }}-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-${{ matrix.python-version }}-
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Build with pyinstaller
+        run: |
+          pyinstaller --onefile main.py
+          pyinstaller --onefile terminal.py
+          mkdir dist/MSFONT
+          cp -r Assets/* dist/MSFONT/
+          cp Assets/ICON/Sv-001.ico dist/
+
+      - name: Archive artifacts
+        uses: actions/upload-artifact@v3.1.3
+        with:
+          name: app-artifacts
+          path: dist/
