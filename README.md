@@ -85,7 +85,7 @@ Ensure that you have Python installed. You can download Python from the official
   sudo pacman -S python3
   ```
 
-**Using the MSFONT**
+## **Using the MSFONT**
 1. Upon running the program, you will be prompted to choose a font.
 2. Choose a font by entering a number from 1 to 5.
 3. Once you've chosen your font, the available color options will depend on your selection.

@@ -9,9 +9,21 @@ jobs:
   build:
     runs-on: windows-latest
 
+    strategy:
+      matrix:
+        python-version: [3.11.5, 3.10.11, 3.9.13]
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4.0.0
+
+    - name: Cache pip packages
+      uses: actions/cache@v3.3.2
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
 
     - name: Update Pip
       run: |
@@ -21,13 +33,16 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4.7.0
       with:
-        python-version: 3.11.5
+        python-version: ${{ matrix.python-version }}
 
     - name: Install PyInstaller
       run: pip install pyinstaller
 
     - name: Build MSFONT
-      run: pyinstaller --noconfirm --onedir --console --icon "Assets\ICON\Sv-001.ico" --name "MSFONT" --add-data "main.py;." --add-data "Assets;Assets/" "terminal.py"
+      run: |
+        pyinstaller --noconfirm --onedir --console --icon "${{ env.ASSET_ICON_PATH }}" --name "MSFONT" --add-data "main.py;." --add-data "Assets;Assets/" "terminal.py"
+      env:
+        ASSET_ICON_PATH: Assets/ICON/Sv-001.ico
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v3.1.3
