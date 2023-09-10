@@ -19,7 +19,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4.7.0
         with:
-          python-version: 3.10
+          python-version: 3
 
       - name: Cache dependencies
         uses: actions/cache@v3.3.2
@@ -27,7 +27,7 @@ jobs:
           path: ~/.cache/pip
           key: ubuntu-pip-3.10-${{ hashFiles('**/requirements.txt') }}
           restore-keys: |
-            ubuntu-pip-3.10-
+            ubuntu-pip-3-
 
       - name: Install dependencies
         run: pip install -r requirements.txt
