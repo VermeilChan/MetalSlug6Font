@@ -9,19 +9,9 @@ jobs:
   build:
     runs-on: windows-latest
 
-    strategy:
-      matrix:
-        python-version: [3.11.5, 3.10.11, 3.9.13]
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v4.0.0
-
-    - name: Cache pip packages
-      uses: actions/cache@v3.3.2
-      with:
-        path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
 
     - name: Update Pip
       run: |
@@ -31,7 +21,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4.7.0
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: 3.9.13
 
     - name: Install PyInstaller
       run: pip install pyinstaller
