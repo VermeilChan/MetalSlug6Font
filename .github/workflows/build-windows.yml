@@ -1,5 +1,5 @@
 # Define the name of the workflow
-name: Build and Upload MSFONT
+name: Build and Upload MSFONT Windows
 
 # Trigger the workflow when code is pushed to the 'experimental' branch
 on:

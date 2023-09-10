@@ -1,5 +1,5 @@
 # Define the name of the workflow
-name: Build and Upload MSFONT
+name: Build and Upload MSFONT Linux
 
 # Trigger the workflow when code is pushed to the 'experimental' branch
 on:
@@ -43,10 +43,10 @@ jobs:
     - name: Install PyInstaller
       run: pip install pyinstaller
 
-    # Step 6: Build the MSFONT application
+    # Step 5: Build the MSFONT application
     - name: Build MSFONT
       run: |
-        pyinstaller --noconfirm --onedir --console --icon "${{ env.ASSET_ICON_PATH }}" --name "MSFONT" --add-data "main.py;." --add-data "Assets;Assets/" "terminal.py"
+          pyinstaller --noconfirm --onedir --console --icon "${{ env.ASSET_ICON_PATH }}" --name "MSFONT" --add-data "main.py:." --add-data "Assets:Assets/" "terminal.py"
       env:
         ASSET_ICON_PATH: Assets/ICON/Sv-001.ico
 
