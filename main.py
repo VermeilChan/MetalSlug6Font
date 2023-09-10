@@ -1,5 +1,7 @@
+# Import necessary libraries
 import os
 from datetime import datetime
+
 from PIL import Image, UnidentifiedImageError
 
 # Constants
@@ -93,7 +95,14 @@ def generate_image_with_filename(text, filename, font_paths):
         img.save(img_path)
         return filename, None
 
-    except (FileNotFoundError, UnidentifiedImageError, ValueError) as e:
-        return None, f"Error: {e}"
+    except FileNotFoundError as e:
+        return None, f"Error: Image not found for character '{e.filename}'"
+
+    except UnidentifiedImageError:
+        return None, "Error: Unsupported image format"
+
+    except ValueError as e:
+        return None, f"Error: Invalid input - {e}"
+
     except Exception as e:
-        return None, f"An unexpected error occurred: {e}"
+        return None, f"An unexpected error occurred: {str(e)}."
