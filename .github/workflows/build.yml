@@ -3,10 +3,10 @@ name: Build Python Application
 on:
   push:
     branches:
-      - master
+      - experimental
   pull_request:
     branches:
-      - master
+      - experimental
 
 jobs:
   build:
