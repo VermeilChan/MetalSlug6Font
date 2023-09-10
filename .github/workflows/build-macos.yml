@@ -30,26 +30,21 @@ jobs:
     - name: Install Pillow
       run: pip install pillow
 
-    # Step 4: Convert Windows '.ico' icon to macOS '.icns' icon
+    # Step 4: Install PyInstaller using pip
+    - name: Install PyInstaller
+      run: pip install pyinstaller
+
+    # Step 5: Convert Windows '.ico' icon to macOS '.icns' icon
     - name: Convert Icon
       run: |
         python -c "from PIL import Image; im = Image.open('Assets/ICON/Sv-001.ico'); im.save('icon.icns')"
       env:
         CONVERT_SCRIPT_PATH: ./convert_icon.sh
 
-    # Step 5: Download and install PyInstaller
-    - name: Install PyInstaller
-      run: |
-        curl -Lo pyinstaller.tar.gz https://github.com/pyinstaller/pyinstaller/releases/download/v4.5/pyinstaller-4.5.tar.gz
-        tar -xzvf pyinstaller.tar.gz
-        cd pyinstaller-4.5
-        python setup.py install
-      shell: bash
-
     # Step 6: Build the MSFONT application
     - name: Build MSFONT
       run: |
-        pyinstaller --noconfirm --onedir --windowed --icon icon.icns --name "MSFONT" --add-data "main.py:." --add-data "Assets:Assets/" "terminal.py"
+        pyinstaller --noconfirm --onedir ---console --icon icon.icns --name "MSFONT" --add-data "main.py:." --add-data "Assets:Assets/" "terminal.py"
       env:
         ASSET_ICON_PATH: Assets/ICON/Sv-001.ico
 
