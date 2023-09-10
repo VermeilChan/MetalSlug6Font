@@ -38,12 +38,9 @@ jobs:
 
     - name: Build MSFONT
       run: |
-        pyinstaller --noconfirm --onedir --console --icon "${{ env.ICON_PATH }}" --name "MSFONT" --add-data "${{ env.MAIN_PY }};." --add-data "${{ env.ASSETS_PATH }};Assets/" "${{ env.TERMINAL_PY }}"
+        pyinstaller --noconfirm --onedir --console --icon "${{ env.ASSET_ICON_PATH }}" --name "MSFONT" --add-data "main.py;." --add-data "Assets;Assets/" "terminal.py"
       env:
-        ASSETS_PATH: Assets
-        ICON_PATH: Assets/ICON/Sv-001.ico
-        MAIN.PY: main.py
-        TERMINAL.PY: terminal.py
+        ASSET_ICON_PATH: Assets/ICON/Sv-001.ico
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v3.1.3
