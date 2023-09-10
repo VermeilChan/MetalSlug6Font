@@ -33,7 +33,7 @@ jobs:
     # Step 4: Convert Windows '.ico' icon to macOS '.icns' icon
     - name: Convert Icon
       run: |
-        python -c "from PIL import Image; im = Image.open('path/to/your/icon.ico'); im.save('icon.icns')"
+        python -c "from PIL import Image; im = Image.open('Assets/ICON/Sv-001.ico'); im.save('icon.icns')"
       env:
         CONVERT_SCRIPT_PATH: ./convert_icon.sh
 
