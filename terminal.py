@@ -96,7 +96,7 @@ def generate_and_display_image(text, font, color):
             logger.info(f"Generated Image Path: '{img_path}'")
 
         # Log chosen font, chosen color, and user input
-        logger.info(f"Chosen Font: {font}, Chosen Color: {color}, User Input: {text}")
+        logger.info(f"Chosen Font: {font}, Chosen Color: {color}, User Input: '{text}'")
 
     except KeyboardInterrupt:
         print("Closing...")

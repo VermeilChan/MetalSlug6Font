@@ -9,11 +9,6 @@ SPACE_WIDTH = 30
 MAX_FILENAME_LENGTH = 255
 DESKTOP_PATH = os.path.expanduser("~/Desktop")
 
-# Custom Exception
-class ColorError(Exception):
-    def __init__(self, *args: object) -> None:
-        super().__init__(*args)
-
 # Function to generate a filename based on user input and current timestamp
 def generate_filename(user_input):
     timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
@@ -63,29 +58,19 @@ def get_character_image_path(char, font_paths):
 
 # Function to generate an image with a given filename and text using provided font assets
 def generate_image_with_filename(text, filename, font_paths):
+    img_height = None
+    char_images = {}
+    img_path = os.path.join(DESKTOP_PATH, filename)
+
     try:
-        img_height = None
-        char_images = {}
-        img_path = os.path.join(DESKTOP_PATH, filename)
-
-        # Iterate through each character in the input text
         for char in text:
-            if char == ' ':
-                char_img = Image.new('RGBA', (SPACE_WIDTH, 1), (0, 0, 0, 0))
-            else:
-                char_img_path = get_character_image_path(char, font_paths)
-                if char_img_path is None:
-                    raise FileNotFoundError(f"Image not found for character '{char}'")
-                char_img = Image.open(char_img_path).convert('RGBA')
-
+            char_img = Image.new('RGBA', (SPACE_WIDTH, 1), (0, 0, 0, 0)) if char == ' ' else Image.open(get_character_image_path(char, font_paths)).convert('RGBA')
             char_images[char] = char_img
             img_height = char_img.size[1] if img_height is None else img_height
 
-        # Create a list of character images and their widths
         chars = [(char_images[char], SPACE_WIDTH if char == ' ' else char_images[char].size[0]) for char in text]
         total_width = sum(char_width for _, char_width in chars)
 
-        # Create a new image and paste the character images onto it
         img = Image.new('RGBA', (total_width, img_height), (0, 0, 0, 0))
         x = 0
 
@@ -93,18 +78,11 @@ def generate_image_with_filename(text, filename, font_paths):
             img.paste(char_img, (x, 0), char_img)
             x += char_width
 
-        # Save the generated image
         img.save(img_path)
         return filename, None
 
-    except FileNotFoundError as e:
+    except (FileNotFoundError, UnidentifiedImageError, ValueError) as e:
         return None, str(e)
-
-    except UnidentifiedImageError:
-        return None, "Error: Unsupported image format"
-
-    except ValueError as e:
-        return None, f"Error: Invalid input - {e}"
 
     except Exception as e:
         return None, f"An unexpected error occurred: {str(e)}."
