@@ -24,8 +24,8 @@ logger.addHandler(log_handler)
 
 # Function to display an introductory message
 def display_intro_message():
-    logger.info("Note: Metal Slug Font style conversion may not be compatible with all fonts.")
-    logger.info("Refer to the SUPPORTED.md file for details.")
+    print("Note: Metal Slug Font style conversion may not be compatible with all fonts.")
+    print("Refer to the SUPPORTED.md file for details.")
 
 # Function to get user input for text to be converted
 def get_user_input():
