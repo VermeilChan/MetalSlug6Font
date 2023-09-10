@@ -21,9 +21,7 @@ jobs:
       uses: actions/cache@v3.3.2
       with:
         path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-        restore-keys: |
-          ${{ runner.os }}-pip-
+        key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
 
     - name: Update Pip
       run: |
@@ -40,9 +38,12 @@ jobs:
 
     - name: Build MSFONT
       run: |
-        pyinstaller --noconfirm --onedir --console --icon "${{ env.ASSET_ICON_PATH }}" --name "MSFONT" --add-data "main.py;." --add-data "Assets;Assets/" "terminal.py"
+        pyinstaller --noconfirm --onedir --console --icon "${{ env.ICON_PATH }}" --name "MSFONT" --add-data "${{ env.MAIN_PY }};." --add-data "${{ env.ASSETS_PATH }};Assets/" "${{ env.TERMINAL_PY }}"
       env:
-        ASSET_ICON_PATH: Assets/ICON/Sv-001.ico
+        ASSETS_PATH: Assets
+        ICON_PATH: Assets/ICON/Sv-001.ico
+        MAIN.PY: main.py
+        TERMINAL.PY: terminal.py
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v3.1.3
