@@ -71,7 +71,7 @@ Font 2 provides support for a wide range of characters, including:
 ### Symbols
 - Comma ( , )
 - Equals ( = )
-- Braces - ︷
+- Braces - ( ︷ )
 - Exclamation Mark ( ! )
 - Hyphen ( - )
 - Period ( . )
