@@ -2,7 +2,7 @@
 
 Create images with the iconic Metal Slug font style! Easily transform your text into visually appealing images reminiscent of the Metal Slug arcade game series. This tool allows you to generate images with a wide range of characters, numbers, and symbols.
 
-#### **Note:** The web app is no longer actively maintained, and it might be down at any time. However, if someone cannot use the terminal-based version, I may consider working on it again in the future.
+#### **Note:** The web app is no longer actively maintained, and it might be down at anytime. However, if someone cannot use the terminal-based version, I may consider working on it again in the future.
 
 ## Table of Contents
 - [Features](#features)
@@ -62,6 +62,8 @@ View examples of available fonts in [EXAMPLE.md](EXAMPLE.md).
 
 ## Requirements
 
+This section outlines the requirements for programmers and contributors who want to work on this project. If you're not planning to code or contribute, you can skip this section.
+
 Ensure that you have Python installed. You can download Python from the official Python website:
 
 - [Python Downloads](https://www.python.org/downloads/)
@@ -83,7 +85,7 @@ Ensure that you have Python installed. You can download Python from the official
   sudo pacman -S python3
   ```
 
-**Using the Metal Slug Font**
+**Using the MSFONT**
 1. Upon running the program, you will be prompted to choose a font.
 2. Choose a font by entering a number from 1 to 5.
 3. Once you've chosen your font, the available color options will depend on your selection.
@@ -104,6 +106,7 @@ This project is licensed under the [MIT License](LICENSE).
 ## Credits
 
 - [Division 六](https://6th-divisions-den.com/)
+- [BinRich](https://discord.com/users/477459550904254464)
 
 ---
 
