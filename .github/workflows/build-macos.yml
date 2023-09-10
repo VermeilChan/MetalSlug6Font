@@ -44,7 +44,7 @@ jobs:
     # Step 6: Build the MSFONT application
     - name: Build MSFONT
       run: |
-        pyinstaller --noconfirm --onedir ---console --icon icon.icns --name "MSFONT" --add-data "main.py:." --add-data "Assets:Assets/" "terminal.py"
+        pyinstaller --noconfirm --onedir --console --icon icon.icns --name "MSFONT" --add-data "main.py:." --add-data "Assets:Assets/" "terminal.py"
       env:
         ASSET_ICON_PATH: Assets/ICON/Sv-001.ico
 
