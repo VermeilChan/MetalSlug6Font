@@ -52,7 +52,7 @@ After pressing 'Enter', the program will generate the stylized text image, which
 
 ![Pre-Release Download](Assets/MARKDOWN/GUIDE/GITHUB-ACTIONS-SELECT.png)
 
-2. Scroll down and download the Artifact.
+2. Scroll down and download the Artifact. You don't need to download 'UPDATER'
 
 ![Pre-Release Download](Assets/MARKDOWN/GUIDE/GITHUB-ACTIONS-DOWNLOAD.png)
 
