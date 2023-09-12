@@ -6,7 +6,6 @@ Create images with the iconic Metal Slug font style! Easily transform your text 
 
 ## Table of Contents
 - [Features](#features)
-- [Supported Characters](#supported-characters)
 - [Preview Fonts](#preview-fonts)
 - [Using MSFONT](#using-msfont)
 - [Contributing](#contributing)
