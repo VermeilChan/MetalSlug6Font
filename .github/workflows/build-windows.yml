@@ -18,7 +18,7 @@ jobs:
     steps:
     # Step 1: Checkout the code from the repository
     - name: Checkout code
-      uses: actions/checkout@v4.0.0
+      uses: actions/checkout@v2
 
     # Step 2: Cache Python pip packages
     - name: Get pip cache dir
@@ -28,7 +28,7 @@ jobs:
       shell: cmd
 
     - name: Cache pip packages
-      uses: actions/cache@v3.3.2
+      uses: actions/cache@v2
       with:
         path: ${{ runner.temp }}/pip-cache
         key: Windows-pip-${{ hashFiles('**/requirements.txt') }}
@@ -37,7 +37,7 @@ jobs:
 
     # Step 3: Set up the Python environment
     - name: Set up Python
-      uses: actions/setup-python@v4.7.0
+      uses: actions/setup-python@v2
       with:
         # Specify the Python version to be used
         python-version: 3.11.5
@@ -54,10 +54,10 @@ jobs:
     - name: Check and Update Python packages
       run: |
         # Check for outdated packages
-        python -m pip list --outdated --format=freeze
+        python -m pip list --outdated
 
         # Update outdated packages
-        python -m pip install --upgrade $(python -m pip list --outdated --format=freeze | cut -d'=' -f1)
+        python -m pip install --upgrade $(python -m pip list --outdated | awk '{print $1}' | tail -n +3)
       working-directory: ${{ github.workspace }}
 
     # Step 6: Build the MSFONT application using PyInstaller
