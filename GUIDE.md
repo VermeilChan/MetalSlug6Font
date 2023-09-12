@@ -7,20 +7,25 @@ Follow these steps to get started with MSFONT and create Metal Slug-style text:
 ### Stable Release
 
 1. Download the latest stable release of MSFONT from the [Releases Page](https://github.com/VermeilChan/MetalSlugFont/releases).
-2. ![Stable Release Download](Assets/MARKDOWN/GUIDE/PROGRAM-DOWNLOAD.png)
 
-### Pre-Release (Portable Version)
+![Stable Release Download](Assets/MARKDOWN/GUIDE/PROGRAM-DOWNLOAD.png)
+
+### Pre-Release (Portable Version) Only If You Have A GitHib Account
 
 1. Click on the latest workflow on the [GitHub Actions Page](https://github.com/VermeilChan/MetalSlugFont/actions).
-2. ![Pre-Release Download](Assets/MARKDOWN/GUIDE/GITHUB-ACTIONS-SELECT.png)
-3. Scroll down and download the Artifact.
-4. ![Pre-Release Download](Assets/MARKDOWN/GUIDE/GITHUB-ACTIONS-DOWNLOAD.png)
+
+![Pre-Release Download](Assets/MARKDOWN/GUIDE/GITHUB-ACTIONS-SELECT.png)
+
+2. Scroll down and download the Artifact.
+
+![Pre-Release Download](Assets/MARKDOWN/GUIDE/GITHUB-ACTIONS-DOWNLOAD.png)
 
 ## 2. Installation and Setup (Stable Release)
 
 1. After downloading, locate the folder named `MSFONT` in your downloads.
 2. Inside the `MSFONT` folder, run the `MSFONT.exe` executable.
-3. ![Run MSFONT](Assets/MARKDOWN/GUIDE/PROGRAM.png)
+
+![Run MSFONT](Assets/MARKDOWN/GUIDE/PROGRAM.png)
 
 ## 3. Selecting a Font
 
