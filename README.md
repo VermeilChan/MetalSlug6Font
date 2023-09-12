@@ -16,14 +16,10 @@ Create images with the iconic Metal Slug font style! Easily transform your text 
 ## Features
 
 - Convert text into captivating images with the iconic Metal Slug font style.
-- Support for uppercase and lowercase alphabets (A-Z, a-z), numbers (0-9), and symbols.
-  For more information, see [Supported Characters](#supported-characters).
+- Support for Uppercase and Lowercase Alphabets (A-Z, a-z), Numbers (0-9), and Symbols.
+  For more information, see [SUPPORTED.md](SUPPORTED.md).
 
-**Note:** The MetalSlugFont style may not be compatible with all fonts. Some fonts may lack certain features such as uppercase and lowercase letters (A-Z, a-z), numbers (0-9), or symbols.
-
-## Supported Characters
-
-Explore the comprehensive list of supported characters in [SUPPORTED.md](SUPPORTED.md).
+**Note:** The MetalSlugFont style may not be compatible with all fonts. Some fonts may lack certain features such as Uppercase and Lowercase Letters (A-Z, a-z), Numbers (0-9), or Symbols.
 
 ## Preview Fonts
 
