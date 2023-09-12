@@ -94,4 +94,4 @@ jobs:
         # Specify the name for the uploaded artifact
         name: UPDATER
         # Specify the path where the artifacts are located
-        path: dist/UPDATER
+        path: dist
