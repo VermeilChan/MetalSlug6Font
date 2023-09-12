@@ -30,7 +30,7 @@ def check_for_updates():
         
         if latest_version == CURRENT_VERSION:
             print(f"You are currently running version {CURRENT_VERSION}, which is up to date.")
-            logging.info(f"Running version {CURRENT_VERSION}. No updates available.")
+            logging.info(f"Running version {CURRENT_VERSION}. No updates are available.")
         else:
             while True:
                 update_confirmation = input(f"You are currently running version {CURRENT_VERSION}. Do you want to update to version {latest_version}? (yes/no): ").strip().lower()
@@ -156,7 +156,7 @@ def download_update(download_url, latest_version):
         print("Go to your downloads folder and reinstall the program.")
         print("Before that, remove the 'MSFONT' folder.\n")
     except requests.exceptions.RequestException as e:
-        handle_error("Failed to download update. Please check your internet connection.", e)
+        handle_error("Failed to download the update. Please check your internet connection.", e)
     except Exception as e:
         handle_error("An unexpected error occurred while downloading the update.", e)
 
@@ -167,9 +167,9 @@ def log_update(version):
             with open(LOG_FILE, 'a') as log:
                 log.write(f"Updated to version {version}\n")
         else:
-            print("Log file is not writable. Update could not be logged.")
+            print("The log file is not writable. The update could not be logged.")
     except Exception as e:
-        handle_error("Failed to log update.", e)
+        handle_error("Failed to log the update.", e)
 
 # Function to check if the log file exists and is writable
 def is_log_file_writable():
