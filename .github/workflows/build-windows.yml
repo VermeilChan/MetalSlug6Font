@@ -76,7 +76,7 @@ jobs:
         pyinstaller --noconfirm --onefile --console --icon "${{ env.UPDATER_ICON_PATH }}" --name "UPDATER" "auto_updater.py"
       env:
         # Define an environment variable for the path to the UPDATER application icon
-        UPDATER_ICON_PATH: Assets/ICON/Sv-001-UPDATER.ico"
+        UPDATER_ICON_PATH: Assets/ICON/Sv-001-UPDATER.ico
 
     # Step 8: Upload the built artifacts for MSFONT
     - name: Upload MSFONT artifacts
