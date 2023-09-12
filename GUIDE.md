@@ -1,4 +1,4 @@
-# How to Use MSFONT
+# How to Use MSFONT (Stable)
 
 Follow these steps to get started with MSFONT and create Metal Slug-style text:
 
@@ -9,16 +9,6 @@ Follow these steps to get started with MSFONT and create Metal Slug-style text:
 1. Download the latest stable release of MSFONT from the [Releases Page](https://github.com/VermeilChan/MetalSlugFont/releases).
 
 ![Stable Release Download](Assets/MARKDOWN/GUIDE/PROGRAM-DOWNLOAD.png)
-
-### Pre-Release (Portable Version) Only If You Have A GitHib Account
-
-1. Click on the latest workflow on the [GitHub Actions Page](https://github.com/VermeilChan/MetalSlugFont/actions).
-
-![Pre-Release Download](Assets/MARKDOWN/GUIDE/GITHUB-ACTIONS-SELECT.png)
-
-2. Scroll down and download the Artifact.
-
-![Pre-Release Download](Assets/MARKDOWN/GUIDE/GITHUB-ACTIONS-DOWNLOAD.png)
 
 ## 2. Installation and Setup (Stable Release)
 
@@ -51,6 +41,25 @@ Follow these steps to get started with MSFONT and create Metal Slug-style text:
 ## Viewing the Result
 
 After pressing 'Enter', the program will generate the stylized text image, which should appear on your desktop.
+
+---
+
+# How to Use MSFONT (Pre-Release) Only If You Have A GitHib Account
+
+### Pre-Release (Portable Version)
+
+1. Click on the latest workflow on the [GitHub Actions Page](https://github.com/VermeilChan/MetalSlugFont/actions).
+
+![Pre-Release Download](Assets/MARKDOWN/GUIDE/GITHUB-ACTIONS-SELECT.png)
+
+2. Scroll down and download the Artifact.
+
+![Pre-Release Download](Assets/MARKDOWN/GUIDE/GITHUB-ACTIONS-DOWNLOAD.png)
+
+## 2. Installation and Setup (Pre-Release)
+
+1. Once you have downloaded the file, find the ZIP archive named `MSFONT` in your Downloads folder.
+2. Extract the ZIP file and locate the `MSFONT` folder. Inside this folder, run the `MSFONT.exe` executable.
 
 ## Need Help?
 
