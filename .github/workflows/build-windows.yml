@@ -20,14 +20,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4.0.0
 
-    # Step 2: Set up the Python environment
-    - name: Set up Python
-      uses: actions/setup-python@v4.7.0
-      with:
-        # Specify the Python version to be used
-        python-version: 3.11.5
-
-    # Step 3: Cache Python pip packages
+    # Step 2: Cache Python pip packages
     - name: Get pip cache dir
       id: pip-cache
       run: |
@@ -38,9 +31,16 @@ jobs:
       uses: actions/cache@v3.3.2
       with:
         path: ${{ runner.temp }}/pip-cache
-        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        key: Windows-pip-${{ hashFiles('**/requirements.txt') }}
         restore-keys: |
-          ${{ runner.os }}-pip-
+          Windows-pip-
+
+    # Step 3: Set up the Python environment
+    - name: Set up Python
+      uses: actions/setup-python@v4.7.0
+      with:
+        # Specify the Python version to be used
+        python-version: 3.11.5
 
     # Step 4: Install Python dependencies from requirements.txt
     - name: Install Python dependencies
@@ -61,7 +61,7 @@ jobs:
 
     # Step 6: Upload the built artifacts
     - name: Upload artifacts
-      uses: actions/upload-artifact@v3.1.3
+      uses: actions/upload-artifact@v2
       with:
         # Specify the name for the uploaded artifact
         name: MSFONT
