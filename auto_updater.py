@@ -134,4 +134,13 @@ def handle_error(message, error):
     print(f"An error occurred: {error}")
 
 if __name__ == '__main__':
-    check_for_updates()
+    while True:
+        user_input = input("Type 'update' to check for updates or 'exit' to exit: ").strip().lower()
+        
+        if user_input == 'update':
+            check_for_updates()
+        elif user_input == 'exit':
+            print("Exiting the program.")
+            break
+        else:
+            print("Invalid input. Please type 'update' to check for updates or 'exit' to exit.")
