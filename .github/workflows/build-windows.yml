@@ -50,7 +50,17 @@ jobs:
         pip install -r requirements.txt
       working-directory: ${{ github.workspace }}
 
-    # Step 5: Build the MSFONT application using PyInstaller
+    # Step 5: Check and update outdated Python packages
+    - name: Check and Update Python packages
+      run: |
+        # Check for outdated packages
+        python -m pip list --outdated --format=freeze
+
+        # Update outdated packages
+        python -m pip install --upgrade $(python -m pip list --outdated --format=freeze | cut -d'=' -f1)
+      working-directory: ${{ github.workspace }}
+
+    # Step 6: Build the MSFONT application using PyInstaller
     - name: Build MSFONT
       run: |
         # Use PyInstaller to build the application with specified options
@@ -59,7 +69,7 @@ jobs:
         # Define an environment variable for the path to the application icon
         ASSET_ICON_PATH: Assets/ICON/Sv-001.ico
 
-    # Step 6: Upload the built artifacts
+    # Step 7: Upload the built artifacts
     - name: Upload artifacts
       uses: actions/upload-artifact@v2
       with:
