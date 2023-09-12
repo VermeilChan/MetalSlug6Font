@@ -1,50 +1,55 @@
-## Running the Program
+# How to Use MSFONT
 
-Follow these steps to use MSFONT:
+Follow these steps to get started with MSFONT and create Metal Slug-style text:
 
-1. **Download the Program**
-   - Download the latest release of the program from the [Releases Page](https://github.com/VermeilChan/MetalSlugFont/releases).
-   - You can also consider trying the pre-release version, but you will need a GitHub account. If you don't have one, you can use the stable version instead [GitHub Actions](https://github.com/VermeilChan/MetalSlugFont/actions).
+## 1. Download the Program
 
-##  *Stable Release*
+### Stable Release
 
-   ![Program Download](Assets/MARKDOWN/GUIDE/PROGRAM-DOWNLOAD.png)
+1. Download the latest stable release of MSFONT from the [Releases Page](https://github.com/VermeilChan/MetalSlugFont/releases).
+2. ![Stable Release Download](Assets/MARKDOWN/GUIDE/PROGRAM-DOWNLOAD.png)
 
-##  *Pre-Release*
-   
-   ![Program Download](Assets/MARKDOWN/GUIDE/GITHUB-ACTIONS-SELECT.png)
+### Pre-Release (Portable Version)
 
-   ![Program Download](Assets/MARKDOWN/GUIDE/GITHUB-ACTIONS-DOWNLOAD.png)
+1. Click on the latest workflow on the [GitHub Actions Page](https://github.com/VermeilChan/MetalSlugFont/actions).
+2. ![Pre-Release Download](Assets/MARKDOWN/GUIDE/GITHUB-ACTIONS-SELECT.png)
+3. Scroll down and download the Artifact.
+4. ![Pre-Release Download](Assets/MARKDOWN/GUIDE/GITHUB-ACTIONS-DOWNLOAD.png)
 
-2. **Installation and Setup**
-   - After installing it, navigate to your downloads and locate the folder named `MSFONT`.
-   - Inside the `MSFONT` folder, find and run the `MSFONT.exe` executable.
+## 2. Installation and Setup (Stable Release)
 
-   ![Program](Assets/MARKDOWN/GUIDE/PROGRAM.png)
+1. After downloading, locate the folder named `MSFONT` in your downloads.
+2. Inside the `MSFONT` folder, run the `MSFONT.exe` executable.
+3. ![Run MSFONT](Assets/MARKDOWN/GUIDE/PROGRAM.png)
 
-3. **Selecting a Font**
-   - Upon running the program, you will be prompted to choose a font.
-   - Choose a font by entering a number from 1 to 5.
+## 3. Selecting a Font
 
-4. **Choosing a Color**
-   - After selecting the font, the available color options will depend on the chosen font.
-   - Enter one of the following color options based on the font you've selected:
-     - For certain fonts, type `Blue` for the color Blue.
-     - For specific fonts, type `Orange-1` for Orange 1.
-     - For other fonts, type `Orange-2` for Orange 2.
+1. When the program starts, you'll be prompted to choose a font.
+2. Choose a font by entering a number from 1 to 5.
 
-5. **Input Text**
-   - Once you've chosen the font and color, the program will prompt you to input the text you want to convert to the Metal Slug style.
+## 4. Choosing a Color
 
-6. **Generating the Style**
-   - Enter your desired text and press the 'enter' key.
+1. After selecting the font, available color options will depend on your chosen font.
+2. Enter one of the following color options based on your font choice:
+   - For certain fonts, type `Blue` for the color Blue.
+   - For specific fonts, type `Orange-1` for Orange 1.
+   - For other fonts, type `Orange-2` for Orange 2.
+
+## 5. Input Text
+
+1. Once you've chosen the font and color, the program will prompt you to input the text you want to convert to the Metal Slug style.
+
+## 6. Generating the Image
+
+1. Enter your desired text and press the 'Enter' key.
 
 ## Viewing the Result
-- After pressing 'enter', the program will generate the stylized text image, which should appear on your desktop.
+
+After pressing 'Enter', the program will generate the stylized text image, which should appear on your desktop.
 
 ## Need Help?
-If you have any questions or require further assistance, feel free to ask. You can also reach out to me on Discord: `mommy_vermeil`.
 
-![Cat](Assets/MARKDOWN/GUIDE/CAT-1.png)
-![Cat](Assets/MARKDOWN/GUIDE/CAT-2.png)
----
+If you have any questions or need further assistance, feel free to ask. You can also reach out to me on Discord: `mommy_vermeil`.
+
+![Metal Slug Cat](Assets/MARKDOWN/GUIDE/CAT-1.png)
+![Metal Slug Cat](Assets/MARKDOWN/GUIDE/CAT-2.png)
