@@ -72,15 +72,15 @@ jobs:
       uses: actions/upload-artifact@v3.1.3
       with:
         # Specify the name for the uploaded artifact
-        name: MSFONT
+        name: MSFONT.exe
         # Specify the path where the artifacts are located
-        path: dist/MSFONT
+        path: dist/MSFONT.exe
 
     # Step 9: Upload the built artifacts for UPDATER
     - name: Upload UPDATER artifacts
       uses: actions/upload-artifact@v3.1.3
       with:
         # Specify the name for the uploaded artifact
-        name: UPDATER
+        name: UPDATER.exe
         # Specify the path where the artifacts are located
-        path: dist/UPDATER
+        path: dist/UPDATER.exe
