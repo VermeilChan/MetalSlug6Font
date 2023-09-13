@@ -1,0 +1,97 @@
+# Define the name of the workflow
+name: Build and Upload MSFONT Linux
+
+# Trigger the workflow when code is pushed to the "experimental" branch
+on:
+  push:
+    branches:
+      - experimental
+
+# Define the jobs to be executed as part of this workflow
+jobs:
+  # Define the "build" job
+  build:
+    # Specify that this job should run on an Ubuntu environment
+    runs-on: ubuntu-latest
+
+    # Define the steps to be executed within the job
+    steps:
+    # Step 1: Checkout the code from the repository
+    - name: Checkout code
+      uses: actions/checkout@v4.0.0
+
+    # Step 2: Cache Python pip packages
+    - name: Get pip cache dir
+      id: pip-cache
+      run: |
+        echo "dir=$(pip cache dir)" >> ${{ runner.temp }}/pip-cache
+      shell: bash
+
+    - name: Cache pip packages
+      uses: actions/cache@v3.3.2
+      with:
+        path: ${{ runner.temp }}/pip-cache
+        key: Linux-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          Linux-pip-
+
+    # Step 3: Set up the Python environment
+    - name: Set up Python
+      uses: actions/setup-python@v4.7.0
+      with:
+        # Specify the Python version to be used
+        python-version: 3.11.5
+
+    # Step 4: Install Python dependencies from requirements.txt
+    - name: Install Python dependencies
+      run: |
+        # Upgrade pip and install dependencies from requirements.txt
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+      working-directory: ${{ github.workspace }}
+
+    # Step 5: Check and update outdated Python packages
+    - name: Check and Update Python packages
+      run: |
+        # Check for outdated packages
+        python -m pip list --outdated
+
+        # Update outdated packages
+        python -m pip install --upgrade $(python -m pip list --outdated | awk '{print $1}' | tail -n +3)
+      working-directory: ${{ github.workspace }}
+
+    # Step 6: Build the MSFONT application using PyInstaller
+    - name: Build MSFONT
+      run: |
+        # Use PyInstaller to build the application with specified options
+        pyinstaller --noconfirm --onedir --console --icon "${{ env.MSFONT_ICON_PATH }}" --name "MSFONT" --add-data "main.py:." --add-data "Assets:Assets/" "terminal.py"
+      env:
+        # Define an environment variable for the path to the application icon
+        MSFONT_ICON_PATH: Assets/ICON/Sv-001.ico
+
+    # Step 7: Build the UPDATER application using PyInstaller
+    - name: Build UPDATER
+      run: |
+        # Use PyInstaller to build the UPDATER application with specified options
+        pyinstaller --noconfirm --onefile --console --icon "${{ env.UPDATER_ICON_PATH }}" --name "UPDATER" "auto_updater.py"
+      env:
+        # Define an environment variable for the path to the UPDATER application icon
+        UPDATER_ICON_PATH: Assets/ICON/Sv-001-UPDATER.ico
+
+    # Step 8: Upload the built artifacts for MSFONT
+    - name: Upload MSFONT artifacts
+      uses: actions/upload-artifact@v3.1.3
+      with:
+        # Specify the name for the uploaded artifact
+        name: MSFONT
+        # Specify the path where the artifacts are located
+        path: dist/MSFONT
+
+    # Step 9: Upload the built artifacts for UPDATER
+    - name: Upload UPDATER artifacts
+      uses: actions/upload-artifact@v3.1.3
+      with:
+        # Specify the name for the uploaded artifact
+        name: UPDATER
+        # Specify the path where the artifacts are located
+        path: dist/UPDATER.exe
