@@ -71,6 +71,11 @@ def generate_image_with_filename(text, filename, font_paths):
                     char_img = space_img
                 else:
                     char_img_path = get_character_image_path(char, font_paths)
+                    if char_img_path is None:
+                        # Handle the case where the character image is not found.
+                        print(f"Character image not found for '{char}'. Skipping.")
+                        continue
+
                     with Image.open(char_img_path).convert('RGBA') as char_img:
                         char_images[char] = char_img
                         img_height = char_img.size[1] if img_height is None else img_height
