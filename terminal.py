@@ -1,13 +1,14 @@
 # Import necessary libraries
 import sys
+import os
 import logging
+import argparse
 from logging.handlers import RotatingFileHandler
+
+from main import generate_filename, generate_image_with_filename, get_font_paths
 
 # Prevent the generation of .pyc (Python bytecode) files
 sys.dont_write_bytecode = True
-
-# Import functions from another file named 'main'
-from main import generate_filename, generate_image_with_filename, get_font_paths
 
 # Set up logging to a rotating log file named 'app.log' with a maximum size of 1 MB
 log_filename = 'app.log'
@@ -22,6 +23,15 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 logger.addHandler(log_handler)
 
+# Define valid color options for each font
+VALID_COLORS_BY_FONT = {
+    1: ["Blue", "Orange-1", "Orange-2"],
+    2: ["Blue", "Orange-1", "Orange-2"],
+    3: ["Blue", "Orange-1"],
+    4: ["Blue", "Orange-1"],
+    5: ["Orange-1"]
+}
+
 # Function to display an introductory message
 def display_intro_message():
     print("Note: Metal Slug Font style conversion may not be compatible with all fonts.")
@@ -33,15 +43,6 @@ def get_user_input():
 
 # Function to allow the user to select a font and color
 def select_font_and_color():
-    # Define valid color options for each font
-    VALID_COLORS_BY_FONT = {
-        1: ["Blue", "Orange-1", "Orange-2"],
-        2: ["Blue", "Orange-1", "Orange-2"],
-        3: ["Blue", "Orange-1"],
-        4: ["Blue", "Orange-1"],
-        5: ["Orange-1"]
-    }
-
     while True:
         try:
             # Prompt the user to choose a font or exit
@@ -82,6 +83,11 @@ def generate_and_display_image(text, font, color):
             print("Closing...")
             sys.exit(0)
 
+        # Check for empty input
+        if not text.strip():
+            print("Input text is empty. Please enter some text.")
+            return
+
         filename = generate_filename(text)
 
         font_paths = get_font_paths(font, color)
@@ -94,6 +100,7 @@ def generate_and_display_image(text, font, color):
         else:
             print(f"Image successfully generated and saved as: {img_path}")
             logger.info(f"Generated Image Path: '{img_path}'")
+            print(f"You can find the image on your desktop: {os.path.abspath(os.path.join(os.path.expanduser('~'), 'Desktop', img_path))}")
 
         # Log chosen font, chosen color, and user input
         logger.info(f"Chosen Font: {font}, Chosen Color: {color}, User Input: '{text}'")
@@ -101,6 +108,11 @@ def generate_and_display_image(text, font, color):
     except KeyboardInterrupt:
         print("Closing...")
         sys.exit(0)
+    except FileNotFoundError as e:
+        error_message = f"Font file not found: {e.filename}"
+        print(error_message)
+        logger.error(error_message)
+        logger.debug(e, exc_info=True)
     except Exception as e:
         error_message = f"An error occurred: {e}"
         print(error_message)
@@ -129,7 +141,13 @@ def main():
 
 # Entry point of the script
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="MSFONT")
+    parser.add_argument("--log-level", default="INFO", choices=["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
+                        help="Logging level (default: INFO)")
+    args = parser.parse_args()
+
     try:
+        logger.setLevel(args.log_level)
         main()
     except KeyboardInterrupt:
         print("Closing...")
