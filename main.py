@@ -20,7 +20,7 @@ def generate_filename(user_input):
 
 # Function to get paths to font assets (letters, numbers, symbols) based on font and color
 def get_font_paths(font, color):
-    base_path = f'Assets/FONTS/Font-{font}/Font-{font}-{color}'
+    base_path = os.path.join('Assets', 'FONTS', f'Font-{font}', f'Font-{font}-{color}')
     return (
         os.path.join(base_path, 'Letters'),
         os.path.join(base_path, 'Numbers'),
@@ -33,9 +33,9 @@ def get_character_image_path(char, font_paths):
 
     if char.isalpha():
         folder = 'Lower-Case' if char.islower() else 'Upper-Case'
-        char_img_path = os.path.join(CHARACTERS_FOLDER, folder, char + '.png')
+        char_img_path = os.path.join(CHARACTERS_FOLDER, folder, f"{char}.png")
     elif char.isdigit():
-        char_img_path = os.path.join(NUMBERS_FOLDER, char + '.png')
+        char_img_path = os.path.join(NUMBERS_FOLDER, f"{char}.png")
     elif char == ' ':
         return None
     else:
@@ -54,7 +54,7 @@ def get_character_image_path(char, font_paths):
         char_img_path = os.path.join(SYMBOLS_FOLDER, f"{SPECIAL_CHARACTERS.get(char, '')}.png")
 
     if not os.path.isfile(char_img_path):
-        raise FileNotFoundError(f"Image not found for character '{char}'")
+        return None
 
     return char_img_path
 
@@ -65,22 +65,26 @@ def generate_image_with_filename(text, filename, font_paths):
     img_path = os.path.join(DESKTOP_PATH, filename)
 
     try:
-        for char in text:
-            char_img = Image.new('RGBA', (SPACE_WIDTH, 1), (0, 0, 0, 0)) if char == ' ' else Image.open(get_character_image_path(char, font_paths)).convert('RGBA')
-            char_images[char] = char_img
-            img_height = char_img.size[1] if img_height is None else img_height
+        with Image.new('RGBA', (1, 1), (0, 0, 0, 0)) as space_img:
+            for char in text:
+                if char == ' ':
+                    char_img = space_img
+                else:
+                    char_img_path = get_character_image_path(char, font_paths)
+                    with Image.open(char_img_path).convert('RGBA') as char_img:
+                        char_images[char] = char_img
+                        img_height = char_img.size[1] if img_height is None else img_height
 
-        chars = [(char_images[char], SPACE_WIDTH if char == ' ' else char_images[char].size[0]) for char in text]
-        total_width = sum(char_width for _, char_width in chars)
+            chars = [(char_images[char], SPACE_WIDTH if char == ' ' else char_images[char].size[0]) for char in text]
+            total_width = sum(char_width for _, char_width in chars)
 
-        img = Image.new('RGBA', (total_width, img_height), (0, 0, 0, 0))
-        x = 0
+            with Image.new('RGBA', (total_width, img_height), (0, 0, 0, 0)) as img:
+                x = 0
+                for char_img, char_width in chars:
+                    img.paste(char_img, (x, 0), char_img)
+                    x += char_width
 
-        for char_img, char_width in chars:
-            img.paste(char_img, (x, 0), char_img)
-            x += char_width
-
-        img.save(img_path)
+                img.save(img_path)
         return filename, None
 
     except (FileNotFoundError, UnidentifiedImageError, ValueError) as e:
