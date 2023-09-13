@@ -1,0 +1,86 @@
+# Define the name of the workflow
+name: Build and Upload MSFONT Ubuntu
+
+# Trigger the workflow when code is pushed to the "experimental" branch
+on:
+  push:
+    branches:
+      - experimental
+
+# Define the jobs to be executed as part of this workflow
+jobs:
+  # Define the "build" job
+  build:
+    # Specify that this job should run on an Ubuntu environment
+    runs-on: ubuntu-latest
+
+    # Define the steps to be executed within the job
+    steps:
+    # Step 1: Checkout the code from the repository
+    - name: Checkout code
+      uses: actions/checkout@v4.0.0
+
+    # Step 2: Set up Python
+    - name: Set up Python
+      uses: actions/setup-python@v4.7.0
+      with:
+        # Specify the Python version to be used
+        python-version: 3.11.5
+
+    # Step 3: Install system dependencies and set up WineHQ
+    - name: Install system dependencies and set up WineHQ
+      run: |
+        sudo dpkg --add-architecture i386
+        sudo mkdir -pm755 /etc/apt/keyrings
+        sudo wget -O /etc/apt/keyrings/winehq-archive.key https://dl.winehq.org/wine-builds/winehq.key
+        sudo wget -NP /etc/apt/sources.list.d/ https://dl.winehq.org/wine-builds/ubuntu/dists/lunar/winehq-lunar.sources
+        sudo apt update
+        sudo apt install --install-recommends winehq-stable
+
+    # Step 4: Install Python dependencies from requirements.txt
+    - name: Install Python dependencies
+      run: |
+        # Upgrade pip and install dependencies from requirements.txt
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+      working-directory: ${{ github.workspace }}
+
+    # Step 5: Check and update outdated Python packages
+    - name: Check and Update Python packages
+      run: |
+        # Check for outdated packages
+        python -m pip list --outdated
+
+        # Update outdated packages
+        python -m pip install --upgrade $(python -m pip list --outdated | awk '{print $1}' | tail -n +3)
+      working-directory: ${{ github.workspace }}
+
+    # Step 6: Build the MSFONT application using PyInstaller
+    - name: Build MSFONT
+      run: |
+        # Use PyInstaller to build the application with specified options
+        wine pyinstaller --noconfirm --onedir --console --icon "${{ github.workspace }}/Assets/ICON/Sv-001.ico" --name "MSFONT" --add-data "main.py:." --add-data "Assets:Assets/" "terminal.py"
+
+    # Step 7: Build the UPDATER application using PyInstaller
+    - name: Build UPDATER
+      run: |
+        # Use PyInstaller to build the UPDATER application with specified options
+        wine pyinstaller --noconfirm --onefile --console --icon "${{ github.workspace }}/Assets/ICON/Sv-001-UPDATER.ico" --name "UPDATER" "auto_updater.py"
+
+    # Step 8: Upload the built artifacts for MSFONT
+    - name: Upload MSFONT artifacts
+      uses: actions/upload-artifact@v3.1.3
+      with:
+        # Specify the name for the uploaded artifact
+        name: MSFONT
+        # Specify the path where the artifacts are located
+        path: dist/MSFONT
+
+    # Step 9: Upload the built artifacts for UPDATER
+    - name: Upload UPDATER artifacts
+      uses: actions/upload-artifact@v3.1.3
+      with:
+        # Specify the name for the uploaded artifact
+        name: UPDATER
+        # Specify the path where the artifacts are located
+        path: dist/UPDATER
