@@ -59,13 +59,13 @@ jobs:
     - name: Build MSFONT
       run: |
         # Use PyInstaller to build the application with specified options
-        wine pyinstaller --noconfirm --onedir --console --icon "${{ github.workspace }}/Assets/ICON/Sv-001.ico" --name "MSFONT" --add-data "main.py:." --add-data "Assets:Assets/" "terminal.py"
+        pyinstaller --noconfirm --onedir --console --icon "${{ github.workspace }}/Assets/ICON/Sv-001.ico" -n "MSFONT.exe" --add-data "main.py:." --add-data "Assets:Assets/" "terminal.py"
 
     # Step 7: Build the UPDATER application using PyInstaller
     - name: Build UPDATER
       run: |
         # Use PyInstaller to build the UPDATER application with specified options
-        wine pyinstaller --noconfirm --onefile --console --icon "${{ github.workspace }}/Assets/ICON/Sv-001-UPDATER.ico" --name "UPDATER" "auto_updater.py"
+        pyinstaller --noconfirm --onefile --console --icon "${{ github.workspace }}/Assets/ICON/Sv-001-UPDATER.ico" --name "UPDATER.exe" "auto_updater.py"
 
     # Step 8: Upload the built artifacts for MSFONT
     - name: Upload MSFONT artifacts
