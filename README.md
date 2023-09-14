@@ -1,14 +1,9 @@
-<p align="center">
-  <a href="https://github.com/VermeilChan/MetalSlugFont/graphs/contributors" alt="Contributors">
-    <img src="https://img.shields.io/github/contributors/VermeilChan/MetalSlugFont" />
-  </a>
-  <a href="https://github.com/VermeilChan/MetalSlugFont/releases" target="_blank">
-    <img alt="release" src="https://img.shields.io/github/v/release/VermeilChan/MetalSlugFont" />
-  </a>
-  <a href="https://github.com/VermeilChan/MetalSlugFont/releases" target="_blank">
-    <img alt="downloads" src="https://img.shields.io/github/downloads/VermeilChan/MetalSlugFont/total" />
-  </a>
-</p>
+<div align="center">
+  <img src="https://img.shields.io/github/contributors/VermeilChan/MetalSlugFont.svg?style=flat-square&color=blue" alt="Contributors">
+  <img src="https://img.shields.io/github/release/VermeilChan/MetalSlugFont.svg?style=flat-square&color=green" alt="Latest Release">
+  <img src="https://img.shields.io/github/downloads/VermeilChan/MetalSlugFont/total.svg?style=flat-square&color=orange" alt="Downloads">
+  <img src="https://img.shields.io/github/license/VermeilChan/MetalSlugFont.svg?style=flat-square&color=purple" alt="License">
+</div>
 
 # MetalSlugFont
 
