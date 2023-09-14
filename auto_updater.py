@@ -74,7 +74,7 @@ def is_update_file_exist(download_url):
 def get_latest_version_and_download_url():
     try:
         headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Safari/537.36',
+            'User-Agent': 'Mozilla/117.0.1 (Windows NT 11.0; Win64; x64) AppleWebKit/537.43 (KHTML, like Gecko) Chrome/117.0.5938.62 Safari/605.1.15',
         }
 
         response = requests.get(f'https://api.github.com/repos/{GITHUB_OWNER}/{GITHUB_REPO}/releases/latest', headers=headers, verify=True)
@@ -130,7 +130,7 @@ def download_update(download_url, latest_version, update_folder):
         shutil.move(temp_download_path, download_path)
 
         logger.info(f"Update downloaded to: {download_path}")
-        click.echo(f"Update downloaded to: {download_path}")
+        click.echo(f"\nUpdate downloaded to: {download_path}")
 
         log_update(latest_version)
 
