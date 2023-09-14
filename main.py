@@ -11,21 +11,27 @@ DESKTOP_PATH = os.path.expanduser("~/Desktop")
 
 # Function to generate a filename based on user input and timestamp
 def generate_filename(user_input):
-    timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
-    sanitized_input = '-'.join(filter(str.isalnum, user_input.split()))
-    filename = f"{sanitized_input}-{timestamp}.png"
-    if len(filename) > MAX_FILENAME_LENGTH:
-        filename = f"{timestamp}.png"
-    return filename
+    try:
+        timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
+        sanitized_input = '-'.join(filter(str.isalnum, user_input.split()))
+        filename = f"{sanitized_input}-{timestamp}.png"
+        if len(filename) > MAX_FILENAME_LENGTH:
+            filename = f"{timestamp}.png"
+        return filename
+    except Exception as e:
+        raise RuntimeError(f"Error generating filename: {str(e)}")
 
 # Function to get paths to font assets (letters, numbers, symbols) based on font and color
 def get_font_paths(font, color):
-    base_path = os.path.join('Assets', 'FONTS', f'Font-{font}', f'Font-{font}-{color}')
-    return (
-        os.path.join(base_path, 'Letters'),
-        os.path.join(base_path, 'Numbers'),
-        os.path.join(base_path, 'Symbols')
-    )
+    try:
+        base_path = os.path.join('Assets', 'FONTS', f'Font-{font}', f'Font-{font}-{color}')
+        return (
+            os.path.join(base_path, 'Letters'),
+            os.path.join(base_path, 'Numbers'),
+            os.path.join(base_path, 'Symbols')
+        )
+    except Exception as e:
+        raise RuntimeError(f"Error getting font paths: {str(e)}")
 
 # Function to get the image path for a specific character based on its type
 def get_character_image_path(char, font_paths):
@@ -53,18 +59,20 @@ def get_character_image_path(char, font_paths):
         }
         char_img_path = os.path.join(SYMBOLS_FOLDER, f"{SPECIAL_CHARACTERS.get(char, '')}.png")
 
-    if not os.path.isfile(char_img_path):
-        return None
-
-    return char_img_path
+    try:
+        if not os.path.isfile(char_img_path):
+            return None
+        return char_img_path
+    except Exception as e:
+        raise RuntimeError(f"Error getting character image path for '{char}': {str(e)}")
 
 # Function to generate an image with a given filename and text using provided font assets
 def generate_image_with_filename(text, filename, font_paths):
-    img_height = None
-    char_images = {}
-    img_path = os.path.join(DESKTOP_PATH, filename)
-
     try:
+        img_height = None
+        char_images = {}
+        img_path = os.path.join(DESKTOP_PATH, filename)
+
         with Image.new('RGBA', (1, 1), (0, 0, 0, 0)) as space_img:
             for char in text:
                 if char == ' ':
@@ -92,8 +100,11 @@ def generate_image_with_filename(text, filename, font_paths):
                 img.save(img_path)
         return filename, None
 
-    except (FileNotFoundError, UnidentifiedImageError, ValueError) as e:
-        return None, str(e)
-
+    except FileNotFoundError as e:
+        return None, f"File not found error: {str(e)}"
+    except UnidentifiedImageError as e:
+        return None, f"Unidentified image error: {str(e)}"
+    except ValueError as e:
+        return None, f"Value error: {str(e)}"
     except Exception as e:
-        return None, f"An unexpected error occurred: {str(e)}."
+        return None, f"An unexpected error occurred: {str(e)}"
