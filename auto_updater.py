@@ -134,8 +134,8 @@ def download_update(download_url, latest_version, update_folder):
 
         log_update(latest_version)
 
-        click.echo("\nUpdate complete. Please close the application.")
-        click.echo("Go to your updates folder and reinstall the program.")
+        click.echo("\nUpdate complete. Please close the program.")
+        click.echo("Go to your downloads folder and reinstall the program.")
         click.echo("Before that, remove the 'MSFONT' folder.\n")
     except requests.exceptions.RequestException as e:
         handle_error("Failed to download the update. Please check your internet connection.", e)
