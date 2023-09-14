@@ -1,3 +1,15 @@
+<p align="center">
+  <a href="https://github.com/VermeilChan/MetalSlugFont/graphs/contributors" alt="Contributors">
+    <img src="https://img.shields.io/github/contributors/VermeilChan/MetalSlugFont" />
+  </a>
+  <a href="https://github.com/VermeilChan/MetalSlugFont/releases" target="_blank">
+    <img alt="release" src="https://img.shields.io/github/v/release/VermeilChan/MetalSlugFont" />
+  </a>
+  <a href="https://github.com/VermeilChan/MetalSlugFont/releases" target="_blank">
+    <img alt="downloads" src="https://img.shields.io/github/downloads/VermeilChan/MetalSlugFont/total" />
+  </a>
+</p>
+
 # MetalSlugFont
 
 Create images with the iconic Metal Slug font style! Easily transform your text into visually appealing images reminiscent of the Metal Slug arcade game series. This tool allows you to generate images with a wide range of characters, numbers, and symbols.
