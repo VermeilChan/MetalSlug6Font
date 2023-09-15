@@ -1,8 +1,11 @@
 <div align="center">
-  <img src="https://img.shields.io/github/contributors/VermeilChan/MetalSlugFont.svg?style=flat-square&color=blue" alt="Contributors">
-  <img src="https://img.shields.io/github/release/VermeilChan/MetalSlugFont.svg?style=flat-square&color=green" alt="Latest Release">
-  <img src="https://img.shields.io/github/downloads/VermeilChan/MetalSlugFont/total.svg?style=flat-square&color=orange" alt="Downloads">
-  <img src="https://img.shields.io/github/license/VermeilChan/MetalSlugFont.svg?style=flat-square&color=purple" alt="License">
+  <img src="https://img.shields.io/github/contributors/VermeilChan/MetalSlugFont.svg?color=blue" alt="Contributors">
+  <img src="https://img.shields.io/github/release/VermeilChan/MetalSlugFont.svg?color=green" alt="Latest Release">
+  <img src="https://img.shields.io/github/downloads/VermeilChan/MetalSlugFont/total.svg?color=orange" alt="Downloads">
+  <img src="https://img.shields.io/github/license/VermeilChan/MetalSlugFont.svg?color=purple" alt="License">
+  <img src="https://img.shields.io/github/issues/VermeilChan/MetalSlugFont.svg?color=red" alt="Open Issues">
+  <img src="https://img.shields.io/github/issues-pr/VermeilChan/MetalSlugFont.svg?color=yellow" alt="Open Pull Requests">
+  <img src="https://img.shields.io/github/last-commit/VermeilChan/MetalSlugFont.svg?color=grey" alt="Last Commit">
 </div>
 
 # MetalSlugFont
