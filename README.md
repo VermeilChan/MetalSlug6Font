@@ -7,6 +7,8 @@
 [![Open Issues](https://img.shields.io/github/issues/VermeilChan/MetalSlugFont.svg?color=red)](https://github.com/VermeilChan/MetalSlugFont/issues)
 [![Open Pull Requests](https://img.shields.io/github/issues-pr/VermeilChan/MetalSlugFont.svg?color=yellow)](https://github.com/VermeilChan/MetalSlugFont/pulls)
 [![Last Commit](https://img.shields.io/github/last-commit/VermeilChan/MetalSlugFont.svg?color=green)](https://github.com/VermeilChan/MetalSlugFont/commits/experimental)
+[![DeepSource](https://app.deepsource.com/gh/VermeilChan/MetalSlugFont.svg/?label=active+issues&show_trend=true&token=fXTu8KET6ZYQaBnVf6JdWq5z)](https://app.deepsource.com/gh/VermeilChan/MetalSlugFont/?ref=repository-badge)
+[![DeepSource](https://app.deepsource.com/gh/VermeilChan/MetalSlugFont.svg/?label=resolved+issues&show_trend=true&token=fXTu8KET6ZYQaBnVf6JdWq5z)](https://app.deepsource.com/gh/VermeilChan/MetalSlugFont/?ref=repository-badge)
 
 A tool for creating images with the iconic Metal Slug font.
 
@@ -45,10 +47,10 @@ View examples of generated images with the available fonts in [EXAMPLE.md](EXAMP
 
 ## Installation
 ### Windows
-[![Windows](Assets/MARKDOWN/README/THUMBNAIL-WINDOWS.png)]((Assets/MARKDOWN/README/INSTALLATION-WINDOWS.mp4) "Windows Guide")
+[![Windows](Assets/MARKDOWN/README/THUMBNAIL-WINDOWS.png)]((https://i.imgur.com/MIC4sgi.mp4) "Windows Guide")
 
 ### Linux
-[![Linux](Assets/MARKDOWN/README/THUMBNAIL-LINUX.png)]((Assets/MARKDOWN/README/INSTALLATION-LINUX.mp4) "Linux Guide")
+[![Linux](Assets/MARKDOWN/README/THUMBNAIL-LINUX.png)](() "Linux Guide")
 
 **Music track:** [Bread by Lukrembo](https://soundcloud.com/lukrembo/bread)
 **Source:** [https://freetouse.com/music](https://freetouse.com/music)
