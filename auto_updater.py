@@ -19,8 +19,9 @@ CURRENT_VERSION = '0.2.6'
 LOG_FILE = 'updates.log'
 DOWNLOAD_FOLDER = os.path.expanduser('~/Downloads')
 VERIFY_SSL_CERTIFICATE = True
+MAX_RETRIES = 3
 
-# Configure logging with log rotation
+# Configure the logger
 logger = logging.getLogger('updates')
 logger.setLevel(logging.INFO)
 handler = RotatingFileHandler(LOG_FILE, maxBytes=10 * 1024 * 1024, backupCount=5)
@@ -35,57 +36,68 @@ class RateLimitExceededError(Exception):
 
 # Function to check for updates
 def check_for_updates(update_folder):
-    try:
-        logger.info("Update check started.")
-        latest_version_str, download_url = get_latest_version_and_download_url()
-        current_version = semantic_version.Version(CURRENT_VERSION)
-        latest_version = semantic_version.Version(latest_version_str)
+    retries = 0
+    while retries < MAX_RETRIES:
+        try:
+            logger.info("Update check started.")
+            latest_version_str, download_url = get_latest_version_and_download_url()
+            current_version = semantic_version.Version(CURRENT_VERSION)
+            latest_version = semantic_version.Version(latest_version_str)
 
-        if latest_version == current_version:
-            logger.info(f"You are currently running version {CURRENT_VERSION}, which is up to date.")
-            click.echo(f"You are currently running version {CURRENT_VERSION}, which is up to date.")
-        else:
-            update_confirmation = click.confirm(f"You are currently running version {CURRENT_VERSION}. Do you want to update to version {latest_version_str}?")
-
-            if update_confirmation:
-                if is_update_file_exist(download_url):
-                    update_file_confirmation = click.confirm("A file with the same name already exists. Do you want to overwrite it?")
-                    if not update_file_confirmation:
-                        click.echo("Update canceled.")
-                        logger.info("Update canceled by the user.")
-                        return
-                download_update(download_url, latest_version_str, update_folder)
+            if latest_version == current_version:
+                logger.info(f"You are currently running version {CURRENT_VERSION}, which is up to date.")
+                click.echo(f"You are currently running version {CURRENT_VERSION}, which is up to date.")
             else:
-                click.echo("Update canceled.")
-                logger.info("Update canceled by the user.")
-    except RequestException as e:
-        # Retry the request with SSL certificate verification disabled if it fails
-        if VERIFY_SSL_CERTIFICATE:
-            click.echo("Failed to check for updates with SSL certificate verification enabled. Retrying with verification disabled...")
-            logger.warning("Failed to check for updates with SSL certificate verification enabled. Retrying with verification disabled...")
-            VERIFY_SSL_CERTIFICATE = False
-            check_for_updates(update_folder)
-        else:
-            handle_error("Failed to check for updates even with SSL certificate verification disabled. Please check your internet connection.", e)
-    except RateLimitExceededError as e:
-        click.echo(f"Rate limit exceeded. Sleeping for {e.sleep_time:.0f} seconds until the rate limit is reset.")
-        time.sleep(e.sleep_time)
-        check_for_updates(update_folder)
-    except Exception as e:
-        handle_error("An unexpected error occurred while checking for updates.", e)
-    finally:
-        logger.info("Update check finished.")
+                update_confirmation = click.confirm(f"You are currently running version {CURRENT_VERSION}. Do you want to update to version {latest_version_str}?")
 
-# Function to check if the download folder exists and is accessible
+                if update_confirmation:
+                    if is_update_file_exist(download_url):
+                        update_file_confirmation = click.confirm("A file with the same name already exists. Do you want to overwrite it?")
+                        if not update_file_confirmation:
+                            click.echo("Update canceled.")
+                            logger.info("Update canceled by the user.")
+                            return
+                    download_update(download_url, latest_version_str, update_folder)
+                else:
+                    click.echo("Update canceled.")
+                    logger.info("Update canceled by the user.")
+            break
+        except RequestException as e:
+            if 'X-RateLimit-Remaining' in str(e) and retries < MAX_RETRIES - 1:
+                sleep_time = int(e.response.headers.get('X-RateLimit-Reset', 0)) - time.time()
+                click.echo(f"Rate limit exceeded. Sleeping for {sleep_time:.0f} seconds until the rate limit is reset.")
+                time.sleep(sleep_time)
+                retries += 1
+                continue
+            else:
+                handle_error("Failed to check for updates. Please check your internet connection.", e)
+        except RateLimitExceededError as e:
+            click.echo(f"Rate limit exceeded. Sleeping for {e.sleep_time:.0f} seconds until the rate limit is reset.")
+            time.sleep(e.sleep_time)
+            retries += 1
+        except semantic_version.InvalidVersion as e:
+            handle_error("Failed to parse version data.", e)
+        except click.Abort:
+            click.echo("Update canceled.")
+            logger.info("Update canceled by the user.")
+        except Exception as e:
+            handle_error("An unexpected error occurred while checking for updates.", e)
+        finally:
+            logger.info("Update check finished.")
+
+    if retries == MAX_RETRIES:
+        click.echo("Maximum retry limit reached. Unable to check for updates.")
+
+# Function to check if the download folder is available
 def is_download_folder_available(download_folder):
     return os.path.isdir(download_folder)
 
-# Function to check if the update file already exists
+# Function to check if an update file already exists
 def is_update_file_exist(download_url):
     download_path = os.path.join(DOWNLOAD_FOLDER, os.path.basename(download_url))
     return os.path.exists(download_path)
 
-# Function to get the latest version and download URL
+# Function to retrieve the latest version and download URL
 def get_latest_version_and_download_url():
     try:
         headers = {
@@ -117,13 +129,13 @@ def get_latest_version_and_download_url():
     except Exception as e:
         handle_error("An unexpected error occurred while processing release data.", e)
 
-# Function to get the download URL for the latest release
+# Function to retrieve the download URL from release data
 def get_download_url(release_data):
     for asset in release_data['assets']:
         if asset['name'].endswith(RELEASE_FILE_EXTENSION):
             return asset['browser_download_url']
 
-# Function to download and update the program
+# Function to download the update
 def download_update(download_url, latest_version_str, update_folder):
     try:
         os.makedirs(update_folder, exist_ok=True)
@@ -133,7 +145,7 @@ def download_update(download_url, latest_version_str, update_folder):
         with requests.get(download_url, stream=True, verify=VERIFY_SSL_CERTIFICATE) as response, open(temp_download_path, 'ab') as outfile:
             response.raise_for_status()
             total_size = int(response.headers.get('content-length', 0))
-            block_size = 1024  # 1 KB
+            block_size = 1024
             progress_bar = tqdm(total=total_size, unit='B', unit_scale=True, desc="Downloading", ncols=80)
 
             for data in response.iter_content(block_size):
@@ -169,7 +181,7 @@ def log_update(version_str):
     except Exception as e:
         handle_error("Failed to log the update.", e)
 
-# Function to check if the log file exists and is writable
+# Function to check if the log file is writable
 def is_log_file_writable():
     return os.access(LOG_FILE, os.W_OK)
 
@@ -178,6 +190,7 @@ def handle_error(message, error):
     logger.error(f"{message}: {error}")
     click.echo(f"An error occurred: {error}")
 
+# Entry point of the script
 if __name__ == '__main__':
     while True:
         user_input = click.prompt("Type 'Update' to check for updates or 'exit' to exit").strip().lower()
