@@ -45,16 +45,12 @@ View examples of generated images with the available fonts in [EXAMPLE.md](EXAMP
 
 ## Installation
 ### Windows
-<video width="640" height="360" controls>
-  <source src="Assets/MARKDOWN/README/INSTALLATION-WINDOWS.mp4" type="video/mp4">
-</video>
+[![Click Here!](Assets/MARKDOWN/README/THUMBNAIL-WINDOWS.png)](Assets/MARKDOWN/README/INSTALLATION-WINDOWS.mp4)
 
 ### Linux
-<video width="640" height="360" controls>
-  <source src="Assets/MARKDOWN/README/INSTALLATION-LINUX.mp4" type="video/mp4">
-</video>
+[![Click Here!](Assets/MARKDOWN/README/THUMBNAIL-LINUX.png)](Assets/MARKDOWN/README/INSTALLATION-LINUX.mp4)
 
-**Music track:** [Bread by Lukrembo](https://freetouse.com/music)
+**Music track:** [Bread by Lukrembo](https://soundcloud.com/lukrembo/bread)
 **Source:** [https://freetouse.com/music](https://freetouse.com/music)
 **Free Music Without Copyright (Safe)**
 
