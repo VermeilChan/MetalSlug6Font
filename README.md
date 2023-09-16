@@ -45,10 +45,10 @@ View examples of generated images with the available fonts in [EXAMPLE.md](EXAMP
 
 ## Installation
 ### Windows
-[![Click Here!](Assets/MARKDOWN/README/THUMBNAIL-WINDOWS.png)](Assets/MARKDOWN/README/INSTALLATION-WINDOWS.mp4)
+[![Windows](Assets/MARKDOWN/README/THUMBNAIL-WINDOWS.png)]((Assets/MARKDOWN/README/INSTALLATION-WINDOWS.mp4) "Windows Guide")
 
 ### Linux
-[![Click Here!](Assets/MARKDOWN/README/THUMBNAIL-LINUX.png)](Assets/MARKDOWN/README/INSTALLATION-LINUX.mp4)
+[![Linux](Assets/MARKDOWN/README/THUMBNAIL-LINUX.png)]((Assets/MARKDOWN/README/INSTALLATION-LINUX.mp4) "Linux Guide")
 
 **Music track:** [Bread by Lukrembo](https://soundcloud.com/lukrembo/bread)
 **Source:** [https://freetouse.com/music](https://freetouse.com/music)
