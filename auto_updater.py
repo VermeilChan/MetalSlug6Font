@@ -6,7 +6,6 @@ import shutil
 import logging
 import requests
 from logging.handlers import RotatingFileHandler
-from requests.exceptions import RequestException
 
 import semantic_version
 from tqdm import tqdm
@@ -16,7 +15,8 @@ GITHUB_OWNER = 'VermeilChan'
 GITHUB_REPO = 'MetalSlugFont'
 
 # Release settings
-RELEASE_FILE_EXTENSION = '.exe'
+# RELEASE_FILE_EXTENSION_WINDOWS
+RFEW = '.exe'
 CURRENT_VERSION = '0.2.6'
 
 # Logging settings
@@ -53,7 +53,7 @@ def check_for_updates(update_folder):
     retries = 0
     while retries < MAX_RETRIES:
         try:
-            logger.info("Update check started.")
+            logger.info("Checking for updates...")
             latest_version_str, download_url = get_latest_version_and_download_url()
             current_version = semantic_version.Version(CURRENT_VERSION)
             latest_version = semantic_version.Version(latest_version_str)
@@ -63,27 +63,23 @@ def check_for_updates(update_folder):
             else:
                 handle_update_confirmation(download_url, latest_version_str, update_folder)
             break
-        except RequestException as e:
-            handle_request_exception(e, retries)
         except RateLimitExceededError as e:
             handle_rate_limit_exceeded(e)
         except semantic_version.InvalidVersion as e:
             handle_error("Failed to parse version data.", e)
         except click.Abort:
             handle_update_cancelled_by_user()
+        except requests.exceptions.RequestException as e:
+            handle_error("Failed to retrieve release data. Please check your internet connection.", e)
         except Exception as e:
-            handle_error("An unexpected error occurred while checking for updates.", e)
+            handle_error("An unexpected error occurred while processing release data.", e)
         finally:
             logger.info("Update check finished.")
 
     if retries == MAX_RETRIES:
         click.echo("Maximum retry limit reached. Unable to check for updates.")
 
-# Helper functions
-def display_up_to_date_message():
-    logger.info(f"You are currently running version {CURRENT_VERSION}, which is up to date.")
-    click.echo(f"You are currently running version {CURRENT_VERSION}, which is up to date.")
-
+# Function to handle update confirmation
 def handle_update_confirmation(download_url, latest_version_str, update_folder):
     update_confirmation = click.confirm(f"You are currently running version {CURRENT_VERSION}. Do you want to update to version {latest_version_str}?")
     if update_confirmation:
@@ -91,32 +87,29 @@ def handle_update_confirmation(download_url, latest_version_str, update_folder):
     else:
         handle_update_cancelled_by_user()
 
+# Function to handle update
 def handle_update(download_url, latest_version_str, update_folder):
     if is_update_file_exist(download_url):
-        update_file_confirmation = click.confirm("A file with the same name already exists. Do you want to overwrite it?")
-        if not update_file_confirmation:
-            handle_update_cancelled()
-    download_update(download_url, latest_version_str, update_folder)
-
-def handle_request_exception(exception, retries):
-    if 'X-RateLimit-Remaining' in str(exception) and retries < MAX_RETRIES - 1:
-        sleep_time = int(exception.response.headers.get('X-RateLimit-Reset', 0)) - time.time()
-        click.echo(f"Rate limit exceeded. Sleeping for {sleep_time:.0f} seconds until the rate limit is reset.")
-        time.sleep(sleep_time)
+        click.echo("An update file with the same name already exists. Update aborted.")
+        logger.warning("Update file already exists. Update aborted.")
     else:
-        handle_error("Failed to check for updates. Please check your internet connection.", exception)
+        download_update(download_url, latest_version_str, update_folder)
 
+# Function to display up-to-date message
+def display_up_to_date_message():
+    logger.info(f"You are currently running version {CURRENT_VERSION}, which is up to date.")
+    click.echo(f"You are currently running version {CURRENT_VERSION}, which is up to date.")
+
+# Function to handle rate limit exceeded
 def handle_rate_limit_exceeded(exception):
-    click.echo(f"Rate limit exceeded. Sleeping for {exception.sleep_time:.0f} seconds until the rate limit is reset.")
-    time.sleep(exception.sleep_time)
+    sleep_time = exception.sleep_time
+    click.echo(f"Rate limit exceeded. Sleeping for {sleep_time:.0f} seconds until the rate limit is reset.")
+    time.sleep(sleep_time)
 
+# Function to handle update canceled by the user
 def handle_update_cancelled_by_user():
     click.echo(UPDATE_CANCELLED_MESSAGE)
     logger.info(UPDATE_CANCELLED_BY_USER_MESSAGE)
-
-def handle_update_cancelled():
-    click.echo(UPDATE_CANCELLED_MESSAGE)
-    logger.info(UPDATE_CANCELLED_MESSAGE)
 
 # Function to check if an update file already exists
 def is_update_file_exist(download_url):
@@ -127,7 +120,7 @@ def is_update_file_exist(download_url):
 def get_latest_version_and_download_url():
     try:
         headers = {
-            'User-Agent': 'Mozilla/117.0.1 (Windows NT 11.0; Win64; x64; rv:117.0) Gecko/20230901 AppleWebKit/537.43 (KHTML, like Gecko) Chrome/117.0.5938.62 Safari/605.1.15 Edg/116.0.1938.81 OPR/102.0.4871.0 YaBrowser/23.7.0.2592 Firefox/117.0.1'
+            'User-Agent': 'Mozilla/117.0.1 (Windows NT 10.0; Win64; x64; rv:117.0) Gecko/20230901 AppleWebKit/537.43 (KHTML, like Gecko) Chrome/117.0.5938.62 Safari/605.1.15 Edg/116.0.1938.81 OPR/102.0.4871.0 YaBrowser/23.7.0.2592 Firefox/117.0.1'
         }
 
         response = requests.get(f'https://api.github.com/repos/{GITHUB_OWNER}/{GITHUB_REPO}/releases/latest', headers=headers, verify=VERIFY_SSL_CERTIFICATE)
@@ -152,13 +145,11 @@ def get_latest_version_and_download_url():
             return latest_version_str, None
     except requests.exceptions.RequestException as e:
         handle_error("Failed to retrieve release data. Please check your internet connection.", e)
-    except Exception as e:
-        handle_error("An unexpected error occurred while processing release data.", e)
 
 # Function to retrieve the download URL from release data
 def get_download_url(release_data):
     for asset in release_data['assets']:
-        if asset['name'].endswith(RELEASE_FILE_EXTENSION):
+        if asset['name'].endswith(RFEW = '.exe'):
             return asset['browser_download_url']
 
 # Function to download the update
@@ -192,8 +183,6 @@ def download_update(download_url, latest_version_str, update_folder):
         click.echo("Before that, remove the 'MSFONT' folder.\n")
     except requests.exceptions.RequestException as e:
         handle_error("Failed to download the update. Please check your internet connection.", e)
-    except Exception as e:
-        handle_error("An unexpected error occurred while downloading the update.", e)
 
 # Function to log the update
 def log_update(version_str):
