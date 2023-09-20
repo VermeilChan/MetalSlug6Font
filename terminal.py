@@ -5,10 +5,10 @@ import logging
 import argparse
 from logging.handlers import RotatingFileHandler
 
-from main import generate_filename, generate_image_with_filename, get_font_paths
-
 # Prevent the generation of .pyc (Python bytecode) files
 sys.dont_write_bytecode = True
+
+from main import generate_filename, generate_image_with_filename, get_font_paths
 
 # Set up logging to a rotating log file named 'app.log' with a maximum size of 1 MB
 log_filename = 'app.log'
@@ -32,6 +32,9 @@ VALID_COLORS_BY_FONT = {
     5: ["Orange-1"]
 }
 
+# Define a constant for the closing message
+CLOSING_MESSAGE = "Closing..."
+
 # Function to display an introductory message
 def display_intro_message():
     print("Note: Metal Slug Font style conversion may not be compatible with all fonts.")
@@ -49,7 +52,7 @@ def select_font_and_color():
             user_input = input("Choose a font from 1 to 5 (Refer to EXAMPLE.md for Font Preview) or type 'exit' to close: ")
 
             if user_input.lower() == 'exit':
-                print("Closing...")
+                print(CLOSING_MESSAGE)
                 sys.exit(0)
 
             font = int(user_input)
@@ -61,7 +64,7 @@ def select_font_and_color():
                 color_input = input("Enter the color you want to use or type 'exit' to close: ")
 
                 if color_input.lower() == 'exit':
-                    print("Closing...")
+                    print(CLOSING_MESSAGE)
                     sys.exit(0)
                 elif color_input.title() in valid_colors:
                     color_input = color_input.title()
@@ -80,7 +83,7 @@ def select_font_and_color():
 def generate_and_display_image(text, font, color):
     try:
         if text.lower() == 'exit':
-            print("Closing...")
+            print(CLOSING_MESSAGE)
             sys.exit(0)
 
         # Check for empty input
@@ -106,7 +109,7 @@ def generate_and_display_image(text, font, color):
         logger.info(f"Chosen Font: {font}, Chosen Color: {color}, User Input: '{text}'")
 
     except KeyboardInterrupt:
-        print("Closing...")
+        print(CLOSING_MESSAGE)
         sys.exit(0)
     except FileNotFoundError as e:
         error_message = f"Font file not found: {e.filename}"
@@ -129,7 +132,7 @@ def main():
             text = get_user_input()
             generate_and_display_image(text, font, color)
     except KeyboardInterrupt:
-        print("Closing...")
+        print(CLOSING_MESSAGE)
         sys.exit(0)
     except Exception as e:
         error_message = f"An unexpected error occurred: {e}"
@@ -150,7 +153,7 @@ if __name__ == "__main__":
         logger.setLevel(args.log_level)
         main()
     except KeyboardInterrupt:
-        print("Closing...")
+        print(CLOSING_MESSAGE)
         sys.exit(0)
     except Exception as e:
         error_message = f"An unexpected error occurred: {e}"
