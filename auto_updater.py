@@ -11,14 +11,28 @@ from requests.exceptions import RequestException
 import semantic_version
 from tqdm import tqdm
 
-# Constants
+# GitHub settings
 GITHUB_OWNER = 'VermeilChan'
 GITHUB_REPO = 'MetalSlugFont'
+
+# Release settings
 RELEASE_FILE_EXTENSION = '.exe'
 CURRENT_VERSION = '0.2.6'
+
+# Logging settings
 LOG_FILE = 'updates.log'
+
+# Download settings
 DOWNLOAD_FOLDER = os.path.expanduser('~/Downloads')
+
+# Security settings
 VERIFY_SSL_CERTIFICATE = True
+
+# Update messages
+UPDATE_CANCELLED_MESSAGE = "Update canceled."
+UPDATE_CANCELLED_BY_USER_MESSAGE = "Update canceled by the user."
+
+# Retry settings
 MAX_RETRIES = 3
 
 # Configure the logger
@@ -45,41 +59,18 @@ def check_for_updates(update_folder):
             latest_version = semantic_version.Version(latest_version_str)
 
             if latest_version == current_version:
-                logger.info(f"You are currently running version {CURRENT_VERSION}, which is up to date.")
-                click.echo(f"You are currently running version {CURRENT_VERSION}, which is up to date.")
+                display_up_to_date_message()
             else:
-                update_confirmation = click.confirm(f"You are currently running version {CURRENT_VERSION}. Do you want to update to version {latest_version_str}?")
-
-                if update_confirmation:
-                    if is_update_file_exist(download_url):
-                        update_file_confirmation = click.confirm("A file with the same name already exists. Do you want to overwrite it?")
-                        if not update_file_confirmation:
-                            click.echo("Update canceled.")
-                            logger.info("Update canceled by the user.")
-                            return
-                    download_update(download_url, latest_version_str, update_folder)
-                else:
-                    click.echo("Update canceled.")
-                    logger.info("Update canceled by the user.")
+                handle_update_confirmation(download_url, latest_version_str, update_folder)
             break
         except RequestException as e:
-            if 'X-RateLimit-Remaining' in str(e) and retries < MAX_RETRIES - 1:
-                sleep_time = int(e.response.headers.get('X-RateLimit-Reset', 0)) - time.time()
-                click.echo(f"Rate limit exceeded. Sleeping for {sleep_time:.0f} seconds until the rate limit is reset.")
-                time.sleep(sleep_time)
-                retries += 1
-                continue
-            else:
-                handle_error("Failed to check for updates. Please check your internet connection.", e)
+            handle_request_exception(e, retries)
         except RateLimitExceededError as e:
-            click.echo(f"Rate limit exceeded. Sleeping for {e.sleep_time:.0f} seconds until the rate limit is reset.")
-            time.sleep(e.sleep_time)
-            retries += 1
+            handle_rate_limit_exceeded(e)
         except semantic_version.InvalidVersion as e:
             handle_error("Failed to parse version data.", e)
         except click.Abort:
-            click.echo("Update canceled.")
-            logger.info("Update canceled by the user.")
+            handle_update_cancelled_by_user()
         except Exception as e:
             handle_error("An unexpected error occurred while checking for updates.", e)
         finally:
@@ -88,9 +79,44 @@ def check_for_updates(update_folder):
     if retries == MAX_RETRIES:
         click.echo("Maximum retry limit reached. Unable to check for updates.")
 
-# Function to check if the download folder is available
-def is_download_folder_available(download_folder):
-    return os.path.isdir(download_folder)
+# Helper functions
+def display_up_to_date_message():
+    logger.info(f"You are currently running version {CURRENT_VERSION}, which is up to date.")
+    click.echo(f"You are currently running version {CURRENT_VERSION}, which is up to date.")
+
+def handle_update_confirmation(download_url, latest_version_str, update_folder):
+    update_confirmation = click.confirm(f"You are currently running version {CURRENT_VERSION}. Do you want to update to version {latest_version_str}?")
+    if update_confirmation:
+        handle_update(download_url, latest_version_str, update_folder)
+    else:
+        handle_update_cancelled_by_user()
+
+def handle_update(download_url, latest_version_str, update_folder):
+    if is_update_file_exist(download_url):
+        update_file_confirmation = click.confirm("A file with the same name already exists. Do you want to overwrite it?")
+        if not update_file_confirmation:
+            handle_update_cancelled()
+    download_update(download_url, latest_version_str, update_folder)
+
+def handle_request_exception(exception, retries):
+    if 'X-RateLimit-Remaining' in str(exception) and retries < MAX_RETRIES - 1:
+        sleep_time = int(exception.response.headers.get('X-RateLimit-Reset', 0)) - time.time()
+        click.echo(f"Rate limit exceeded. Sleeping for {sleep_time:.0f} seconds until the rate limit is reset.")
+        time.sleep(sleep_time)
+    else:
+        handle_error("Failed to check for updates. Please check your internet connection.", exception)
+
+def handle_rate_limit_exceeded(exception):
+    click.echo(f"Rate limit exceeded. Sleeping for {exception.sleep_time:.0f} seconds until the rate limit is reset.")
+    time.sleep(exception.sleep_time)
+
+def handle_update_cancelled_by_user():
+    click.echo(UPDATE_CANCELLED_MESSAGE)
+    logger.info(UPDATE_CANCELLED_BY_USER_MESSAGE)
+
+def handle_update_cancelled():
+    click.echo(UPDATE_CANCELLED_MESSAGE)
+    logger.info(UPDATE_CANCELLED_MESSAGE)
 
 # Function to check if an update file already exists
 def is_update_file_exist(download_url):
