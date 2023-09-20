@@ -15,7 +15,6 @@ GITHUB_OWNER = 'VermeilChan'
 GITHUB_REPO = 'MetalSlugFont'
 
 # Release settings
-# RELEASE_FILE_EXTENSION_WINDOWS
 RFEW = '.exe'
 CURRENT_VERSION = '0.2.6'
 
@@ -66,13 +65,13 @@ def check_for_updates(update_folder):
         except RateLimitExceededError as e:
             handle_rate_limit_exceeded(e)
         except semantic_version.InvalidVersion as e:
-            handle_error("Failed to parse version data.", e)
+            handle_error("Failed to parse version data: %s", e)
         except click.Abort:
             handle_update_cancelled_by_user()
         except requests.exceptions.RequestException as e:
-            handle_error("Failed to retrieve release data. Please check your internet connection.", e)
+            handle_error("Failed to retrieve release data. Please check your internet connection: %s", e)
         except Exception as e:
-            handle_error("An unexpected error occurred while processing release data.", e)
+            handle_error("An unexpected error occurred while processing release data: %s", e)
         finally:
             logger.info("Update check finished.")
 
@@ -144,12 +143,12 @@ def get_latest_version_and_download_url():
         else:
             return latest_version_str, None
     except requests.exceptions.RequestException as e:
-        handle_error("Failed to retrieve release data. Please check your internet connection.", e)
+        handle_error("Failed to retrieve release data. Please check your internet connection: %s", e)
 
 # Function to retrieve the download URL from release data
 def get_download_url(release_data):
     for asset in release_data['assets']:
-        if asset['name'].endswith(RFEW = '.exe'):
+        if asset['name'].endswith(RFEW):
             return asset['browser_download_url']
 
 # Function to download the update
@@ -182,7 +181,7 @@ def download_update(download_url, latest_version_str, update_folder):
         click.echo("Go to your downloads folder and reinstall the program.")
         click.echo("Before that, remove the 'MSFONT' folder.\n")
     except requests.exceptions.RequestException as e:
-        handle_error("Failed to download the update. Please check your internet connection.", e)
+        handle_error("Failed to download the update. Please check your internet connection: %s", e)
 
 # Function to log the update
 def log_update(version_str):
@@ -194,7 +193,7 @@ def log_update(version_str):
         else:
             click.echo("The log file is not writable. The update could not be logged.")
     except Exception as e:
-        handle_error("Failed to log the update.", e)
+        handle_error("Failed to log the update: %s", e)
 
 # Function to check if the log file is writable
 def is_log_file_writable():
@@ -202,8 +201,8 @@ def is_log_file_writable():
 
 # Function to handle errors
 def handle_error(message, error):
-    logger.error(f"{message}: {error}")
-    click.echo(f"An error occurred: {error}")
+    logger.error(message, error)
+    click.echo("An error occurred: %s" % error)
 
 # Entry point of the script
 if __name__ == '__main__':
