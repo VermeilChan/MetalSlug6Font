@@ -7,6 +7,7 @@
 [![Open Issues](https://img.shields.io/github/issues/VermeilChan/MetalSlugFont.svg?color=red)](https://github.com/VermeilChan/MetalSlugFont/issues)
 [![Open Pull Requests](https://img.shields.io/github/issues-pr/VermeilChan/MetalSlugFont.svg?color=yellow)](https://github.com/VermeilChan/MetalSlugFont/pulls)
 [![Last Commit](https://img.shields.io/github/last-commit/VermeilChan/MetalSlugFont.svg?color=green)](https://github.com/VermeilChan/MetalSlugFont/commits/experimental)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/19bbe49a47c04243991c02e43aa6f966)](https://app.codacy.com/gh/VermeilChan/MetalSlugFont/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 [![DeepSource](https://app.deepsource.com/gh/VermeilChan/MetalSlugFont.svg/?label=active+issues&show_trend=true&token=fXTu8KET6ZYQaBnVf6JdWq5z)](https://app.deepsource.com/gh/VermeilChan/MetalSlugFont/?ref=repository-badge)
 [![DeepSource](https://app.deepsource.com/gh/VermeilChan/MetalSlugFont.svg/?label=resolved+issues&show_trend=true&token=fXTu8KET6ZYQaBnVf6JdWq5z)](https://app.deepsource.com/gh/VermeilChan/MetalSlugFont/?ref=repository-badge)
 
@@ -18,7 +19,6 @@ A tool for creating images with the iconic Metal Slug font.
 - [Features](#features)
 - [Preview Fonts](#preview-fonts)
 - [Using MSFONT](#using-msfont)
-- [Installation](#installation)
 - [Contributing](#contributing)
 - [License](#license)
 - [Credits](#credits)
@@ -44,17 +44,6 @@ View examples of generated images with the available fonts in [EXAMPLE.md](EXAMP
    - For specific fonts, type `Orange-1` for Orange 1.
    - For other fonts, type `Orange-2` for Orange 2.
 6. The generated image will be saved to your desktop.
-
-## Installation
-### Windows
-[![Windows](Assets/MARKDOWN/README/THUMBNAIL-WINDOWS.png)]((https://i.imgur.com/MIC4sgi.mp4) "Windows Guide")
-
-### Linux
-[![Linux](Assets/MARKDOWN/README/THUMBNAIL-LINUX.png)](() "Linux Guide")
-
-**Music track:** [Bread by Lukrembo](https://soundcloud.com/lukrembo/bread)
-**Source:** [https://freetouse.com/music](https://freetouse.com/music)
-**Free Music Without Copyright (Safe)**
 
 ## Contributing
 Contributions are highly encouraged! If you encounter issues or have suggestions for improvements, please feel free to [Open An Issue](https://github.com/VermeilChan/MetalSlugFont/issues) or submit a pull request [Pull Request](https://github.com/VermeilChan/MetalSlugFont/pulls).
