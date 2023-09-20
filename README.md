@@ -13,20 +13,20 @@
 
 A tool for creating images with the iconic Metal Slug font.
 
-#### **Note:** The web app is no longer actively maintained, and it might be down at any time. However, if someone cannot use the terminal-based version, I may consider working on it again in the future.
+#### **Note:** The web app is no longer actively maintained, and it might be down at any time. However, if someone cannot use the terminal-based version, I may consider working on it again in the future. [Web App](https://vermeil.pythonanywhere.com/) Only Font 5
 
 ## Table of Contents
 - [Features](#features)
 - [Preview Fonts](#preview-fonts)
-- [Using MSFONT](#using-msfont)
+  - [Using MSFONT](#using-msfont)
 - [Contributing](#contributing)
 - [License](#license)
 - [Credits](#credits)
-- [Contact](#contact)
+  - [Contact](#contact)
 
 ## Features
 - Convert text into images with the iconic Metal Slug font.
-- Support for Uppercase and Lowercase Alphabets (A-Z, a-z), Numbers (0-9), and Symbols.
+  - Support for Uppercase and Lowercase Alphabets (A-Z, a-z), Numbers (0-9), and Symbols.
   For more information, see [SUPPORTED.md](SUPPORTED.md).
 
 **Note:** The MetalSlugFont may not be compatible with all fonts. Some fonts may lack certain features such as Uppercase and Lowercase Letters (A-Z, a-z), Numbers (0-9), or Symbols.
@@ -41,7 +41,7 @@ View examples of generated images with the available fonts in [EXAMPLE.md](EXAMP
 4. Follow the on-screen instructions or refer to the [Setup Guide](GUIDE.md) and [Supported Characters](SUPPORTED.md) for creating Metal Slug font images.
 5. Enter one of the following color options based on the font you've chosen:
    - For some fonts, type `Blue` for the color Blue.
-   - For specific fonts, type `Orange-1` for Orange 1.
+     - For specific fonts, type `Orange-1` for Orange 1.
    - For other fonts, type `Orange-2` for Orange 2.
 6. The generated image will be saved to your desktop.
 
@@ -62,7 +62,7 @@ If you have any questions, suggestions, or need assistance, please don't hesitat
 - **Discord:** [mommy_vermeil](https://discord.com/users/857841811736100925)
 - **Twitter:** [@VermeilChan2](https://twitter.com/VermeilChan2)
 - **GitHub Issues:** [Project Issues](https://github.com/VermeilChan/MetalSlugFont/issues)
-- **Reddit:** [_Vermeil_](https://www.reddit.com/user/_Vermeil_)
+  - **Reddit:** [_Vermeil_](https://www.reddit.com/user/_Vermeil_)
 - **Stack Overflow:** [Vermeil](https://stackoverflow.com/users/20787000/vermeil)
 
 Feel free to reach out via any of these platforms. I'm most active on Discord and GitHub, so you can expect a quick response there. Whether it's Discord, GitHub Issues, or other social media, I'm here to help and hear your feedback.

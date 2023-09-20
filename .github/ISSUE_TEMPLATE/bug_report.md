@@ -11,8 +11,8 @@ assignees: VermeilChan
 A clear and concise description of what the bug is.
 
 **Environment Information**
-- Operating System: [Windows 10/Linux/MacOS]
-- Version of the program: [e.g., 1.0.0]
+- Operating System: [Windows/Linux/MacOS]
+- Version of the program: e.g., 0.1.5
 
 **To Reproduce**
 Steps to reproduce the behavior:

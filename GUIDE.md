@@ -25,10 +25,10 @@ Follow these steps to get started with MSFONT and create Metal Slug-style text:
 ## 4. Choosing a Color
 
 1. After selecting the font, available color options will depend on your chosen font.
-2. Enter one of the following color options based on your font choice:
-   - For certain fonts, type `Blue` for the color Blue.
-   - For specific fonts, type `Orange-1` for Orange 1.
-   - For other fonts, type `Orange-2` for Orange 2.
+ 2. Enter one of the following color options based on your font choice:
+     - For certain fonts, type `Blue` for the color Blue.
+     - For specific fonts, type `Orange-1` for Orange 1.
+     - For other fonts, type `Orange-2` for Orange 2.
 
 ## 5. Input Text
 
@@ -48,7 +48,7 @@ After pressing 'Enter', the program will generate the stylized text image, which
 
 ### Pre-Release (Portable Version)
 
-1. Click on the latest workflow on the [GitHub Actions Page](https://github.com/VermeilChan/MetalSlugFont/actions).
+ 1. Click on the latest workflow on the [GitHub Actions Page](https://github.com/VermeilChan/MetalSlugFont/actions).
 
 ![Pre-Release Download](Assets/MARKDOWN/GUIDE/GITHUB-ACTIONS-SELECT.png)
 
