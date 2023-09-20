@@ -119,7 +119,7 @@ def is_update_file_exist(download_url):
 def get_latest_version_and_download_url():
     try:
         headers = {
-            'User-Agent': 'Mozilla/117.0.1 (Windows NT 10.0; Win64; x64; rv:117.0) Gecko/20230901 AppleWebKit/537.43 (KHTML, like Gecko) Chrome/117.0.5938.62 Safari/605.1.15 Edg/116.0.1938.81 OPR/102.0.4871.0 YaBrowser/23.7.0.2592 Firefox/117.0.1'
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/616.17.13 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36'
         }
 
         response = requests.get(f'https://api.github.com/repos/{GITHUB_OWNER}/{GITHUB_REPO}/releases/latest', headers=headers, verify=VERIFY_SSL_CERTIFICATE)
@@ -217,3 +217,5 @@ if __name__ == '__main__':
             break
         else:
             click.echo("Invalid input. Please type 'Update' to check for updates or 'exit' to exit.")
+
+
