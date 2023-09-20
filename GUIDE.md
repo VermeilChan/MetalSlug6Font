@@ -1,4 +1,4 @@
-# How to Use MSFONT (Stable)
+# How to Use MSFONT (Stable Release)
 
 Follow these steps to get started with MSFONT and create Metal Slug-style text:
 
