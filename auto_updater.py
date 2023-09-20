@@ -5,10 +5,11 @@ import click
 import shutil
 import logging
 import requests
-from logging.handlers import RotatingFileHandler
-
 import semantic_version
+
 from tqdm import tqdm
+from fake_useragent import UserAgent
+from logging.handlers import RotatingFileHandler
 
 # GitHub settings
 GITHUB_OWNER = 'VermeilChan'
@@ -46,6 +47,11 @@ logger.addHandler(handler)
 class RateLimitExceededError(Exception):
     def __init__(self, sleep_time):
         self.sleep_time = sleep_time
+
+# Function to generate a random user agent
+def get_random_user_agent():
+    user_agent = UserAgent()
+    return user_agent.random
 
 # Function to check for updates
 def check_for_updates(update_folder):
@@ -119,7 +125,7 @@ def is_update_file_exist(download_url):
 def get_latest_version_and_download_url():
     try:
         headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/616.17.13 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36'
+            'User-Agent': get_random_user_agent()  # Use random user agent
         }
 
         response = requests.get(f'https://api.github.com/repos/{GITHUB_OWNER}/{GITHUB_REPO}/releases/latest', headers=headers, verify=VERIFY_SSL_CERTIFICATE)
@@ -187,8 +193,8 @@ def download_update(download_url, latest_version_str, update_folder):
 def log_update(version_str):
     try:
         if is_log_file_writable():
-            with open(LOG_FILE, 'a') as log:
-                log.write(f"\nUpdated to version {version_str}")
+            with open(LOG_FILE, 'a'):
+                print(f"\nUpdated to version {version_str}")
                 logger.info(f"Updated to version {version_str}")
         else:
             click.echo("The log file is not writable. The update could not be logged.")
