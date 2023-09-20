@@ -95,11 +95,11 @@ def generate_and_display_image(text, font, color):
 
         font_paths = get_font_paths(font, color)
 
-        img_path, error_message = generate_image_with_filename(text, filename, font_paths)
+        img_path, error_message_generate = generate_image_with_filename(text, filename, font_paths)
 
-        if error_message:
-            print(f"Error: {error_message}")
-            logger.error(error_message)
+        if error_message_generate:
+            print(f"Error: {error_message_generate}")
+            logger.error(error_message_generate)
         else:
             print(f"Image successfully generated and saved as: {img_path}")
             logger.info(f"Generated Image Path: '{img_path}'")
@@ -112,14 +112,14 @@ def generate_and_display_image(text, font, color):
         print(CLOSING_MESSAGE)
         sys.exit(0)
     except FileNotFoundError as e:
-        error_message = f"Font file not found: {e.filename}"
-        print(error_message)
-        logger.error(error_message)
+        error_message_generate = f"Font file not found: {e.filename}"
+        print(error_message_generate)
+        logger.error(error_message_generate)
         logger.debug(e, exc_info=True)
     except Exception as e:
-        error_message = f"An error occurred: {e}"
-        print(error_message)
-        logger.exception(error_message)
+        error_message_generate = f"An error occurred: {e}"
+        print(error_message_generate)
+        logger.exception(error_message_generate)
 
 # The main function of the program
 def main():
@@ -135,9 +135,9 @@ def main():
         print(CLOSING_MESSAGE)
         sys.exit(0)
     except Exception as e:
-        error_message = f"An unexpected error occurred: {e}"
-        print(error_message)
-        logger.exception(error_message)
+        error_message_main = f"An unexpected error occurred: {e}"
+        print(error_message_main)
+        logger.exception(error_message_main)
 
     finally:
         logging.shutdown()
@@ -156,9 +156,9 @@ if __name__ == "__main__":
         print(CLOSING_MESSAGE)
         sys.exit(0)
     except Exception as e:
-        error_message = f"An unexpected error occurred: {e}"
-        print(error_message)
-        logger.exception(error_message)
+        error_message_main = f"An unexpected error occurred: {e}"
+        print(error_message_main)
+        logger.exception(error_message_main)
 
     finally:
         logging.shutdown()
