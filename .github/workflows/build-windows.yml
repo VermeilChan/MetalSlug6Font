@@ -1,5 +1,5 @@
 # Define the name of the workflow
-name: Build and Upload MSFONT Windows
+name: Build, Upload, and Run MSFONT Windows
 
 # Trigger the workflow when code is pushed to the "experimental" branch
 on:
@@ -20,17 +20,15 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4.0.0
 
-    # Step 2: Set up the Python environment
+    # Step 2: Set up Python
     - name: Set up Python
       uses: actions/setup-python@v4.7.0
       with:
-        # Specify the Python version to be used
         python-version: 3.11.5
 
     # Step 3: Install Python dependencies from requirements.txt
     - name: Install Python dependencies
       run: |
-        # Upgrade pip and install dependencies from requirements.txt
         python -m pip install --upgrade pip
         pip install -r requirements.txt
       working-directory: ${{ github.workspace }}
@@ -38,45 +36,54 @@ jobs:
     # Step 4: Check and update outdated Python packages
     - name: Check and Update Python packages
       run: |
-        # Check for outdated packages
         python -m pip list --outdated
-
-        # Update outdated packages
         python -m pip install --upgrade $(python -m pip list --outdated | awk '{print $1}' | tail -n +3)
       working-directory: ${{ github.workspace }}
 
     # Step 5: Build the MSFONT application using PyInstaller
     - name: Build MSFONT
       run: |
-        # Use PyInstaller to build the application with specified options
         pyinstaller --noconfirm --onedir --console --icon "${{ env.MSFONT_ICON_PATH }}" --name "MSFONT" --add-data "main.py;." --add-data "Assets;Assets/" "terminal.py"
       env:
-        # Define an environment variable for the path to the application icon
         MSFONT_ICON_PATH: Assets/ICON/Sv-001.ico
 
     # Step 6: Build the UPDATER application using PyInstaller
     - name: Build UPDATER
       run: |
-        # Use PyInstaller to build the UPDATER application with specified options
         pyinstaller --noconfirm --onefile --console --icon "${{ env.UPDATER_ICON_PATH }}" --name "UPDATER" "auto_updater.py"
       env:
-        # Define an environment variable for the path to the UPDATER application icon
         UPDATER_ICON_PATH: Assets/ICON/Sv-001-UPDATER.ico
 
     # Step 7: Upload the built artifacts for MSFONT
     - name: Upload MSFONT artifacts
       uses: actions/upload-artifact@v3.1.3
       with:
-        # Specify the name for the uploaded artifact
         name: MSFONT
-        # Specify the path where the artifacts are located
         path: dist/MSFONT
 
     # Step 8: Upload the built artifacts for UPDATER
     - name: Upload UPDATER artifacts
       uses: actions/upload-artifact@v3.1.3
       with:
-        # Specify the name for the uploaded artifact
         name: UPDATER
-        # Specify the path where the artifacts are located
         path: dist/UPDATER.exe
+
+    # Step 9: Run MSFONT.exe and simulate keyboard input
+    - name: Run MSFONT and type
+      run: |
+        cd ${{ github.workspace }}/dist/MSFONT
+        Start-Process -FilePath "MSFONT.exe" -Wait -NoNewWindow | ForEach-Object {
+          Start-Sleep -Milliseconds 3000
+          [System.Windows.Forms.SendKeys]::SendWait("1")
+          Start-Sleep -Milliseconds 3000
+          [System.Windows.Forms.SendKeys]::SendWait("{ENTER}")
+          Start-Sleep -Milliseconds 3000
+          [System.Windows.Forms.SendKeys]::SendWait("Blue")
+          Start-Sleep -Milliseconds 3000
+          [System.Windows.Forms.SendKeys]::SendWait("{ENTER}")
+          Start-Sleep -Milliseconds 3000
+          [System.Windows.Forms.SendKeys]::SendWait("Cat")
+          Start-Sleep -Milliseconds 3000
+          [System.Windows.Forms.SendKeys]::SendWait("{ENTER}")
+        }
+      working-directory: ${{ github.workspace }}/dist/MSFONT
