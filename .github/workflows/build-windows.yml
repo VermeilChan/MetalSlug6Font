@@ -68,22 +68,4 @@ jobs:
         name: UPDATER
         path: dist/UPDATER.exe
 
-    # Step 9: Run MSFONT.exe and simulate keyboard input
-    - name: Run MSFONT and type
-      run: |
-        cd ${{ github.workspace }}/dist/MSFONT
-        Start-Process -FilePath "MSFONT.exe" -Wait -NoNewWindow | ForEach-Object {
-          Start-Sleep -Milliseconds 3000
-          [System.Windows.Forms.SendKeys]::SendWait("1")
-          Start-Sleep -Milliseconds 3000
-          [System.Windows.Forms.SendKeys]::SendWait("{ENTER}")
-          Start-Sleep -Milliseconds 3000
-          [System.Windows.Forms.SendKeys]::SendWait("Blue")
-          Start-Sleep -Milliseconds 3000
-          [System.Windows.Forms.SendKeys]::SendWait("{ENTER}")
-          Start-Sleep -Milliseconds 3000
-          [System.Windows.Forms.SendKeys]::SendWait("Cat")
-          Start-Sleep -Milliseconds 3000
-          [System.Windows.Forms.SendKeys]::SendWait("{ENTER}")
-        }
-      working-directory: ${{ github.workspace }}/dist/MSFONT
+
