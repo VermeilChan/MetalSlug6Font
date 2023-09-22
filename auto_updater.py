@@ -5,6 +5,8 @@ import click
 import shutil
 import logging
 import requests
+import platform
+import subprocess
 import semantic_version
 
 from tqdm import tqdm
@@ -70,12 +72,6 @@ def check_for_updates(update_folder):
             break
         except RateLimitExceededError as e:
             handle_rate_limit_exceeded(e)
-        except semantic_version.InvalidVersion as e:
-            handle_error("Failed to parse version data: %s", e)
-        except click.Abort:
-            handle_update_cancelled_by_user()
-        except requests.exceptions.RequestException as e:
-            handle_error("Failed to retrieve release data. Please check your internet connection: %s", e)
         except Exception as e:
             handle_error("An unexpected error occurred while processing release data: %s", e)
         finally:
@@ -187,7 +183,19 @@ def download_update(download_url, latest_version_str, update_folder):
         click.echo("Go to your downloads folder and reinstall the program.")
         click.echo("Before that, remove the 'MSFONT' folder.\n")
 
-        os.system(download_path) 
+        # Wait for 3 seconds before running the updated MSFONT.exe
+        time.sleep(3)
+
+        # Check the operating system and run accordingly
+        system = platform.system()
+        if system == 'Windows':
+            subprocess.Popen([download_path])
+        elif system == 'Linux':
+            subprocess.Popen(['wine', download_path])
+        elif system == 'Darwin':
+            subprocess.Popen(['wine', download_path])
+        else:
+            click.echo("Unsupported operating system.")
 
     except requests.exceptions.RequestException as e:
         handle_error("Failed to download the update. Please check your internet connection: %s", e)
