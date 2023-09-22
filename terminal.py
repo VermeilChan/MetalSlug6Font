@@ -68,7 +68,7 @@ def select_font_and_color():
                     sys.exit(0)
                 elif color_input.title() in valid_colors:
                     color_input = color_input.title()
-                    logger.info(f"Chosen Font: {font}, Chosen Color: {color_input}")
+                    logger.info("Chosen Font: %s, Chosen Color: %s", font, color_input)
                     return font, color_input
                 else:
                     print("Invalid color. Please choose a valid color.")
@@ -99,14 +99,14 @@ def generate_and_display_image(text, font, color):
 
         if error_message_generate:
             print(f"Error: {error_message_generate}")
-            logger.error(error_message_generate)
+            logger.error("Error: %s", error_message_generate)
         else:
             print(f"Image successfully generated and saved as: {img_path}")
-            logger.info(f"Generated Image Path: '{img_path}'")
+            logger.info("Image successfully generated and saved as: %s", img_path)
             print(f"You can find the image on your desktop: {os.path.abspath(os.path.join(os.path.expanduser('~'), 'Desktop', img_path))}")
 
         # Log chosen font, chosen color, and user input
-        logger.info(f"Chosen Font: {font}, Chosen Color: {color}, User Input: '{text}'")
+        logger.info("Chosen Font: %s, Chosen Color: %s, User Input: '%s'", font, color, text)
 
     except KeyboardInterrupt:
         print(CLOSING_MESSAGE)
@@ -114,12 +114,12 @@ def generate_and_display_image(text, font, color):
     except FileNotFoundError as e:
         error_message_generate = f"Font file not found: {e.filename}"
         print(error_message_generate)
-        logger.error(error_message_generate)
+        logger.error("Font file not found: %s", e.filename)
         logger.debug(e, exc_info=True)
     except Exception as e:
         error_message_generate = f"An error occurred: {e}"
         print(error_message_generate)
-        logger.exception(error_message_generate)
+        logger.exception("An error occurred: %s", e)
 
 # The main function of the program
 def main():
@@ -137,7 +137,7 @@ def main():
     except Exception as e:
         error_message_main = f"An unexpected error occurred: {e}"
         print(error_message_main)
-        logger.exception(error_message_main)
+        logger.exception("An unexpected error occurred: %s", e)
 
     finally:
         logging.shutdown()
@@ -158,9 +158,7 @@ if __name__ == "__main__":
     except Exception as e:
         error_message_main = f"An unexpected error occurred: {e}"
         print(error_message_main)
-        logger.exception(error_message_main)
+        logger.exception("An unexpected error occurred: %s", e)
 
     finally:
         logging.shutdown()
-
-
