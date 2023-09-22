@@ -43,14 +43,14 @@ jobs:
     # Step 5: Build the MSFONT application using PyInstaller
     - name: Build MSFONT
       run: |
-        pyinstaller --noconfirm --onedir --console --icon "${{ env.MSFONT_ICON_PATH }}" --name "MSFONT" --add-data "main.py;." --add-data "Assets;Assets/" "terminal.py"
+        pyinstaller --noconfirm --onedir --console --icon "${{ env.MSFONT_ICON_PATH }}" --name "MSFONT" --version-file "config.yml" --add-data "main.py;." --add-data "Assets;Assets/"  "terminal.py"
       env:
         MSFONT_ICON_PATH: Assets/ICON/Sv-001.ico
 
     # Step 6: Build the UPDATER application using PyInstaller
     - name: Build UPDATER
       run: |
-        pyinstaller --noconfirm --onefile --console --icon "${{ env.UPDATER_ICON_PATH }}" --name "UPDATER" "auto_updater.py"
+        pyinstaller --noconfirm --onefile --console --icon "${{ env.UPDATER_ICON_PATH }}" --name "UPDATER" --version-file "version.yml"  "auto_updater.py"
       env:
         UPDATER_ICON_PATH: Assets/ICON/Sv-001-UPDATER.ico
 
