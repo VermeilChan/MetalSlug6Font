@@ -8,8 +8,6 @@ from PIL import Image, UnidentifiedImageError
 SPACE_WIDTH = 30
 MAX_FILENAME_LENGTH = 255
 DESKTOP_PATH = os.path.expanduser("~/Desktop")
-
-# Define special characters mapping
 SPECIAL_CHARACTERS = {
     '!': 'Exclamation', '?': 'Question', "'": 'Apostrophe', '*': 'Asterisk',
     ')': 'Bracket-Left', '}': 'Bracket-Left-2', ']': 'Bracket-Left-3',
