@@ -8,7 +8,7 @@ from logging.handlers import RotatingFileHandler
 # Prevent the generation of .pyc (Python bytecode) files
 sys.dont_write_bytecode = True
 
-from main import generate_filename, generate_image_with_filename, get_font_paths
+from main import generate_filename, generate_image, get_font_paths
 
 # Set up logging to a rotating log file named 'app.log' with a maximum size of 1 MB
 log_filename = 'app.log'
@@ -95,7 +95,7 @@ def generate_and_display_image(text, font, color):
 
         font_paths = get_font_paths(font, color)
 
-        img_path, error_message_generate = generate_image_with_filename(text, filename, font_paths)
+        img_path, error_message_generate = generate_image(text, filename, font_paths)
 
         if error_message_generate:
             print(f"Error: {error_message_generate}")
