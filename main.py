@@ -63,53 +63,51 @@ def get_character_image_path(char, font_paths):
         return None
     return char_img_path
 
-# Function to create a dictionary of character images and calculate image height
-def create_char_images(text, font_paths):
-    char_images = {}
+# Generates an image from the given text using character images from specified fonts.
+def generate_image(text, filename, font_paths):
     img_height = None
+    char_images = {}
+    img_path = os.path.join(DESKTOP_PATH, filename)
 
-    for char in text:
-        if char == ' ':
-            continue
-
-        char_img_path = get_character_image_path(char, font_paths)
-        if char_img_path is None:
-            print(f"Character image not found for '{char}'. Skipping.")
-            continue
-
-        with Image.open(char_img_path).convert('RGBA') as char_img:
-            char_images[char] = char_img
-            img_height = char_img.size[1] if img_height is None else img_height
-
-    return char_images, img_height
-
-# Function to create the final image from character images
-def create_final_image(char_images, text, img_height):
-    chars = [(char_images[char], SPACE_WIDTH if char == ' ' else char_images[char].size[0]) for char in text]
-    total_width = sum(char_width for _, char_width in chars)
-
-    with Image.new('RGBA', (total_width, img_height), (0, 0, 0, 0)) as img:
-        x = 0
-        for char_img, char_width in chars:
-            img.paste(char_img, (x, 0), char_img)
-            x += char_width
-
-    return img
-
-# Function to generate an image with a given filename
-def generate_image_with_filename(text, filename, font_paths):
     try:
-        char_images, img_height = create_char_images(text, font_paths)
-        img = create_final_image(char_images, text, img_height)
+        total_width = 0
 
-        img_path = os.path.join(DESKTOP_PATH, filename)
-        img.save(img_path)
-        
-        return filename, None
+        # Iterate through each character in the input text
+        for char in text:
+            if char == ' ':
+                # Create an empty space character image
+                char_img = Image.new("RGBA", (SPACE_WIDTH, img_height or 1), (0, 0, 0, 0))
+            else:
+                # Get the path to the character image based on the font
+                char_img_path = get_character_image_path(char, font_paths)
+                if not char_img_path:
+                    raise FileNotFoundError(f"Image not found for character '{char}'")
+                char_img = Image.open(char_img_path).convert("RGBA")
 
-    except (FileNotFoundError, UnidentifiedImageError, ValueError) as e:
-        return None, f"Error: {str(e)}"
+            char_images[char] = char_img
+            img_height = char_img.height if img_height is None else img_height
+            total_width += char_img.width
+
+        # Create the final image and paste character images into it
+        final_img = Image.new("RGBA", (total_width, img_height), (0, 0, 0, 0))
+        x = 0
+
+        for char in text:
+            final_img.paste(char_images[char], (x, 0))
+            x += char_images[char].width
+
+        # Save the final image
+        final_img.save(img_path)
+
+        return (filename, None)
+
+    except FileNotFoundError as e:
+        return (None, f"Error: Image not found for character '{char}'")
+    except UnidentifiedImageError as e:
+        return (None, "Error: Unable to identify image")
+    except ValueError as e:
+        return (None, f"Error: Invalid value - {str(e)}")
     except Exception as e:
-        return None, f"An unexpected error occurred: {str(e)}"
+        return (None, f"An unexpected error occurred: {str(e)}")
 
 
