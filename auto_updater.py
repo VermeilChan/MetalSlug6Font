@@ -82,7 +82,7 @@ def check_for_updates(update_folder):
 
 # Function to handle update confirmation
 def handle_update_confirmation(download_url, latest_version_str, update_folder):
-    update_confirmation = click.confirm(f"You are currently running version {CURRENT_VERSION}. Do you want to update to version {latest_version_str}?")
+    update_confirmation = click.confirm("You are currently running version %s. Do you want to update to version %s?" % (CURRENT_VERSION, latest_version_str))
     if update_confirmation:
         handle_update(download_url, latest_version_str, update_folder)
     else:
@@ -98,13 +98,13 @@ def handle_update(download_url, latest_version_str, update_folder):
 
 # Function to display up-to-date message
 def display_up_to_date_message():
-    logger.info(f"You are currently running version {CURRENT_VERSION}, which is up to date.")
-    click.echo(f"You are currently running version {CURRENT_VERSION}, which is up to date.")
+    logger.info("You are currently running version %s, which is up to date." % CURRENT_VERSION)
+    click.echo("You are currently running version %s, which is up to date." % CURRENT_VERSION)
 
 # Function to handle rate limit exceeded
 def handle_rate_limit_exceeded(exception):
     sleep_time = exception.sleep_time
-    click.echo(f"Rate limit exceeded. Sleeping for {sleep_time:.0f} seconds until the rate limit is reset.")
+    click.echo("Rate limit exceeded. Sleeping for %.0f seconds until the rate limit is reset." % sleep_time)
     time.sleep(sleep_time)
 
 # Function to handle update canceled by the user
@@ -174,8 +174,8 @@ def download_update(download_url, latest_version_str, update_folder):
 
         shutil.move(temp_download_path, download_path)
 
-        logger.info(f"Update downloaded to: {download_path}")
-        click.echo(f"\nUpdate downloaded to: {download_path}")
+        logger.info("Update downloaded to: %s" % download_path)
+        click.echo("\nUpdate downloaded to: %s" % download_path)
 
         log_update(latest_version_str)
 
@@ -205,8 +205,8 @@ def log_update(version_str):
     try:
         if is_log_file_writable():
             with open(LOG_FILE, 'a'):
-                print(f"\nUpdated to version {version_str}")
-                logger.info(f"Updated to version {version_str}")
+                print("\nUpdated to version %s" % version_str)
+                logger.info("Updated to version %s" % version_str)
         else:
             click.echo("The log file is not writable. The update could not be logged.")
     except Exception as e:
@@ -218,8 +218,9 @@ def is_log_file_writable():
 
 # Function to handle errors
 def handle_error(message, error):
-    logger.error(message, error)
-    click.echo("An error occurred: %s" % error)
+    logger.error(message % error)
+    error_message = f"An error occurred: {error}"
+    click.echo(error_message)
 
 # Entry point of the script
 if __name__ == '__main__':
