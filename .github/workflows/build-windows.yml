@@ -49,12 +49,12 @@ jobs:
     # Step 6: Build the MSFONT application using PyInstaller
     - name: Build MSFONT
       run: |
-        pyinstaller --noconfirm --onedir --console --icon "Assets/ICON/Sv-001.ico" --name "MSFONT" --version-file "pyinstaller/version_msfont.txt" --add-data "src/main.py;." --add-data "Assets;Assets/"  "src/terminal.py"
+        pyinstaller --noconfirm --onedir --console --icon "Assets/ICON/Sv-001.ico" --name "MSFONT" --version-file "Other/version_msfont.txt" --add-data "src/main.py;." --add-data "Assets;Assets/"  "src/terminal.py"
 
     # Step 7: Build the UPDATER application using PyInstaller
     - name: Build UPDATER
       run: |
-        pyinstaller --noconfirm --onefile --console --icon "Assets/ICON/Sv-001-UPDATER.ico" --name "UPDATER" --version-file "pyinstaller/version_updater.txt"  "src/auto_updater.py"
+        pyinstaller --noconfirm --onefile --console --icon "Assets/ICON/Sv-001-UPDATER.ico" --name "UPDATER" --version-file "Other/version_updater.txt"  "src/auto_updater.py"
 
     # Step 8: Upload the built artifacts for MSFONT
     - name: Upload MSFONT artifacts
