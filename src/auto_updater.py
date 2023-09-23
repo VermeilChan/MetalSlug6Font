@@ -225,7 +225,7 @@ def handle_error(message, error):
 # Entry point of the script
 if __name__ == '__main__':
     while True:
-        user_input = click.prompt("Type 'Update' to check for updates or 'exit' to exit").strip().lower()
+        user_input = input("Type 'Update' to check for updates or 'exit' to exit: ").strip().lower()
 
         if user_input == 'update':
             check_for_updates(DOWNLOAD_FOLDER)
@@ -236,4 +236,5 @@ if __name__ == '__main__':
         else:
             click.echo("Invalid input. Please type 'Update' to check for updates or 'exit' to exit.")
 
+    input("Press Enter to exit...")
 
