@@ -1,5 +1,2 @@
-tqdm
 Pillow
 pyinstaller
-semantic_version
-pyinstaller-versionfile
