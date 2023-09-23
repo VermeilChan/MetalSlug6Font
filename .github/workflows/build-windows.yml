@@ -42,9 +42,13 @@ jobs:
 
     # Step 5: Remove the "build" and "dist" directories if they exist
     - name: Remove build and dist directories
-      run: |
-        if exist build rmdir /s /q build
-        if exist dist rmdir /s /q dist
+    run: |
+      if (Test-Path -Path "build") {
+        Remove-Item -Path "build" -Recurse -Force
+      }
+      if (Test-Path -Path "dist") {
+        Remove-Item -Path "dist" -Recurse -Force
+      }
 
     # Step 6: Build the MSFONT application using PyInstaller
     - name: Build MSFONT
