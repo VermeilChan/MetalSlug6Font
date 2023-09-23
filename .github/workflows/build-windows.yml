@@ -49,6 +49,9 @@ jobs:
         if (Test-Path -Path "dist") {
           Remove-Item -Path "dist" -Recurse -Force
         }
+        if (Test-Path -Path "__pycache__") {
+          Remove-Item -Path "__pycache__" -Recurse -Force
+        }
 
     # Step 6: Build the MSFONT application using PyInstaller
     - name: Build MSFONT

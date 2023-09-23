@@ -19,7 +19,7 @@ GITHUB_REPO = 'MetalSlugFont'
 
 # Release settings
 RFEW = '.exe'
-CURRENT_VERSION = '0.2.6'
+CURRENT_VERSION = '0.2.5'
 
 # Logging settings
 LOG_FILE = 'updates.log'
