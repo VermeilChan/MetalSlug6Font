@@ -7,7 +7,7 @@
   },
   {
    "optionDest": "filenames",
-   "value": "/home/vermeil/Documents/Development/Coding/Vs-Code/Python/MetalSlugFont/terminal.py"
+   "value": "/home/vermeil/Documents/Development/Coding/Vs-Code/Python/MetalSlugFont/src/terminal.py"
   },
   {
    "optionDest": "onefile",
@@ -19,7 +19,7 @@
   },
   {
    "optionDest": "icon_file",
-   "value": "/home/vermeil/Documents/Development/Coding/Vs-Code/Python/MetalSlugFont/Assets/ICON/Sv-001.ico"
+   "value": "/home/vermeil/Documents/Development/Coding/Vs-Code/Python/MetalSlugFont/Assets/ICON/Sv-002.ico"
   },
   {
    "optionDest": "name",
@@ -47,7 +47,7 @@
   },
   {
    "optionDest": "version_file",
-   "value": "/home/vermeil/Documents/Development/Coding/Vs-Code/Python/MetalSlugFont/version_msfont.txt"
+   "value": "/home/vermeil/Documents/Development/Coding/Vs-Code/Python/MetalSlugFont/Other/version_msfont.txt"
   },
   {
    "optionDest": "embed_manifest",
@@ -79,7 +79,7 @@
   },
   {
    "optionDest": "datas",
-   "value": "/home/vermeil/Documents/Development/Coding/Vs-Code/Python/MetalSlugFont/main.py:."
+   "value": "/home/vermeil/Documents/Development/Coding/Vs-Code/Python/MetalSlugFont/src/main.py:."
   },
   {
    "optionDest": "datas",
