@@ -1,19 +1,73 @@
-# MetalSlugFont
+<div style="text-align:center;">
+  <h1 style="font-size:2em;">MetalSlugFont</h1>
+</div>
 
-[![Contributors](https://img.shields.io/github/contributors/VermeilChan/MetalSlugFont.svg?color=blue)](https://github.com/VermeilChan/MetalSlugFont/graphs/contributors)
-[![Latest Release](https://img.shields.io/github/release/VermeilChan/MetalSlugFont.svg?color=green)](https://github.com/VermeilChan/MetalSlugFont/releases)
-[![Downloads](https://img.shields.io/github/downloads/VermeilChan/MetalSlugFont/total.svg?color=orange)](https://github.com/VermeilChan/MetalSlugFont/releases)
-[![License](https://img.shields.io/github/license/VermeilChan/MetalSlugFont.svg?color=purple)](https://github.com/VermeilChan/MetalSlugFont/blob/experimental/LICENSE)
-[![Open Issues](https://img.shields.io/github/issues/VermeilChan/MetalSlugFont.svg?color=red)](https://github.com/VermeilChan/MetalSlugFont/issues)
-[![Open Pull Requests](https://img.shields.io/github/issues-pr/VermeilChan/MetalSlugFont.svg?color=yellow)](https://github.com/VermeilChan/MetalSlugFont/pulls)
-[![Last Commit](https://img.shields.io/github/last-commit/VermeilChan/MetalSlugFont.svg?color=green)](https://github.com/VermeilChan/MetalSlugFont/commits/experimental)
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/19bbe49a47c04243991c02e43aa6f966)](https://app.codacy.com/gh/VermeilChan/MetalSlugFont/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
-[![DeepSource](https://app.deepsource.com/gh/VermeilChan/MetalSlugFont.svg/?label=active+issues&show_trend=true&token=fXTu8KET6ZYQaBnVf6JdWq5z)](https://app.deepsource.com/gh/VermeilChan/MetalSlugFont/?ref=repository-badge)
-[![DeepSource](https://app.deepsource.com/gh/VermeilChan/MetalSlugFont.svg/?label=resolved+issues&show_trend=true&token=fXTu8KET6ZYQaBnVf6JdWq5z)](https://app.deepsource.com/gh/VermeilChan/MetalSlugFont/?ref=repository-badge)
+<p align="center">
+  <a href="https://github.com/VermeilChan/MetalSlugFont">
+    <img src="Assets/MARKDOWN/README/Sv-002-Logo.png" width="400" alt="MSFONT logo">
+  </a>
+</p>
 
-A tool for creating images with the iconic Metal Slug font.
+<p align="center">
+  <a href="https://github.com/VermeilChan/MetalSlugFont/graphs/contributors" target="_blank">
+    <img alt="Contributors" src="https://img.shields.io/github/contributors/VermeilChan/MetalSlugFont.svg?color=blue" />
+  </a>
+  <a href="https://github.com/VermeilChan/MetalSlugFont/releases" target="_blank">
+    <img alt="Latest Release" src="https://img.shields.io/github/release/VermeilChan/MetalSlugFont.svg?color=green" />
+  </a>
+  <a href="https://github.com/VermeilChan/MetalSlugFont/releases" target="_blank">
+    <img alt="Downloads" src="https://img.shields.io/github/downloads/VermeilChan/MetalSlugFont/total.svg?color=orange" />
+  </a>
+  <a href="https://github.com/VermeilChan/MetalSlugFont/blob/experimental/LICENSE" target="_blank">
+    <img alt="License" src="https://img.shields.io/github/license/VermeilChan/MetalSlugFont.svg?color=purple" />
+  </a>
+  <a href="https://github.com/VermeilChan/MetalSlugFont/issues" target="_blank">
+    <img alt="Open Issues" src="https://img.shields.io/github/issues/VermeilChan/MetalSlugFont.svg?color=red" />
+  </a>
+  <a href="https://github.com/VermeilChan/MetalSlugFont/pulls" target="_blank">
+    <img alt="Open Pull Requests" src="https://img.shields.io/github/issues-pr/VermeilChan/MetalSlugFont.svg?color=yellow" />
+  </a>
+  <a href="https://github.com/VermeilChan/MetalSlugFont/commits/experimental" target="_blank">
+    <img alt="Last Commit" src="https://img.shields.io/github/last-commit/VermeilChan/MetalSlugFont.svg?color=green" />
+  </a>
+</p>
 
-#### **Note:** The web app is no longer actively maintained, and it might be down at any time. However, if someone cannot use the terminal-based version, I may consider working on it again in the future. [Web App](https://vermeil.pythonanywhere.com/) Only Font 5
+<div style="text-align:center;">
+  <h1 style="font-size:2em;">A tool for creating images with the iconic Metal Slug font</h1>
+</div>
+
+## **Note:** The web app is no longer actively maintained, and it might be down at any time. However, if the terminal-based version doesn't work for you, you can follow these steps:
+
+### 1. Download and install Python from the official website (Windows & MacOS): [Python Downloads](https://www.python.org/downloads/).
+
+### Linux
+
+```bash
+# Debian/Ubuntu
+sudo apt update && sudo apt install python3 python3-pip
+
+# Fedora
+sudo dnf install python3 python3-pip
+
+# Arch Linux
+sudo pacman -Sy python python-pip
+```
+
+### 2. Download the repository
+
+![Repo Download](Assets/MARKDOWN/README/REPO-DOWNLOAD.png)
+
+### 3. Install the required libraries by opening a terminal or command prompt and navigating to the repository folder. Then, run the following command:
+
+   ```
+   pip install -r requirements.txt
+   ```
+
+### 4. Run the terminal-based version by executing the `terminal.py` script:
+   
+   ```
+   python src/terminal.py or python3 src/terminal.py
+   ```
 
 ## Table of Contents
 - [Features](#features)
