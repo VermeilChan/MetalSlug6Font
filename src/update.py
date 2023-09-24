@@ -7,7 +7,7 @@ GITHUB_OWNER = 'VermeilChan'
 GITHUB_REPO = 'MetalSlugFont'
 
 # Current version
-CURRENT_VERSION = '0.2.6'
+CURRENT_VERSION = '0.3.7'
 
 # Custom exception for rate limit exceeded
 class RateLimitExceededError(Exception):
