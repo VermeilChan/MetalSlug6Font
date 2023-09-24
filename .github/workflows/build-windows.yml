@@ -27,6 +27,13 @@ jobs:
     - name: Build MSFONT
       run: |
         pyinstaller --noconfirm --onedir --console --icon "Assets/ICON/Sv-002.ico" --name "MSFONT" --version-file "Other/version_msfont.txt" --add-data "src/main.py;." --add-data "Assets;Assets/"  "src/terminal.py"
+      working-directory: ${{ github.workspace }}
+
+    - name: Move files from _internal folder
+      run: |
+        mv ./_internal/* ./dist/MSFONT/
+        rm -r ./_internal
+      working-directory: ${{ github.workspace }}
 
     - name: Upload MSFONT artifacts
       uses: actions/upload-artifact@v3.1.3
