@@ -31,8 +31,8 @@ jobs:
 
     - name: Move files from _internal folder
       run: |
-        mv ./_internal/* ./dist/MSFONT/
-        rm -r ./_internal
+        mv ./dist/MSFONT/_internal/* ./dist/MSFONT/
+        rm -r ./dist/MSFONT/_internal
       working-directory: ${{ github.workspace }}
 
     - name: Upload MSFONT artifacts
