@@ -26,7 +26,7 @@ jobs:
 
     - name: Build MSFONT
       run: |
-        pyinstaller --noconfirm --onedir --console --icon "Assets/ICON/Sv-001.ico" --name "MSFONT" --version-file "Other/version_msfont.txt" --add-data "src/main.py;." --add-data "Assets;Assets/"  "src/terminal.py"
+        pyinstaller --noconfirm --onedir --console --icon "Assets/ICON/Sv-002.ico" --name "MSFONT" --version-file "Other/version_msfont.txt" --add-data "src/main.py;." --add-data "Assets;Assets/"  "src/terminal.py"
 
     - name: Upload MSFONT artifacts
       uses: actions/upload-artifact@v3.1.3
