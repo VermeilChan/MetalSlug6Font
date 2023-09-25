@@ -12,8 +12,8 @@ Follow these steps to get started with MSFONT and create Metal Slug-style text:
 
 ## 2. Installation and Setup (Stable Release)
 
-1. After downloading, locate the folder named `MSFONT` in your downloads.
-2. Inside the `MSFONT` folder, run the `MSFONT.exe` executable.
+1. After downloading, locate the folder named `MSFONT` in your documents.
+2. Run the `MSFONT.exe` executable.
 
 ![Run MSFONT](Assets/MARKDOWN/GUIDE/PROGRAM.png)
 
@@ -59,7 +59,7 @@ After pressing 'Enter', the program will generate the stylized text image, which
 ## 2. Installation and Setup (Pre-Release)
 
 1. Once you have downloaded the file, find the ZIP archive named `MSFONT` in your Downloads folder.
-2. Extract the ZIP file and locate the `MSFONT` folder. Inside this folder, run the `MSFONT.exe` executable.
+2. Extract the ZIP file and run the `MSFONT.exe` executable.
 
 ## Need Help?
 
