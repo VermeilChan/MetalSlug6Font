@@ -88,6 +88,14 @@ sudo pacman -Sy python python-pip
 ## Preview Fonts
 View examples of generated images with the available fonts in [EXAMPLE.md](EXAMPLE.md).
 
+## Installation
+
+For a step-by-step installation guide, you can watch the video tutorial below:
+
+<a href="https://clipchamp.com/watch/Ifs1Azs3ISZ/embed" target="_blank">
+ <img src="Assets/MARKDOWN/README/GUIDE.png" alt="Watch the video" width="640" height="360" border="5" />
+</a>
+
 ## Using MSFONT
 1. Upon running the program, you will be prompted to choose a font.
 2. Choose a font by entering a number from 1 to 5.
