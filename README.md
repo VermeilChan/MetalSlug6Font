@@ -105,6 +105,16 @@ Contributions are highly encouraged! If you encounter issues or have suggestions
 ## License
 This project is licensed under the [MIT License](LICENSE).
 
+1. **Use:** You can use the software for any purpose, like personal or commercial projects.
+
+2. **Modify:** You can modify the software to suit your needs.
+
+3. **Distribute:** You can distribute the software to others.
+
+4. **No Warranty:** The software is provided "as is," and the author isn't responsible for any issues.
+
+5. **Keep Notice:** You must include the MIT License text and copyright notice in your project.
+
 ## Credits
 - [Division 六](https://6th-divisions-den.com/)
 - [BinRich](https://discord.com/users/477459550904254464)
