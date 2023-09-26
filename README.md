@@ -36,9 +36,9 @@
   <h1 style="font-size:2em;">A tool for creating images with the iconic Metal Slug font</h1>
 </div>
 
-## **Note:** The web app is no longer actively maintained, and it might be down at any time. However, if the terminal-based version doesn't work for you, you can follow these steps:
+### **Note:** The web app is no longer actively maintained, and it might be down at any time. However, if the terminal-based version doesn't work for you, you can follow these steps:
 
-### 1. Download and install Python from the official website (Windows & MacOS): [Python Downloads](https://www.python.org/downloads/).
+1. Download and install Python from the official website (Windows & MacOS): [Python Downloads](https://www.python.org/downloads/).
 
 ### Linux
 
@@ -53,17 +53,17 @@ sudo dnf install python3 python3-pip
 sudo pacman -Sy python python-pip
 ```
 
-### 2. Download the repository
+2. Download the repository
 
 ![Repo Download](Assets/MARKDOWN/README/REPO-DOWNLOAD.png)
 
-### 3. Install the required libraries by opening a terminal or command prompt and navigating to the repository folder. Then, run the following command:
+3. Install the required libraries by opening a terminal or command prompt and navigating to the repository folder. Then, run the following command:
 
    ```
    pip install -r requirements.txt
    ```
 
-### 4. Run the terminal-based version by executing the `terminal.py` script:
+4. Run the terminal-based version by executing the `terminal.py` script:
    
    ```
    python src/terminal.py or python3 src/terminal.py
@@ -72,10 +72,11 @@ sudo pacman -Sy python python-pip
 ## Table of Contents
 - [Features](#features)
 - [Preview Fonts](#preview-fonts)
+  - [Installation](#installation)
   - [Using MSFONT](#using-msfont)
 - [Contributing](#contributing)
 - [License](#license)
-- [Credits](#credits)
+- [Acknowledgments](#acknowledgments)
   - [Contact](#contact)
 
 ## Features
@@ -97,18 +98,20 @@ For a step-by-step installation guide, you can watch the video tutorial below:
 </a>
 
 ## Using MSFONT
-1. Upon running the program, you will be prompted to choose a font.
-2. Choose a font by entering a number from 1 to 5.
-3. Once you've chosen your font, the available color options will depend on your selection.
-4. Follow the on-screen instructions or refer to the [Setup Guide](GUIDE.md) and [Supported Characters](SUPPORTED.md) for creating Metal Slug font images.
-5. Enter one of the following color options based on the font you've chosen:
-   - For some fonts, type `Blue` for the color Blue.
-     - For specific fonts, type `Orange-1` for Orange 1.
-   - For other fonts, type `Orange-2` for Orange 2.
-6. The generated image will be saved to your desktop.
+
+1. When you start the program, you'll be presented with a font selection prompt.
+2. Choose a font by inputting a number ranging from 1 to 5.
+3. Depending on your font selection, the available color options will vary.
+4. To create Metal Slug font images, follow the on-screen instructions or consult the [Setup Guide](GUIDE.md) and [Supported Characters](SUPPORTED.md).
+5. Input one of the following color options that corresponds to your chosen font:
+   - For certain fonts, use `Blue` to specify the Blue color.
+     - For particular fonts, use `Orange-1` for Orange 1.
+   - For other fonts, use `Orange-2` for Orange 2.
+6. The resulting image will be automatically saved to your desktop for easy access. Enjoy using MSFONT!
 
 ## Contributing
-Contributions are highly encouraged! If you encounter issues or have suggestions for improvements, please feel free to [Open An Issue](https://github.com/VermeilChan/MetalSlugFont/issues) or submit a pull request [Pull Request](https://github.com/VermeilChan/MetalSlugFont/pulls).
+
+Your contributions are greatly welcomed and appreciated! If you come across any issues or have ideas for enhancements, please don't hesitate to [open an issue](https://github.com/VermeilChan/MetalSlugFont/issues) or submit a [pull request](https://github.com/VermeilChan/MetalSlugFont/pulls). Your input and involvement help make this project better.
 
 ## License
 This project is licensed under the [MIT License](LICENSE).
@@ -123,7 +126,10 @@ This project is licensed under the [MIT License](LICENSE).
 
 5. **Keep Notice:** You must include the MIT License text and copyright notice in your project.
 
-## Credits
+## Acknowledgments
+
+I would like to express my gratitude to the following individuals and resources for their contributions and support:
+
 - [Division 六](https://6th-divisions-den.com/)
 - [BinRich](https://discord.com/users/477459550904254464)
 - [GussPrint](https://www.spriters-resource.com/submitter/Gussprint/)
