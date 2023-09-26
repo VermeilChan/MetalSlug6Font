@@ -1,5 +1,14 @@
 # Frequently Asked Questions (FAQ)
 
+**Table of Contents**
+- [General Questions](#general-questions)
+- [Getting Started](#getting-started)
+- [Usage](#usage)
+- [Troubleshooting](#troubleshooting)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
+
 ## General Questions
 
 ### Q: What is MetalSlugFont?
