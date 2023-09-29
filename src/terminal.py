@@ -1,27 +1,11 @@
 # Import necessary libraries
 import os
 import sys
-import logging
-import argparse
-from logging.handlers import RotatingFileHandler
 
 # Prevent the generation of .pyc (Python bytecode) files
 sys.dont_write_bytecode = True
 
 from main import generate_filename, generate_image, get_font_paths
-
-# Set up logging to a rotating log file named 'app.log' with a maximum size of 1 MB
-log_filename = 'app.log'
-log_format = '%(asctime)s - %(levelname)s: %(message)s'
-
-# Use a RotatingFileHandler to enable log rotation
-log_handler = RotatingFileHandler(log_filename, maxBytes=1e6, backupCount=5)
-log_handler.setFormatter(logging.Formatter(log_format))
-
-# Create a logger and set the level to INFO
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.INFO)
-logger.addHandler(log_handler)
 
 # Define valid color options for each font
 VALID_COLORS_BY_FONT = {
@@ -68,7 +52,6 @@ def select_font_and_color():
                     sys.exit(0)
                 elif color_input.title() in valid_colors:
                     color_input = color_input.title()
-                    logger.info("Chosen Font: %s, Chosen Color: %s", font, color_input)
                     return font, color_input
                 else:
                     print("Invalid color. Please choose a valid color.")
@@ -99,14 +82,9 @@ def generate_and_display_image(text, font, color):
 
         if error_message_generate:
             print(f"Error: {error_message_generate}")
-            logger.error("Error: %s", error_message_generate)
         else:
             print(f"Image successfully generated and saved as: {img_path}")
-            logger.info("Image successfully generated and saved as: %s", img_path)
             print(f"You can find the image on your desktop: {os.path.abspath(os.path.join(os.path.expanduser('~'), 'Desktop', img_path))}")
-
-        # Log chosen font, chosen color, and user input
-        logger.info("Chosen Font: %s, Chosen Color: %s, User Input: '%s'", font, color, text)
 
     except KeyboardInterrupt:
         print(CLOSING_MESSAGE)
@@ -114,12 +92,9 @@ def generate_and_display_image(text, font, color):
     except FileNotFoundError as e:
         error_message_generate = f"Font file not found: {e.filename}"
         print(error_message_generate)
-        logger.error("Font file not found: %s", e.filename)
-        logger.debug(e, exc_info=True)
     except Exception as e:
         error_message_generate = f"An error occurred: {e}"
         print(error_message_generate)
-        logger.exception("An error occurred: %s", e)
 
 # The main function of the program
 def main():
@@ -137,28 +112,7 @@ def main():
     except Exception as e:
         error_message_main = f"An unexpected error occurred: {e}"
         print(error_message_main)
-        logger.exception("An unexpected error occurred: %s", e)
-
-    finally:
-        logging.shutdown()
 
 # Entry point of the script
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="MSFONT")
-    parser.add_argument("--log-level", default="INFO", choices=["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
-                        help="Logging level (default: INFO)")
-    args = parser.parse_args()
-
-    try:
-        logger.setLevel(args.log_level)
-        main()
-    except KeyboardInterrupt:
-        print(CLOSING_MESSAGE)
-        sys.exit(0)
-    except Exception as e:
-        error_message_main = f"An unexpected error occurred: {e}"
-        print(error_message_main)
-        logger.exception("An unexpected error occurred: %s", e)
-
-    finally:
-        logging.shutdown()
+    main()
