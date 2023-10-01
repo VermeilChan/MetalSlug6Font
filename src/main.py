@@ -99,7 +99,7 @@ def generate_image(text, filename, font_paths):
 
         return (filename, None)
 
-    except FileNotFoundError as e:
+    except FileNotFoundError:
         return (None, f"Error: Image not found for character '{char}'")
     except UnidentifiedImageError as e:
         return (None, "Error: Unable to identify image")

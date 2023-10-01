@@ -110,8 +110,8 @@ def main():
         print(CLOSING_MESSAGE)
         sys.exit(0)
     except Exception as e:
-        error_message_main = f"An unexpected error occurred: {e}"
-        print(error_message_main)
+        error_message_main_inner = f"An unexpected error occurred: {e}"
+        print(error_message_main_inner)
 
 # Entry point of the script
 if __name__ == "__main__":
