@@ -71,8 +71,8 @@ def handle_update_confirmation(download_url, update_folder, current_version, lat
 
 # Function to ask the user if they want to remove a folder
 def ask_to_remove_folder(folder_name):
-    user_input = input(f"Do you want to remove the folder '{folder_name}' (Recommend)? (yes/no): ").strip().lower()
-    if user_input in ('yes', 'y'):
+    user_response = input(f"Do you want to remove the folder '{folder_name}' (Recommend)? (yes/no): ").strip().lower()
+    if user_response in ('yes', 'y'):
         folder_path = os.path.join(os.path.expanduser("~"), "Downloads", folder_name)
         if os.path.exists(folder_path):
             try:
@@ -82,7 +82,7 @@ def ask_to_remove_folder(folder_name):
                 print(f"Error removing folder '{folder_name}': {str(e)}")
         else:
             print(f"Folder '{folder_name}' does not exist in the 'Downloads' directory.")
-    return user_input in ('yes', 'y')
+    return user_response in ('yes', 'y')
 
 # Function to handle the update process
 def handle_update(download_url, update_folder):
