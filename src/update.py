@@ -63,9 +63,26 @@ def check_for_updates(update_folder):
 def handle_update_confirmation(download_url, update_folder, current_version, latest_version_str):
     update_confirmation = input(f"You are currently running version '{current_version}', and a newer version '{latest_version_str}' is available. Do you want to update? (yes/no): ").strip().lower()
     if update_confirmation in ('yes', 'y'):
-        handle_update(download_url, update_folder)
-    else:
-        handle_update_cancelled_by_user()
+        remove_folder = ask_to_remove_folder("MSFONT")
+        if remove_folder:
+            handle_update(download_url, update_folder)
+        else:
+            handle_update_cancelled_by_user()
+
+# Function to ask the user if they want to remove a folder
+def ask_to_remove_folder(folder_name):
+    user_input = input(f"Do you want to remove the folder '{folder_name}' (Recommend)? (yes/no): ").strip().lower()
+    if user_input == 'yes' or user_input == 'y':
+        folder_path = os.path.join(os.path.expanduser("~"), "Downloads", folder_name)
+        if os.path.exists(folder_path):
+            try:
+                shutil.rmtree(folder_path)
+                print(f"Folder '{folder_name}' removed successfully.")
+            except OSError as e:
+                print(f"Error removing folder '{folder_name}': {str(e)}")
+        else:
+            print(f"Folder '{folder_name}' does not exist in the 'Downloads' directory.")
+    return user_input == 'yes' or user_input == 'y'
 
 # Function to handle the update process
 def handle_update(download_url, update_folder):
@@ -144,26 +161,66 @@ def download_update(download_url, update_folder):
 
         shutil.move(temp_download_path, download_path)
 
-        print("\nThe Newer Version Can Be Found In : {download_path}")
-
-        print("\nUpdate complete. Please close the program.")
-        print("Go to your downloads folder and reinstall the program.")
-        print("Before that, remove the 'MSFONT' folder.\n")
-
+        # Wait 3 seconds before starting the executable
         time.sleep(3)
 
-        system = platform.system()
-        if system == 'Windows':
-            subprocess.Popen([download_path])
-        elif system == 'Linux':
-            subprocess.Popen(['wine', download_path])
-        elif system == 'Darwin':
-            subprocess.Popen(['wine', download_path])
-        else:
-            print("Unsupported operating system.")
+        # Launch the downloaded file
+        launch_downloaded_file(download_path)
 
     except requests.exceptions.RequestException as e:
         handle_error(f"Failed to download the update. Please check your internet connection: {e}")
+
+# Function to check if Wine is installed
+def is_wine_installed():
+    try:
+        subprocess.check_call(['wine', '--version'])
+        return True
+    except subprocess.CalledProcessError:
+        return False
+
+# Function to launch a downloaded file on Windows
+def launch_on_windows(download_path):
+    try:
+        subprocess.Popen([download_path])
+    except Exception as e:
+        print(f"Error launching the file on Windows: {e}")
+
+# Function to launch a downloaded file on Linux
+def launch_on_linux(download_path):
+    if is_wine_installed():
+        try:
+            subprocess.Popen(['wine', download_path])
+        except Exception as e:
+            print(f"Error launching the file on Linux: {e}")
+    else:
+        distro = platform.linux_distribution()[0]
+        print(f"{distro} Linux support is not implemented.")
+        print("Wine is not installed. Please install Wine to run this application on Linux.")
+
+# Function to launch a downloaded file on MacOS
+def launch_on_macos(download_path):
+    macos_version = platform.mac_ver()[0]
+    print(f"MacOS {macos_version} support is not implemented.")
+    if is_wine_installed():
+        try:
+            subprocess.Popen(['wine', download_path])
+        except Exception as e:
+            print(f"Error launching the file on MacOS: {e}")
+    else:
+        print("Wine is not installed. Please install Wine to run this application on MacOS.")
+
+# Main function to launch a downloaded file based on the platform
+def launch_downloaded_file(download_path):
+    current_platform = sys.platform
+
+    if current_platform.startswith('win'):
+        launch_on_windows(download_path)
+    elif current_platform.startswith('linux'):
+        launch_on_linux(download_path)
+    elif current_platform == 'darwin':
+        launch_on_macos(download_path)
+    else:
+        print(f"{current_platform} support is not implemented.")
 
 # Function to handle and print error messages
 def handle_error(error_message):
