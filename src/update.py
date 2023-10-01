@@ -62,7 +62,7 @@ def check_for_updates(update_folder):
 # Function to handle user confirmation for updating
 def handle_update_confirmation(download_url, update_folder, current_version, latest_version_str):
     update_confirmation = input(f"You are currently running version '{current_version}', and a newer version '{latest_version_str}' is available. Do you want to update? (yes/no): ").strip().lower()
-    if update_confirmation == 'yes' or update_confirmation == 'y':
+    if update_confirmation in ('yes', 'y'):
         handle_update(download_url, update_folder)
     else:
         handle_update_cancelled_by_user()
@@ -113,8 +113,7 @@ def get_latest_version_and_download_url():
         if latest_version_str != CURRENT_VERSION:
             download_url = get_download_url(release_data)
             return latest_version_str, download_url
-        else:
-            return latest_version_str, None
+        return latest_version_str, None
     except requests.exceptions.RequestException as e:
         handle_error(f"Failed to retrieve release data. Please check your internet connection: {e}")
 
@@ -182,3 +181,5 @@ if __name__ == '__main__':
             sys.exit(0)
         else:
             print("Invalid input. Please type 'Update' to check for updates or 'exit' to exit.")
+
+

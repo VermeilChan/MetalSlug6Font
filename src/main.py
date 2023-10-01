@@ -31,7 +31,7 @@ def generate_filename(user_input):
     except Exception as e:
         raise RuntimeError(f"Error generating filename: {str(e)}")
 
-# Function to get paths to font assets (letters, numbers, symbols) based on font and color
+# Function to get paths to font assets based on font and color.
 def get_font_paths(font, color):
     try:
         base_path = os.path.join('Assets', 'FONTS', f'Font-{font}', f'Font-{font}-{color}')
