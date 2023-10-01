@@ -101,7 +101,7 @@ def generate_image(text, filename, font_paths):
 
     except FileNotFoundError:
         return (None, f"Error: Image not found for character '{char}'")
-    except UnidentifiedImageError as e:
+    except UnidentifiedImageError:
         return (None, "Error: Unable to identify image")
     except ValueError as e:
         return (None, f"Error: Invalid value - {str(e)}")
