@@ -63,7 +63,7 @@ sudo pacman -Sy python python-pip
    pip install -r requirements.txt
    ```
 
-4. Run the terminal-based version by executing the `terminal.py` script:
+4. Run the program by executing the `terminal.py`:
    
    ```
    python src/terminal.py or python3 src/terminal.py
@@ -94,7 +94,7 @@ View examples of generated images with the available fonts in [EXAMPLE.md](EXAMP
 For a step-by-step installation guide, you can watch the video tutorial below:
 
 <a href="https://clipchamp.com/watch/Ifs1Azs3ISZ/embed" target="_blank">
- <img src="Assets/MARKDOWN/README/GUIDE.png" alt="Watch the video" width="640" height="360" border="5" />
+ <img src="Assets/MARKDOWN/README/GUIDE.png" alt="Watch the video" width="640" height="360"/>
 </a>
 
 ## Using MSFONT
@@ -130,9 +130,9 @@ This project is licensed under the [MIT License](LICENSE).
 
 I would like to express my gratitude to the following individuals and resources for their contributions and support:
 
-- [Division 六](https://6th-divisions-den.com/)
-- [BinRich](https://discord.com/users/477459550904254464)
-- [GussPrint](https://www.spriters-resource.com/submitter/Gussprint/)
+- **Division 六:** Assets For Font 1, 2, 3, 4.
+- **BinRich:** Providing The Diacritic Marks.
+- **GussPrint:** Assets For Font 5.
 
 ## Contact
 If you have any questions, suggestions, or need assistance, please don't hesitate to contact me:
