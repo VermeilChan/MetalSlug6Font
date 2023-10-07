@@ -1,4 +1,3 @@
-# Import necessary libraries
 import os
 import sys
 import time
@@ -7,8 +6,9 @@ import requests
 import platform
 import subprocess
 import semantic_version
-
+import tkinter as tk
 from tqdm import tqdm
+from tkinter import ttk, messagebox
 from fake_useragent import UserAgent
 
 # Define constants
@@ -18,11 +18,7 @@ GITHUB_REPO = 'MetalSlugFont'
 RELEASE_FILE_EXTENSION = '.exe'
 CURRENT_VERSION = '0.3.7'
 
-DOWNLOAD_FOLDER = os.path.expanduser('~/Downloads')
-
 VERIFY_SSL = True
-
-UPDATE_CANCELLED_MESSAGE = "Update canceled."
 
 MAX_RETRIES = 3
 
@@ -37,73 +33,74 @@ def get_random_user_agent():
     return user_agent.random
 
 # Function to check for updates
-def check_for_updates(update_folder):
+def check_for_updates():
     retries = 0
     while retries < MAX_RETRIES:
         try:
-            print("Checking for updates...")
             latest_version_str, download_url = get_latest_version_and_download_url()
             current_version = semantic_version.Version(CURRENT_VERSION)
             latest_version = semantic_version.Version(latest_version_str)
 
             if latest_version == current_version:
-                print(f"You are currently running version '{CURRENT_VERSION}', which is up to date.")
+                messagebox.showinfo("Update Check", f"You are currently running version '{CURRENT_VERSION}', which is up to date.")
             else:
-                handle_update_confirmation(download_url, update_folder, current_version, latest_version_str)
-            sys.exit(0)
+                result = messagebox.askquestion("Update Available", f"You are currently running version '{current_version}', and a newer version '{latest_version_str}' is available. Do you want to update?")
+                if result == "yes":
+                    remove_folder = ask_to_remove_folder("MSFONT")
+                    if remove_folder:
+                        download_update(download_url)
+                    else:
+                        messagebox.showinfo("Update Canceled", "Update canceled by the user.")
+            break
         except RateLimitExceededError as e:
             handle_rate_limit_exceeded(e)
         except Exception as e:
             handle_error(f"An unexpected error occurred while processing release data: {e}")
 
     if retries == MAX_RETRIES:
-        print("Maximum retry limit reached. Unable to check for updates.")
+        messagebox.showerror("Update Error", "Maximum retry limit reached. Unable to check for updates.")
 
 # Function to handle user confirmation for updating
-def handle_update_confirmation(download_url, update_folder, current_version, latest_version_str):
-    update_confirmation = input(f"You are currently running version '{current_version}', and a newer version '{latest_version_str}' is available. Do you want to update? (yes/no): ").strip().lower()
-    if update_confirmation in ('yes', 'y'):
+def handle_update_confirmation(download_url):
+    update_confirmation = messagebox.askquestion("Update Confirmation", f"Do you want to update to the latest version?")
+    if update_confirmation == "yes":
         remove_folder = ask_to_remove_folder("MSFONT")
         if remove_folder:
-            handle_update(download_url, update_folder)
+            download_update(download_url)
         else:
-            handle_update_cancelled_by_user()
+            messagebox.showinfo("Update Canceled", "Update canceled by the user.")
 
 # Function to ask the user if they want to remove a folder
 def ask_to_remove_folder(folder_name):
-    user_response = input(f"Do you want to remove the folder '{folder_name}' (Recommend)? (yes/no): ").strip().lower()
-    if user_response in ('yes', 'y'):
+    user_response = messagebox.askquestion("Folder Removal", f"Do you want to remove the folder '{folder_name}' (Recommend)?")
+    if user_response == "yes":
         folder_path = os.path.join(os.path.expanduser("~"), "Downloads", folder_name)
         if os.path.exists(folder_path):
             try:
                 shutil.rmtree(folder_path)
-                print(f"Folder '{folder_name}' removed successfully.")
+                messagebox.showinfo("Folder Removed", f"Folder '{folder_name}' removed successfully.")
             except OSError as e:
-                print(f"Error removing folder '{folder_name}': {str(e)}")
+                messagebox.showerror("Folder Removal Error", f"Error removing folder '{folder_name}': {str(e)}")
         else:
-            print(f"Folder '{folder_name}' does not exist in the 'Downloads' directory.")
-    return user_response in ('yes', 'y')
+            messagebox.showinfo("Folder Not Found", f"Folder '{folder_name}' does not exist in the 'Downloads' directory.")
+    return user_response == "yes"
 
 # Function to handle the update process
-def handle_update(download_url, update_folder):
+def handle_update(download_url):
     if is_update_file_exist(download_url):
-        print("An update file with the same name already exists. Update aborted.")
+        messagebox.showerror("Update Error", "An update file with the same name already exists. Update aborted.")
     else:
-        download_update(download_url, update_folder)
+        download_update(download_url)
 
 # Function to handle rate limit exceeded
 def handle_rate_limit_exceeded(exception):
     sleep_time = exception.sleep_time
-    print(f"Rate limit exceeded. Sleeping for {sleep_time:.0f} seconds until the rate limit is reset.")
+    messagebox.showinfo("Rate Limit Exceeded", f"Rate limit exceeded. Sleeping for {sleep_time:.0f} seconds until the rate limit is reset.")
     time.sleep(sleep_time)
-
-# Function to handle update cancellation by the user
-def handle_update_cancelled_by_user():
-    print(UPDATE_CANCELLED_MESSAGE)
 
 # Function to check if an update file already exists
 def is_update_file_exist(download_url):
-    download_path = os.path.join(DOWNLOAD_FOLDER, os.path.basename(download_url))
+    download_path = os.path.join(os.path.expanduser("~"), "Downloads", os.path.basename(download_url))
     return os.path.exists(download_path)
 
 # Function to get the latest version and download URL from GitHub
@@ -141,10 +138,9 @@ def get_download_url(release_data):
             return asset['browser_download_url']
 
 # Function to download the update
-def download_update(download_url, update_folder):
+def download_update(download_url):
     try:
-        os.makedirs(update_folder, exist_ok=True)
-        download_path = os.path.join(update_folder, os.path.basename(download_url))
+        download_path = os.path.join(os.path.expanduser("~"), "Downloads", os.path.basename(download_url))
         temp_download_path = download_path + '.temp'
 
         with requests.get(download_url, stream=True, verify=VERIFY_SSL) as response, open(temp_download_path, 'ab') as outfile:
@@ -183,7 +179,7 @@ def launch_on_windows(download_path):
     try:
         subprocess.Popen([download_path])
     except Exception as e:
-        print(f"Error launching the file on Windows: {e}")
+        messagebox.showerror("Launch Error", f"Error launching the file on Windows: {e}")
 
 # Function to launch a downloaded file on Linux
 def launch_on_linux(download_path):
@@ -191,25 +187,24 @@ def launch_on_linux(download_path):
         try:
             subprocess.Popen(['wine', download_path])
         except Exception as e:
-            print(f"Error launching the file on Linux: {e}")
+            messagebox.showerror("Launch Error", f"Error launching the file on Linux: {e}")
     else:
         distro = platform.linux_distribution()[0]
-        print(f"{distro} Linux support is not implemented.")
-        print("Wine is not installed. Please install Wine to run this application on Linux.")
+        messagebox.showinfo("Linux Not Supported", f"{distro} Linux support is not implemented.\nWine is not installed. Please install Wine to run this application on Linux.")
 
 # Function to launch a downloaded file on MacOS
 def launch_on_macos(download_path):
     macos_version = platform.mac_ver()[0]
-    print(f"MacOS {macos_version} support is not implemented.")
+    messagebox.showinfo("MacOS Not Supported", f"MacOS {macos_version} support is not implemented.")
     if is_wine_installed():
         try:
             subprocess.Popen(['wine', download_path])
         except Exception as e:
-            print(f"Error launching the file on MacOS: {e}")
+            messagebox.showerror("Launch Error", f"Error launching the file on MacOS: {e}")
     else:
-        print("Wine is not installed. Please install Wine to run this application on MacOS.")
+        messagebox.showinfo("MacOS Not Supported", "Wine is not installed. Please install Wine to run this application on MacOS.")
 
-# Main function to launch a downloaded file based on the platform
+# Function to launch a downloaded file based on the platform
 def launch_downloaded_file(download_path):
     current_platform = sys.platform
 
@@ -220,23 +215,25 @@ def launch_downloaded_file(download_path):
     elif current_platform == 'darwin':
         launch_on_macos(download_path)
     else:
-        print(f"{current_platform} support is not implemented.")
+        messagebox.showinfo("Platform Not Supported", f"{current_platform} support is not implemented.")
 
 # Function to handle and print error messages
 def handle_error(error_message):
-    print(error_message)
+    messagebox.showerror("Error", error_message)
 
 # Main program entry point
+def main():
+    root = tk.Tk()
+    root.title("Metal Slug Font Updater")
+
+    frame = ttk.Frame(root)
+    frame.grid(column=0, row=0, padx=10, pady=10)
+
+    ttk.Label(frame, text="Metal Slug Font Updater", font=("Helvetica", 16)).grid(column=0, row=0, columnspan=2, pady=10)
+    ttk.Button(frame, text="Check for Updates", command=check_for_updates).grid(column=0, row=1, pady=10, padx=5)
+    ttk.Button(frame, text="Exit", command=root.quit).grid(column=1, row=1, pady=10, padx=5)
+
+    root.mainloop()
+
 if __name__ == '__main__':
-    while True:
-        user_input = input("Type 'Update' to check for updates or 'exit' to exit: ").strip().lower()
-
-        if user_input == 'update':
-            check_for_updates(DOWNLOAD_FOLDER)
-        elif user_input == 'exit':
-            print("Exiting the program...")
-            sys.exit(0)
-        else:
-            print("Invalid input. Please type 'Update' to check for updates or 'exit' to exit.")
-
-
+    main()
