@@ -1,8 +1,13 @@
 # Import necessary libraries
 import sys
-import tkinter as tk
-from tkinter import ttk, messagebox
+import customtkinter
+import customtkinter as ctk
+from tkinter import messagebox
+
 from main import generate_filename, generate_image, get_font_paths
+
+customtkinter.set_appearance_mode("dark")
+customtkinter.set_default_color_theme("blue")
 
 # Prevent the generation of .pyc (Python bytecode) files
 sys.dont_write_bytecode = True
@@ -53,57 +58,59 @@ def generate_and_display_image():
 
 # Function to handle font selection change
 def on_font_change(*args):
-    font = int(font_var.get())
-    valid_colors = VALID_COLORS_BY_FONT.get(font, [])
-    color_combobox['values'] = valid_colors
-    color_var.set(valid_colors[0] if valid_colors else "")
+    selected_font = font_var.get()
+    if selected_font:
+        font = int(selected_font)
+        valid_colors = VALID_COLORS_BY_FONT.get(font, [])
+        color_combobox['values'] = valid_colors
+        color_var.set(valid_colors[0] if valid_colors else "")
 
 # Create the main window
-root = tk.Tk()
+root = ctk.CTk()
 root.title("Metal Slug Font")
 
 # Create a frame for input elements
-frame = ttk.Frame(root, padding=20)
-frame.grid(column=0, row=0, sticky=(tk.W, tk.E, tk.N, tk.S))
+frame = ctk.CTkFrame(root)
+frame.grid(column=0, row=0, sticky=(ctk.W, ctk.E, ctk.N, ctk.S))
 
 # Label for text input
-text_label = ttk.Label(frame, text="Enter the text:")
-text_label.grid(column=0, row=0, sticky=tk.W)
+text_label = ctk.CTkLabel(frame, text="Enter the text:")
+text_label.grid(column=0, row=0, sticky=ctk.W)
 
 # Text input field
-text_entry = ttk.Entry(frame, width=40)
+text_entry = ctk.CTkEntry(frame, width=40)
 text_entry.grid(column=1, row=0, columnspan=2)
 
 # Label for font selection
-font_label = ttk.Label(frame, text="Choose a font:")
-font_label.grid(column=0, row=1, sticky=tk.W)
+font_label = ctk.CTkLabel(frame, text="Choose a font:")
+font_label.grid(column=0, row=1, sticky=ctk.W)
 
 # Font selection dropdown
-font_var = tk.StringVar()
+font_var = ctk.StringVar()
 font_var.set("1")  # Default font selection
-font_combobox = ttk.Combobox(frame, textvariable=font_var, values=["1", "2", "3", "4", "5"])
+font_combobox = ctk.CTkComboBox(frame, variable=font_var, values=["1", "2", "3", "4", "5"])
 font_combobox.grid(column=1, row=1, columnspan=2)
 
 # Label for color selection
-color_label = ttk.Label(frame, text="Choose a color:")
-color_label.grid(column=0, row=2, sticky=tk.W)
+color_label = ctk.CTkLabel(frame, text="Choose a color:")
+color_label.grid(column=0, row=2, sticky=ctk.W)
 
 # Color selection dropdown
-color_var = tk.StringVar()
+color_var = ctk.StringVar()
 color_var.set("Blue")  # Default color selection
-color_combobox = ttk.Combobox(frame, textvariable=color_var, values=[])
+color_combobox = ctk.CTkComboBox(frame, variable=color_var, values=[])
 color_combobox.grid(column=1, row=2, columnspan=2)
 
 # Bind the font selection change event
 font_var.trace("w", on_font_change)
 
 # Generate button
-generate_button = ttk.Button(frame, text="Generate Image", command=generate_and_display_image)
+generate_button = ctk.CTkButton(frame, text="Generate Image", command=generate_and_display_image)
 generate_button.grid(column=0, row=3, columnspan=3)
 
 # Add padding and make widgets expand
 for child in frame.winfo_children():
-    child.grid_configure(padx=5, pady=5, sticky=(tk.W, tk.E))
+    child.grid_configure(padx=5, pady=5, sticky=(ctk.W, ctk.E))
 
-# Run the tkinter main loop
+# Run the customtkinter main loop
 root.mainloop()
