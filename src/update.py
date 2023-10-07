@@ -22,6 +22,8 @@ VERIFY_SSL = True
 
 MAX_RETRIES = 3
 
+ERROR_MESSAGE = "Launch Error"
+
 # Custom Exception for Rate Limit Exceeded
 class RateLimitExceededError(Exception):
     def __init__(self, sleep_time):
@@ -42,15 +44,10 @@ def check_for_updates():
             latest_version = semantic_version.Version(latest_version_str)
 
             if latest_version == current_version:
-                messagebox.showinfo("Update Check", f"You are currently running version '{CURRENT_VERSION}', which is up to date.")
+                show_up_to_date_message(current_version)
             else:
-                result = messagebox.askquestion("Update Available", f"You are currently running version '{current_version}', and a newer version '{latest_version_str}' is available. Do you want to update?")
-                if result == "yes":
-                    remove_folder = ask_to_remove_folder("MSFONT")
-                    if remove_folder:
-                        download_update(download_url)
-                    else:
-                        messagebox.showinfo("Update Canceled", "Update canceled by the user.")
+                handle_update_confirmation(download_url)
+
             break
         except RateLimitExceededError as e:
             handle_rate_limit_exceeded(e)
@@ -60,9 +57,21 @@ def check_for_updates():
     if retries == MAX_RETRIES:
         messagebox.showerror("Update Error", "Maximum retry limit reached. Unable to check for updates.")
 
+def show_up_to_date_message(current_version):
+    messagebox.showinfo("Update Check", f"You are currently running version '{current_version}', which is up to date.")
+
+def handle_update_confirmation(download_url):
+    result = messagebox.askquestion("Update Available", f"You are currently running version '{CURRENT_VERSION}', and a newer version is available. Do you want to update?")
+    if result == "yes":
+        remove_folder = ask_to_remove_folder("MSFONT")
+        if remove_folder:
+            download_update(download_url)
+        else:
+            messagebox.showinfo("Update Canceled", "Update canceled by the user.")
+
 # Function to handle user confirmation for updating
 def handle_update_confirmation(download_url):
-    update_confirmation = messagebox.askquestion("Update Confirmation", f"Do you want to update to the latest version?")
+    update_confirmation = messagebox.askquestion("Update Confirmation", "Do you want to update to the latest version?")
     if update_confirmation == "yes":
         remove_folder = ask_to_remove_folder("MSFONT")
         if remove_folder:
@@ -179,7 +188,7 @@ def launch_on_windows(download_path):
     try:
         subprocess.Popen([download_path])
     except Exception as e:
-        messagebox.showerror("Launch Error", f"Error launching the file on Windows: {e}")
+        messagebox.showerror(ERROR_MESSAGE, f"Error launching the file on Windows: {e}")
 
 # Function to launch a downloaded file on Linux
 def launch_on_linux(download_path):
@@ -187,7 +196,7 @@ def launch_on_linux(download_path):
         try:
             subprocess.Popen(['wine', download_path])
         except Exception as e:
-            messagebox.showerror("Launch Error", f"Error launching the file on Linux: {e}")
+            messagebox.showerror(ERROR_MESSAGE, f"Error launching the file on Linux: {e}")
     else:
         distro = platform.linux_distribution()[0]
         messagebox.showinfo("Linux Not Supported", f"{distro} Linux support is not implemented.\nWine is not installed. Please install Wine to run this application on Linux.")
@@ -200,7 +209,7 @@ def launch_on_macos(download_path):
         try:
             subprocess.Popen(['wine', download_path])
         except Exception as e:
-            messagebox.showerror("Launch Error", f"Error launching the file on MacOS: {e}")
+            messagebox.showerror(ERROR_MESSAGE, f"Error launching the file on MacOS: {e}")
     else:
         messagebox.showinfo("MacOS Not Supported", "Wine is not installed. Please install Wine to run this application on MacOS.")
 
