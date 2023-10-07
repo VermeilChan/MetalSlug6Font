@@ -7,7 +7,6 @@ import platform
 import subprocess
 import semantic_version
 import tkinter as tk
-from tqdm import tqdm
 from tkinter import ttk, messagebox
 from fake_useragent import UserAgent
 
@@ -35,7 +34,7 @@ def get_random_user_agent():
     return user_agent.random
 
 # Function to check for updates
-def check_for_updates():
+def check_for_updates(root):
     retries = 0
     while retries < MAX_RETRIES:
         try:
@@ -46,7 +45,7 @@ def check_for_updates():
             if latest_version == current_version:
                 show_up_to_date_message(current_version)
             else:
-                handle_update_confirmation(download_url)
+                handle_update_confirmation(download_url, root)
 
             break
         except RateLimitExceededError as e:
@@ -60,22 +59,12 @@ def check_for_updates():
 def show_up_to_date_message(current_version):
     messagebox.showinfo("Update Check", f"You are currently running version '{current_version}', which is up to date.")
 
-def handle_update_confirmation(download_url):
+def handle_update_confirmation(download_url, root):
     result = messagebox.askquestion("Update Available", f"You are currently running version '{CURRENT_VERSION}', and a newer version is available. Do you want to update?")
     if result == "yes":
         remove_folder = ask_to_remove_folder("MSFONT")
         if remove_folder:
-            download_update(download_url)
-        else:
-            messagebox.showinfo("Update Canceled", "Update canceled by the user.")
-
-# Function to handle user confirmation for updating
-def handle_update_confirmation(download_url):
-    update_confirmation = messagebox.askquestion("Update Confirmation", "Do you want to update to the latest version?")
-    if update_confirmation == "yes":
-        remove_folder = ask_to_remove_folder("MSFONT")
-        if remove_folder:
-            download_update(download_url)
+            download_update(download_url, root)
         else:
             messagebox.showinfo("Update Canceled", "Update canceled by the user.")
 
@@ -95,11 +84,11 @@ def ask_to_remove_folder(folder_name):
     return user_response == "yes"
 
 # Function to handle the update process
-def handle_update(download_url):
+def handle_update(download_url, root):
     if is_update_file_exist(download_url):
         messagebox.showerror("Update Error", "An update file with the same name already exists. Update aborted.")
     else:
-        download_update(download_url)
+        download_update(download_url, root)
 
 # Function to handle rate limit exceeded
 def handle_rate_limit_exceeded(exception):
@@ -147,7 +136,7 @@ def get_download_url(release_data):
             return asset['browser_download_url']
 
 # Function to download the update
-def download_update(download_url):
+def download_update(download_url, root):
     try:
         download_path = os.path.join(os.path.expanduser("~"), "Downloads", os.path.basename(download_url))
         temp_download_path = download_path + '.temp'
@@ -156,13 +145,16 @@ def download_update(download_url):
             response.raise_for_status()
             total_size = int(response.headers.get('content-length', 0))
             block_size = 1024
-            progress_bar = tqdm(total=total_size, unit='B', unit_scale=True, desc="Downloading", ncols=80)
+            progress_bar = ttk.Progressbar(root, length=300, mode="determinate")
+            progress_bar.grid(column=0, row=3, columnspan=2, pady=10)
+            progress_bar["maximum"] = total_size
+            progress = 0
 
             for data in response.iter_content(block_size):
-                progress_bar.update(len(data))
+                progress += len(data)
+                progress_bar["value"] = progress
+                root.update_idletasks()
                 outfile.write(data)
-
-            progress_bar.close()
 
         shutil.move(temp_download_path, download_path)
 
@@ -239,7 +231,7 @@ def main():
     frame.grid(column=0, row=0, padx=10, pady=10)
 
     ttk.Label(frame, text="Metal Slug Font Updater", font=("Helvetica", 16)).grid(column=0, row=0, columnspan=2, pady=10)
-    ttk.Button(frame, text="Check for Updates", command=check_for_updates).grid(column=0, row=1, pady=10, padx=5)
+    ttk.Button(frame, text="Check for Updates", command=lambda: check_for_updates(root)).grid(column=0, row=1, pady=10, padx=5)
     ttk.Button(frame, text="Exit", command=root.quit).grid(column=1, row=1, pady=10, padx=5)
 
     root.mainloop()
