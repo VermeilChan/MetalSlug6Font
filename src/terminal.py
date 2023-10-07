@@ -1,6 +1,7 @@
 # Import necessary libraries
-import os
 import sys
+import tkinter as tk
+from tkinter import ttk, messagebox
 from main import generate_filename, generate_image, get_font_paths
 
 # Prevent the generation of .pyc (Python bytecode) files
@@ -18,102 +19,91 @@ VALID_COLORS_BY_FONT = {
 # Define a constant for the closing message
 CLOSING_MESSAGE = "Closing..."
 
-# Function to display an introductory message
-def display_intro_message():
-    print("Note: Metal Slug Font style conversion may not be compatible with all fonts.")
-    print("Refer to the SUPPORTED.md file for details.")
-
-# Function to get user input for text to be converted
-def get_user_input():
-    return input("Enter the text you want to generate (type 'exit' to close): ")
-
-# Function to allow the user to select a font and color
-def select_font_and_color():
-    while True:
-        try:
-            # Prompt the user to choose a font or exit
-            user_input = input("Choose a font from 1 to 5 (Refer to EXAMPLE.md for Font Preview) or type 'exit' to close: ")
-
-            if user_input.lower() == 'exit':
-                print(CLOSING_MESSAGE)
-                sys.exit(0)
-
-            font = int(user_input)
-
-            # Check if the chosen font is valid
-            if font in VALID_COLORS_BY_FONT:
-                valid_colors = VALID_COLORS_BY_FONT[font]
-                print("Available colors: " + " | ".join(valid_colors))
-                color_input = input("Enter the color you want to use or type 'exit' to close: ")
-
-                if color_input.lower() == 'exit':
-                    print(CLOSING_MESSAGE)
-                    sys.exit(0)
-                elif color_input.title() in valid_colors:
-                    color_input = color_input.title()
-                    return font, color_input
-                else:
-                    print("Invalid color. Please choose a valid color.")
-
-            else:
-                print("Invalid input. Please choose a font between 1 and 5.")
-
-        except ValueError:
-            print("Invalid input. Please enter a valid number.")
-
 # Function to generate and display an image based on user input
-def generate_and_display_image(text, font, color):
+def generate_and_display_image():
+    text = text_entry.get()
+    font = int(font_var.get())
+    color = color_var.get()
+
     try:
         if text.lower() == 'exit':
-            print(CLOSING_MESSAGE)
-            sys.exit(0)
+            messagebox.showinfo("Info", CLOSING_MESSAGE)
+            root.quit()
 
         # Check for empty input
         if not text.strip():
-            print("Input text is empty. Please enter some text.")
+            messagebox.showerror("Error", "Input text is empty. Please enter some text.")
             return
 
         filename = generate_filename(text)
-
         font_paths = get_font_paths(font, color)
 
         img_path, error_message_generate = generate_image(text, filename, font_paths)
 
         if error_message_generate:
-            print(f"Error: {error_message_generate}")
+            messagebox.showerror("Error", f"Error: {error_message_generate}")
         else:
-            print(f"Image successfully generated and saved as: {img_path}")
-            print(f"You can find the image on your desktop: {os.path.abspath(os.path.join(os.path.expanduser('~'), 'Desktop', img_path))}")
-
-    except KeyboardInterrupt:
-        print(CLOSING_MESSAGE)
-        sys.exit(0)
+            messagebox.showinfo("Success", f"Image successfully generated and saved as: {img_path}")
     except FileNotFoundError as e:
         error_message_generate = f"Font file not found: {e.filename}"
-        print(error_message_generate)
+        messagebox.showerror("Error", error_message_generate)
     except Exception as e:
         error_message_generate = f"An error occurred: {e}"
-        print(error_message_generate)
+        messagebox.showerror("Error", error_message_generate)
 
-# The main function of the program
-def main():
-    display_intro_message()
+# Function to handle font selection change
+def on_font_change(*args):
+    font = int(font_var.get())
+    valid_colors = VALID_COLORS_BY_FONT.get(font, [])
+    color_combobox['values'] = valid_colors
+    color_var.set(valid_colors[0] if valid_colors else "")
 
-    font, color = select_font_and_color()
+# Create the main window
+root = tk.Tk()
+root.title("Metal Slug Font")
 
-    try:
-        while True:
-            text = get_user_input()
-            generate_and_display_image(text, font, color)
-    except KeyboardInterrupt:
-        print(CLOSING_MESSAGE)
-        sys.exit(0)
-    except Exception as e:
-        error_message_main_inner = f"An unexpected error occurred: {e}"
-        print(error_message_main_inner)
+# Create a frame for input elements
+frame = ttk.Frame(root, padding=20)
+frame.grid(column=0, row=0, sticky=(tk.W, tk.E, tk.N, tk.S))
 
-# Entry point of the script
-if __name__ == "__main__":
-    main()
+# Label for text input
+text_label = ttk.Label(frame, text="Enter the text:")
+text_label.grid(column=0, row=0, sticky=tk.W)
 
+# Text input field
+text_entry = ttk.Entry(frame, width=40)
+text_entry.grid(column=1, row=0, columnspan=2)
 
+# Label for font selection
+font_label = ttk.Label(frame, text="Choose a font:")
+font_label.grid(column=0, row=1, sticky=tk.W)
+
+# Font selection dropdown
+font_var = tk.StringVar()
+font_var.set("1")  # Default font selection
+font_combobox = ttk.Combobox(frame, textvariable=font_var, values=["1", "2", "3", "4", "5"])
+font_combobox.grid(column=1, row=1, columnspan=2)
+
+# Label for color selection
+color_label = ttk.Label(frame, text="Choose a color:")
+color_label.grid(column=0, row=2, sticky=tk.W)
+
+# Color selection dropdown
+color_var = tk.StringVar()
+color_var.set("Blue")  # Default color selection
+color_combobox = ttk.Combobox(frame, textvariable=color_var, values=[])
+color_combobox.grid(column=1, row=2, columnspan=2)
+
+# Bind the font selection change event
+font_var.trace("w", on_font_change)
+
+# Generate button
+generate_button = ttk.Button(frame, text="Generate Image", command=generate_and_display_image)
+generate_button.grid(column=0, row=3, columnspan=3)
+
+# Add padding and make widgets expand
+for child in frame.winfo_children():
+    child.grid_configure(padx=5, pady=5, sticky=(tk.W, tk.E))
+
+# Run the tkinter main loop
+root.mainloop()
