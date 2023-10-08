@@ -4,13 +4,13 @@ import customtkinter
 import customtkinter as ctk
 from tkinter import messagebox
 
+# Prevent the generation of .pyc (Python bytecode) files
+sys.dont_write_bytecode = True
+
 from main import generate_filename, generate_image, get_font_paths
 
 customtkinter.set_appearance_mode("dark")
 customtkinter.set_default_color_theme("blue")
-
-# Prevent the generation of .pyc (Python bytecode) files
-sys.dont_write_bytecode = True
 
 # Define valid color options for each font
 VALID_COLORS_BY_FONT = {
