@@ -6,8 +6,9 @@ import requests
 import platform
 import subprocess
 import semantic_version
-import tkinter as tk
-from tkinter import ttk, messagebox
+import customtkinter
+import customtkinter as ctk
+from tkinter import messagebox, ttk
 from fake_useragent import UserAgent
 
 # Define constants
@@ -22,6 +23,9 @@ VERIFY_SSL = True
 MAX_RETRIES = 3
 
 ERROR_MESSAGE = "Launch Error"
+
+customtkinter.set_appearance_mode("dark")
+customtkinter.set_default_color_theme("blue")
 
 # Custom Exception for Rate Limit Exceeded
 class RateLimitExceededError(Exception):
@@ -224,15 +228,15 @@ def handle_error(error_message):
 
 # Main program entry point
 def main():
-    root = tk.Tk()
+    root = ctk.CTk()
     root.title("Metal Slug Font Updater")
 
-    frame = ttk.Frame(root)
+    frame = ctk.CTkFrame(root)
     frame.grid(column=0, row=0, padx=10, pady=10)
 
-    ttk.Label(frame, text="Metal Slug Font Updater", font=("Helvetica", 16)).grid(column=0, row=0, columnspan=2, pady=10)
-    ttk.Button(frame, text="Check for Updates", command=lambda: check_for_updates(root)).grid(column=0, row=1, pady=10, padx=5)
-    ttk.Button(frame, text="Exit", command=root.quit).grid(column=1, row=1, pady=10, padx=5)
+    ctk.CTkLabel(frame, text="Metal Slug Font Updater", font=("Ubuntu", 32)).grid(column=0, row=0, columnspan=2, pady=10)
+    ctk.CTkButton(frame, text="Check for Updates", command=lambda: check_for_updates(root)).grid(column=0, row=1, pady=10, padx=5)
+    ctk.CTkButton(frame, text="Exit", command=root.quit).grid(column=1, row=1, pady=10, padx=5)
 
     root.mainloop()
 
