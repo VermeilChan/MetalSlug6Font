@@ -3,7 +3,7 @@ name: Build Upload MSFONT
 on:
   push:
     branches:
-      - experimental
+      - dev
 
 jobs:
   build:
@@ -25,12 +25,8 @@ jobs:
 
     - name: Build MSFONT
       run: |
-        pyinstaller --noconfirm --onedir --windowed --icon "Assets/ICON/Sv-002.ico" --name "MSFONT" --version-file "Other/version_msfont.txt" --add-data "C:\Users\$env:USERNAME\AppData\Roaming\Python\Python311\site-packages/customtkinter;customtkinter/" --add-data "src/main.py;." --add-data "Assets:Assets/"  "src/ui.py"
-
-    - name: Build UPDATER
-      run: |
-        pyinstaller --noconfirm --onedir --windowed --icon "Assets/ICON/Sv-002-UPDATER.ico" --name "UPDATER" --version-file "Other/version_updater.txt" --add-data "C:\Users\$env:USERNAME\AppData\Roaming\Python\Python311\site-packages/customtkinter;customtkinter/"  "src/update.py"
-
+        pyinstaller --noconfirm --onedir --windowed --icon "Assets/ICON/Sv-002.ico" --name "MSFONT" --version-file "Other/version_msfont.txt" --add-data "src/main.py;." --add-data "Assets;Assets/"  "src/terminal.py"
+        
     - name: Move Assets folder
       run: |
         mv dist/MSFONT/_internal/Assets dist/MSFONT/
