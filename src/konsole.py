@@ -1,10 +1,11 @@
 # Import necessary libraries
 import os
 import sys
-from main import generate_filename, generate_image, get_font_paths
 
 # Prevent the generation of .pyc (Python bytecode) files
 sys.dont_write_bytecode = True
+
+from main import generate_filename, generate_image, get_font_paths
 
 # Define valid color options for each font
 VALID_COLORS_BY_FONT = {
