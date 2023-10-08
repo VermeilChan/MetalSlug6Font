@@ -25,11 +25,11 @@ jobs:
 
     - name: Build MSFONT
       run: |
-        pyinstaller --noconfirm --onedir --windowed --icon "Assets/ICON/Sv-002.ico" --name "MSFONT" --version-file "Other/version_msfont.txt" --add-data "C:\Users\$env:USERNAME\AppData\Roaming\Python\Python311\site-packages/customtkinter:customtkinter/" --add-data "src/main.py;." --add-data "Assets:Assets/"  "src/ui.py"
+        pyinstaller --noconfirm --onedir --windowed --icon "Assets/ICON/Sv-002.ico" --name "MSFONT" --version-file "Other/version_msfont.txt" --add-data "C:\Users\$env:USERNAME\AppData\Roaming\Python\Python311\site-packages/customtkinter;customtkinter/" --add-data "src/main.py;." --add-data "Assets:Assets/"  "src/ui.py"
 
     - name: Build UPDATER
       run: |
-        pyinstaller --noconfirm --onedir --console --icon "Assets/ICON/Sv-001-UPDATER.ico" --name "UPDATER" --version-file "pyinstaller/version_updater.txt"  "src/auto_updater.py"
+        pyinstaller --noconfirm --onedir --windowed --icon "Assets/ICON/Sv-002-UPDATER.ico" --name "UPDATER" --version-file "Other/version_updater.txt" --add-data "C:\Users\$env:USERNAME\AppData\Roaming\Python\Python311\site-packages/customtkinter;customtkinter/"  "src/update.py"
 
     - name: Move Assets folder
       run: |
