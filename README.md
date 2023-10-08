@@ -36,39 +36,6 @@
   <h1 style="font-size:2em;">A tool for creating images with the iconic Metal Slug font</h1>
 </div>
 
-### **Note:** The web app is no longer actively maintained, and it might be down at any time. However, if the terminal-based version doesn't work for you, you can follow these steps:
-
-1. Download and install Python from the official website (Windows & MacOS): [Python Downloads](https://www.python.org/downloads/).
-
-### Linux
-
-```bash
-# Debian/Ubuntu
-sudo apt update && sudo apt install python3 python3-pip
-
-# Fedora
-sudo dnf install python3 python3-pip
-
-# Arch Linux
-sudo pacman -Sy python python-pip
-```
-
-2. Download the repository
-
-![Repo Download](Assets/MARKDOWN/README/REPO-DOWNLOAD.png)
-
-3. Install the required libraries by opening a terminal or command prompt and navigating to the repository folder. Then, run the following command:
-
-   ```
-   pip install -r requirements.txt
-   ```
-
-4. Run the program by executing the `terminal.py`:
-   
-   ```
-   python src/terminal.py or python3 src/terminal.py
-   ```
-
 ## Table of Contents
 - [Features](#features)
 - [Preview Fonts](#preview-fonts)
@@ -117,13 +84,9 @@ Your contributions are greatly welcomed and appreciated! If you come across any 
 This project is licensed under the [MIT License](LICENSE).
 
 1. **Use:** You can use the software for any purpose, like personal or commercial projects.
-
 2. **Modify:** You can modify the software to suit your needs.
-
 3. **Distribute:** You can distribute the software to others.
-
 4. **No Warranty:** The software is provided "as is," and the author isn't responsible for any issues.
-
 5. **Keep Notice:** You must include the MIT License text and copyright notice in your project.
 
 ## Acknowledgments
