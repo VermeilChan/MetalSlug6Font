@@ -16,7 +16,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4.7.1
       with:
-        python-version: 3.12.0
+        python-version: 3.11.5
 
     - name: Install Python dependencies
       run: |
@@ -25,8 +25,12 @@ jobs:
 
     - name: Build MSFONT
       run: |
-        pyinstaller --noconfirm --onedir --console --icon "Assets/ICON/Sv-002.ico" --name "MSFONT" --version-file "Other/version_msfont.txt" --add-data "src/main.py;." --add-data "Assets;Assets/"  "src/terminal.py"
-        
+        pyinstaller --noconfirm --onedir --windowed --icon "Assets/ICON/Sv-002.ico" --name "MSFONT" --version-file "Other/version_msfont.txt" --add-data "C:\Users\$env:USERNAME\AppData\Roaming\Python\Python311\site-packages/customtkinter:customtkinter/" --add-data "src/main.py;." --add-data "Assets:Assets/"  "src/ui.py"
+
+    - name: Build UPDATER
+      run: |
+        pyinstaller --noconfirm --onedir --console --icon "Assets/ICON/Sv-001-UPDATER.ico" --name "UPDATER" --version-file "pyinstaller/version_updater.txt"  "src/auto_updater.py"
+
     - name: Move Assets folder
       run: |
         mv dist/MSFONT/_internal/Assets dist/MSFONT/
