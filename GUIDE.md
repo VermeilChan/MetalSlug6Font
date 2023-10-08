@@ -64,6 +64,3 @@ After pressing 'Enter', the program will generate the stylized text image, which
 ## Need Help?
 
 If you have any questions or need further assistance, feel free to ask. You can also reach out to me on Discord: `mommy_vermeil`.
-
-![Metal Slug Cat](Assets/MARKDOWN/GUIDE/CAT-1.png)
-![Metal Slug Cat](Assets/MARKDOWN/GUIDE/CAT-2.png)
