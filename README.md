@@ -8,6 +8,10 @@
   </a>
 </p>
 
+# Program No Longer Maintained
+
+# Thank you for your interest in this project. This program is no longer actively maintained or updated. I recommend using the new and improved version of this software, available at [MetalSlugFontReborn](https://github.com/VermeilChan/MetalSlugFontReborn).
+
 <p align="center">
   <a href="https://github.com/VermeilChan/MetalSlugFont/graphs/contributors" target="_blank">
     <img alt="Contributors" src="https://img.shields.io/github/contributors/VermeilChan/MetalSlugFont.svg?color=blue" />
