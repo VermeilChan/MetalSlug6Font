@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <title>MetalSlugFont</title>
+    <link rel="stylesheet" href="/static/css/results.css"/>
+    <link rel="icon" href="/static/icon/sv-001.gif" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="container">
+        <h1>Result</h1>
+
+        {% if output %}
+            <img id="image" src="{{ output }}" alt="Image"/>
+            <button id="download_button">
+                <a href="{{ output }}" download>Download</a>
+            </button>
+        {% else %}
+            <p>No results were found. Return to the <a href="/">home page</a>.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

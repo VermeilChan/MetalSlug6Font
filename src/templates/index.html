@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <title>MetalSlugFont</title>
+    <link rel="stylesheet" href="/static/css/home.css"/>
+    <link rel="icon" href="/static/icon/sv-001.gif" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="container">
+        <img src="/static/icon/sv-001.gif" alt="SV-001" class="header-image">
+    </div>
+    <h1>MetalSlugFont</h1>
+
+    <form id="form" action="/" method="post">
+        <input type="text" name="text" placeholder="Enter Text" required oninvalid="setCustomValidity('Please enter some text.')" oninput="setCustomValidity('')">
+
+        <select id="font" name="font">
+            <option value="5">Font 5</option>
+        </select>
+
+        <select id="color" name="color">
+            <option value="orange">Orange</option>
+        </select>
+
+        <input type="submit" value="Generate">
+    </form>
+
+    <section>
+        {% if error %}
+            <p class="error-message">
+                {{ error }}
+                {% if unsupported == 'FileNotFoundError' %}
+                    <a href='/supported'>here</a>.
+                {% endif %}
+            </p>
+        {% else %}
+            {% if state %}
+                <img id="image" src="{{ output }}" alt="Image"/>
+            {% endif %}
+        {% endif %}
+    </section>
+</body>
+</html>
